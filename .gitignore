@@ -2,3 +2,7 @@ _bmad
 _bmad-output
 .agents
 brain-dump/
+node_modules/
+.next/
+out/
+*.tsbuildinfo
