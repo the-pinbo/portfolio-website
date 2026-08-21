@@ -41,10 +41,33 @@ test("the RingCentral stories carry the approved labels and delivery evidence", 
 
 test("static portrait remains complete when WebGL is unavailable", () => {
   assert.match(portrait, /inbase-editorial-portrait\.png/);
-  assert.equal((portrait.match(/portrait-panel/g) ?? []).length >= 5, true);
+  assert.equal((portrait.match(/<Image/g) ?? []).length, 1);
+  assert.match(portrait, /portrait-single/);
+  assert.doesNotMatch(portrait, /inbase-editorial-dark\.png/);
   assert.match(page, /<SplitPortrait \/>/);
   assert.match(styles, /\.hero-canvas \{ display: none; \}/);
   assert.doesNotMatch(projectStories, /initial=/);
+});
+
+test("the portrait uses a fixed multi-window mask and theme-safe treatment", () => {
+  assert.match(styles, /portrait-window-mask\.svg/);
+  assert.match(styles, /@supports \(\(mask-image/);
+  assert.match(styles, /--portrait-wash/);
+  assert.match(styles, /--portrait-filter/);
+  assert.match(styles, /@media \(prefers-color-scheme: dark\)/);
+  assert.match(styles, /transition: border-color 360ms ease, filter 360ms ease/);
+  assert.match(styles, /@media \(max-width: 767px\)/);
+  assert.doesNotMatch(styles, /filter: invert\(/);
+});
+
+test("the face-first mask prioritizes a full-height central portrait window", () => {
+  const mask = read("public/assets/portrait-window-mask.svg");
+  assert.equal((mask.match(/fill="white"/g) ?? []).length, 3);
+  assert.match(mask, /x="201" y="36" width="598" height="1028"/);
+  assert.match(mask, /x="24" y="328" width="150" height="700"/);
+  assert.match(mask, /x="826" y="184" width="150" height="816"/);
+  assert.match(styles, /\.hero__art \{ aspect-ratio: 0\.8; margin-left: auto; max-width: 560px/);
+  assert.match(styles, /transform: scale\(1\.12\) translateX\(-3\.3%\)/);
 });
 
 test("the WebGL effect is optional, constrained, and demand rendered", () => {
@@ -74,6 +97,7 @@ test("the production-rendered page contains the anchorable systems and approved 
   assert.match(documentShell, /<section(?=[^>]*class="systems section-shell")(?=[^>]*id="systems")/);
   assert.equal((documentShell.match(/<article class="project-story/g) ?? []).length, 3);
   assert.equal((documentShell.match(/What I owned/g) ?? []).length, 3);
+  assert.equal((documentShell.match(/<img[^>]*class="portrait-image"/g) ?? []).length, 1);
   assert.match(documentShell, /href="#systems"/);
 
   for (const href of [

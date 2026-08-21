@@ -16,6 +16,10 @@
   --text-muted: #465560;
   --line: color-mix(in srgb, var(--navy) 23%, transparent);
   --paper-shadow: rgba(23, 43, 60, 0.12);
+  --portrait-wash: rgb(238 230 218 / 0.1);
+  --portrait-wash-blend: multiply;
+  --portrait-filter: saturate(0.94) contrast(1.02);
+  --portrait-edge: rgb(23 43 60 / 0.22);
   --radius: 2px;
   --frame: 1px solid var(--line);
   color-scheme: light dark;
@@ -33,6 +37,10 @@
     --vermilion-action-text: #10191f;
     --line: color-mix(in srgb, #eee6da 24%, transparent);
     --paper-shadow: rgba(0, 0, 0, 0.25);
+    --portrait-wash: rgb(23 43 60 / 0.38);
+    --portrait-wash-blend: color;
+    --portrait-filter: brightness(0.82) saturate(0.84) contrast(1.1);
+    --portrait-edge: rgb(238 230 218 / 0.3);
   }
 }
 
@@ -159,19 +167,43 @@ h1 {
 .button--secondary { border: var(--frame); color: var(--text); }
 .button--secondary:hover { border-color: var(--vermilion-text); color: var(--vermilion-text); }
 
-.hero__art { aspect-ratio: 0.88; margin-left: auto; max-width: 590px; position: relative; width: 100%; }
+.hero__art { aspect-ratio: 0.8; margin-left: auto; max-width: 560px; position: relative; width: 100%; }
 .hero-canvas { inset: -7%; pointer-events: auto; position: absolute; z-index: 0; }
-.portrait-system { height: 100%; pointer-events: none; position: relative; width: 100%; z-index: 1; }
-.portrait-panel { border: var(--frame); overflow: hidden; position: absolute; }
-.portrait-image { object-fit: cover; }
-.portrait-panel--one { height: 57%; left: 0; top: 0; width: 52%; }
-.portrait-panel--one .portrait-image { object-position: 27% 22%; transform: scale(1.38); }
-.portrait-panel--two { height: 42%; right: 0; top: 8%; width: 42%; }
-.portrait-panel--two .portrait-image { object-position: 75% 19%; transform: scale(1.54); }
-.portrait-panel--three { bottom: 0; height: 35%; left: 7%; width: 37%; }
-.portrait-panel--three .portrait-image { object-position: 33% 84%; transform: scale(1.52); }
-.portrait-panel--four { bottom: 5%; height: 43%; right: 9%; width: 47%; }
-.portrait-panel--four .portrait-image { object-position: 72% 80%; transform: scale(1.38); }
+.portrait-system { height: 100%; isolation: isolate; pointer-events: none; position: relative; width: 100%; z-index: 1; }
+.portrait-single {
+  border: 1px solid var(--portrait-edge);
+  border-radius: 4rem 4rem 2rem;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  transition: border-color 360ms ease, filter 360ms ease;
+  width: 100%;
+}
+.portrait-image {
+  filter: var(--portrait-filter);
+  object-fit: cover;
+  object-position: 50% 50%;
+  transform: scale(1.12) translateX(-3.3%);
+  transform-origin: center;
+  transition: filter 360ms ease;
+}
+.portrait-single::after {
+  background: var(--portrait-wash);
+  content: "";
+  inset: 0;
+  mix-blend-mode: var(--portrait-wash-blend);
+  pointer-events: none;
+  position: absolute;
+  transition: background 360ms ease, mix-blend-mode 360ms ease;
+}
+@supports ((mask-image: url("/assets/portrait-window-mask.svg")) or (-webkit-mask-image: url("/assets/portrait-window-mask.svg"))) {
+  .portrait-single {
+    border: 0;
+    border-radius: 0;
+    -webkit-mask: url("/assets/portrait-window-mask.svg") center / 100% 100% no-repeat;
+    mask: url("/assets/portrait-window-mask.svg") center / 100% 100% no-repeat;
+  }
+}
 .portrait-annotation { bottom: 0.15rem; color: var(--vermilion-text); font-family: "Bradley Hand", "Segoe Print", cursive; font-size: clamp(1.1rem, 2vw, 1.6rem); left: -0.5rem; position: absolute; transform: rotate(-5deg); z-index: 2; }
 
 .section-shell { margin: 0 auto; max-width: 1420px; padding: clamp(5.5rem, 11vw, 10rem) clamp(1.25rem, 4vw, 4.5rem); }
@@ -222,6 +254,7 @@ h1 {
   .hero__grid { display: flex; flex-direction: column; justify-content: center; min-height: auto; padding-top: 3.1rem; }
   h1 { font-size: clamp(2.75rem, 14vw, 4.45rem); line-height: 0.95; max-width: 11ch; }
   .hero__art { margin: 1.4rem 0 0; max-width: 520px; }
+  .portrait-single { border-radius: 3rem 3rem 1.5rem; }
   .portrait-annotation { font-size: 1rem; left: 0; }
   .section-shell { padding-bottom: 5.75rem; padding-top: 5.75rem; }
   .project-story { gap: 1.8rem; grid-template-columns: 1fr; }
