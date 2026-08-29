@@ -107,6 +107,122 @@ a:focus-visible, button:focus-visible {
 
 .skip-link:focus { top: 1rem; }
 
+.thesis-stage {
+  display: grid;
+  min-height: 100dvh;
+  padding: var(--space-7) var(--page-margin-desktop);
+  place-content: center;
+}
+
+.thesis-stage h1 {
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 520;
+  letter-spacing: -0.056em;
+  line-height: 0.99;
+  margin: 0 0 var(--space-5);
+  max-width: 20ch;
+}
+
+.cadence {
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.identity-frame {
+  align-items: center;
+  display: grid;
+  gap: var(--space-8);
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 1.08fr);
+  margin: 0 auto;
+  max-width: var(--content-max);
+  min-height: 100dvh;
+  padding: var(--space-9) var(--page-margin-desktop);
+}
+
+.identity-copy h2 {
+  font-size: clamp(44px, 4.7vw, 60px);
+  font-weight: 560;
+  letter-spacing: -0.058em;
+  line-height: 0.95;
+  margin: 0 0 var(--space-4);
+}
+
+.identity-copy .role {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 540;
+  letter-spacing: -0.018em;
+  line-height: 1.5;
+  margin: 0 0 var(--space-3);
+}
+
+.identity-copy .supporting {
+  color: var(--color-ink-deep);
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 30ch;
+}
+
+.portrait-triptych {
+  aspect-ratio: 1;
+  justify-self: end;
+  margin: 0;
+  width: min(100%, 650px);
+}
+
+.portrait-triptych__stage {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.portrait-triptych__fallback {
+  fill: var(--color-paper-light);
+}
+
+.portrait-triptych__panel {
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  .thesis-stage {
+    padding: var(--space-7) var(--page-margin-mobile);
+  }
+
+  .thesis-stage h1 {
+    font-size: 42px;
+    letter-spacing: -0.045em;
+    line-height: 1.02;
+  }
+
+  .identity-frame {
+    gap: var(--space-6);
+    grid-template-columns: 1fr;
+    padding: var(--space-8) var(--page-margin-mobile);
+  }
+
+  .identity-copy h2 {
+    font-size: 44px;
+    letter-spacing: -0.048em;
+    line-height: 0.98;
+  }
+
+  .portrait-triptych {
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
 .hero {
   min-height: 100dvh;
   overflow: hidden;

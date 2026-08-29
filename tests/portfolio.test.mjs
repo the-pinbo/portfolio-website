@@ -7,19 +7,16 @@ const page = read("app/page.tsx");
 const portfolio = read("content/portfolio.ts");
 const scene = read("components/hero-scene.tsx");
 const canvas = read("components/hero-canvas.tsx");
-const portrait = read("components/split-portrait.tsx");
+const portrait = read("components/portrait-triptych.tsx");
 const projectStories = read("components/project-stories.tsx");
 const styles = read("app/globals.css");
 
 test("the static page communicates the systems identity and routes", () => {
-  assert.match(page, /AI\/ML Systems Engineer/);
-  assert.match(page, /View flagship systems/);
-  assert.match(page, /href="#contact"/);
-  assert.match(page, /href="#credibility"/);
-  assert.match(page, /Résumé/);
+  assert.match(page, /I turn meaningful business problems into reliable software and AI systems\./);
+  assert.match(page, /Software Development Engineer II, RingCentral/);
+  assert.match(page, /<PortraitTriptych \/>/);
   assert.match(page, /Skip to content/);
-  assert.match(page, /rel: "noreferrer"/);
-  assert.match(page, /target: "_blank"/);
+  assert.match(page, /id="contact"/);
 });
 
 test("the RingCentral stories carry the approved labels and delivery evidence", () => {
@@ -41,10 +38,9 @@ test("the RingCentral stories carry the approved labels and delivery evidence", 
 
 test("static portrait remains complete when WebGL is unavailable", () => {
   assert.match(portrait, /inbase-editorial-portrait\.png/);
-  assert.equal((portrait.match(/<Image/g) ?? []).length, 1);
-  assert.match(portrait, /portrait-single/);
+  assert.match(portrait, /portrait-triptych/);
   assert.doesNotMatch(portrait, /inbase-editorial-dark\.png/);
-  assert.match(page, /<SplitPortrait \/>/);
+  assert.match(page, /<PortraitTriptych \/>/);
   assert.match(styles, /\.hero-canvas \{ display: none; \}/);
   assert.doesNotMatch(projectStories, /initial=/);
 });
@@ -95,20 +91,11 @@ test("the production-rendered page contains the anchorable systems and approved 
   const rendered = read(".next/server/app/index.html");
   const documentShell = rendered.slice(0, rendered.indexOf("</main>") + "</main>".length);
 
-  assert.match(documentShell, /<section(?=[^>]*class="systems section-shell")(?=[^>]*id="systems")/);
-  assert.equal((documentShell.match(/<article class="project-story/g) ?? []).length, 3);
-  assert.equal((documentShell.match(/What I owned/g) ?? []).length, 3);
-  assert.equal((documentShell.match(/<img[^>]*class="portrait-image"/g) ?? []).length, 1);
-  assert.match(documentShell, /href="#systems"/);
-
-  for (const href of [
-    "mailto:inba2002.p@gmail.com",
-    "https://www.linkedin.com/in/inbasperu",
-    "https://github.com/the-pinbo",
-    "https://drive.google.com/file/d/1Yd9XmOQbQr_j_XIw3krVfHL3XIJ8zHTQ/view?usp=sharing",
-  ]) {
-    assert.match(documentShell, new RegExp(`href="${href.replace(/[.?]/g, "\\$&")}"`));
-  }
+  assert.match(documentShell, /<section(?=[^>]*class="thesis-stage")(?=[^>]*id="top")/);
+  assert.match(documentShell, /<section(?=[^>]*class="identity-frame")(?=[^>]*id="identity-frame")/);
+  assert.match(documentShell, /<section(?=[^>]*id="contact")/);
+  assert.match(documentShell, /<figure class="portrait-triptych"/);
+  assert.doesNotMatch(documentShell, /href="#systems"/);
 });
 
 test("narrow layouts and accessible focus states are explicitly styled", () => {
