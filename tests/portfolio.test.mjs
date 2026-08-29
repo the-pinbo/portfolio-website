@@ -5,6 +5,7 @@ import test from "node:test";
 const read = (file) => readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
 const page = read("app/page.tsx");
 const portfolio = read("content/portfolio.ts");
+const navigation = read("components/site-navigation.tsx");
 const scene = read("components/hero-scene.tsx");
 const canvas = read("components/hero-canvas.tsx");
 const portrait = read("components/portrait-triptych.tsx");
@@ -17,6 +18,11 @@ test("the static page communicates the systems identity and routes", () => {
   assert.match(page, /<PortraitTriptych \/>/);
   assert.match(page, /Skip to content/);
   assert.match(page, /id="contact"/);
+  assert.match(navigation, /href: "#work"/);
+  assert.match(navigation, /href: "#research"/);
+  assert.match(navigation, /href: "#track-record"/);
+  assert.match(navigation, /href: "#contact"/);
+  assert.match(navigation, /inba\.dev/);
 });
 
 test("the RingCentral stories carry the approved labels and delivery evidence", () => {
@@ -95,7 +101,9 @@ test("the production-rendered page contains the anchorable systems and approved 
   assert.match(documentShell, /<section(?=[^>]*class="identity-frame")(?=[^>]*id="identity-frame")/);
   assert.match(documentShell, /<section(?=[^>]*id="contact")/);
   assert.match(documentShell, /<figure class="portrait-triptych"/);
+  assert.match(documentShell, /<nav class="section-navigation"/);
   assert.doesNotMatch(documentShell, /href="#systems"/);
+  assert.doesNotMatch(documentShell, /href="#credibility"/);
 });
 
 test("narrow layouts and accessible focus states are explicitly styled", () => {

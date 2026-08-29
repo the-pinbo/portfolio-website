@@ -1,4 +1,5 @@
 import { PortraitTriptych } from "@/components/portrait-triptych";
+import { SiteNavigation } from "@/components/site-navigation";
 
 export default function Home() {
   return (
@@ -27,6 +28,11 @@ export default function Home() {
           <PortraitTriptych />
         </section>
 
+        <SiteNavigation />
+
+        <section id="work" aria-label="Work"></section>
+        <section id="research" aria-label="Research"></section>
+        <section id="track-record" aria-label="Track Record"></section>
         <section id="contact" aria-label="Contact"></section>
       </main>
     </>

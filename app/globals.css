@@ -194,6 +194,73 @@ a:focus-visible, button:focus-visible {
   width: 100%;
 }
 
+.site-header {
+  align-items: center;
+  background: var(--color-paper-light);
+  border-bottom: 1px solid var(--color-hairline);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  min-height: 64px;
+  padding: var(--space-2) var(--page-margin-desktop);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-mark {
+  color: var(--color-ink-deep);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.section-navigation {
+  justify-self: center;
+}
+
+.section-navigation ul {
+  display: flex;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.section-navigation a {
+  align-items: center;
+  border-radius: var(--radius-nav);
+  color: var(--color-muted);
+  display: inline-flex;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 540;
+  line-height: 1;
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  text-decoration: none;
+}
+
+.section-navigation a[aria-current="location"] {
+  background: var(--color-ink-deep);
+  color: var(--color-paper-light);
+}
+
+.section-navigation a:focus-visible {
+  outline-color: var(--color-focus);
+}
+
+.site-header__utility {
+  justify-self: end;
+  width: 1px;
+}
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
 @media (max-width: 767px) {
   .thesis-stage {
     padding: var(--space-7) var(--page-margin-mobile);
@@ -220,6 +287,24 @@ a:focus-visible, button:focus-visible {
   .portrait-triptych {
     justify-self: stretch;
     width: 100%;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr;
+    padding: var(--space-2) var(--page-margin-mobile);
+  }
+
+  .section-navigation {
+    justify-self: stretch;
+    overflow-x: auto;
+  }
+
+  .section-navigation ul {
+    min-width: max-content;
+  }
+
+  .site-header__utility {
+    display: none;
   }
 }
 
