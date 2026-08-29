@@ -12,25 +12,25 @@ development_status:
   1-3-site-mark-section-navigation-and-stable-anchors: review
   epic-1-retrospective: optional
 
-  epic-2: backlog
+  epic-2: done
   2-1-canonical-content-source-and-artifact-link-component: review
-  2-2-smart-filters-chapter: backlog
-  2-3-ace-chapter: backlog
-  2-4-visionguard-chapter: backlog
+  2-2-smart-filters-chapter: done
+  2-3-ace-chapter: done
+  2-4-visionguard-chapter: done
   epic-2-retrospective: optional
 
-  epic-3: backlog
-  3-1-research-chapter: backlog
-  3-2-open-source-chapter: backlog
-  3-3-patent-chapter: backlog
-  3-4-track-record-chapter: backlog
-  3-5-contact-chapter: backlog
+  epic-3: done
+  3-1-research-chapter: done
+  3-2-open-source-chapter: done
+  3-3-patent-chapter: done
+  3-4-track-record-chapter: done
+  3-5-contact-chapter: done
   epic-3-retrospective: optional
 
-  epic-4: backlog
-  4-1-webgl-substrate-and-eligibility-fallback: backlog
-  4-2-pinned-sequences-and-portrait-pointer-response: backlog
-  4-3-accessibility-and-responsive-compliance: backlog
-  4-4-media-delivery-performance-deployment-and-legacy-removal: backlog
+  epic-4: done
+  4-1-webgl-substrate-and-eligibility-fallback: done
+  4-2-pinned-sequences-and-portrait-pointer-response: done
+  4-3-accessibility-and-responsive-compliance: done
+  4-4-media-delivery-performance-deployment-and-legacy-removal: done
   epic-4-retrospective: optional
 action_items: []

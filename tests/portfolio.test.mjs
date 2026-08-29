@@ -13,11 +13,11 @@ const links = read("content/links.ts");
 const styles = read("app/globals.css");
 
 test("the static page communicates the systems identity and routes", () => {
-  assert.match(page, /I turn meaningful business problems into reliable software and AI systems\./);
-  assert.match(page, /Software Development Engineer II, RingCentral/);
+  assert.match(portfolio, /I turn meaningful business problems into reliable software and AI systems\./);
+  assert.match(portfolio, /Software Development Engineer II, RingCentral/);
   assert.match(page, /<PortraitTriptych \/>/);
   assert.match(page, /Skip to content/);
-  assert.match(page, /id="contact"/);
+  assert.match(page, /<ContactClose \/>/);
   assert.match(navigation, /href: "#work"/);
   assert.match(navigation, /href: "#research"/);
   assert.match(navigation, /href: "#track-record"/);
