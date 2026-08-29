@@ -1,0 +1,12 @@
+# Seven-chapter mock asset manifest
+
+| Asset | Role | Intrinsic size | Mock behavior | Accessible treatment | Source / integrity rule |
+|---|---|---:|---|---|---|
+| `public/assets/visionguard-riso-editorial-v2.png` | Informative editorial image | 1586 × 992 | Complete image, `object-fit: contain`, 12–16px navy specimen inset; copy and links precede it on mobile | “Riso-style editorial composite of VisionGuard’s desktop interface and gaze-calibration geometry.” | User-supplied generated editorial image; do not present as a screenshot or crop it |
+| `fractal-double.png` | Scientific artifact crop | 790 × 593 | First panel, labeled Double; viewport uses a restrained 1.06 scale to remove the white source edge | Label is real text; image alt identifies the double-precision reference | Exact crop `x22 y186 w790 h593` from the supplied float comparison image; no recolor or filter |
+| `fractal-float.png` | Scientific artifact crop | 790 × 593 | Second panel, labeled float; viewport uses the same restrained scale; metrics associated below | Image alt identifies the conventional float result | Exact crop `x874 y186 w790 h593` from the supplied float comparison image; no recolor or filter |
+| `fractal-posit32.png` | Scientific artifact crop | 790 × 593 | Third panel, labeled posit32; viewport uses the same restrained scale; metrics associated below | Image alt identifies the posit32 result | Exact crop `x874 y186 w790 h593` from the supplied posit32 comparison image; no recolor or filter |
+| `icassp-poster.png` | Research artifact crop and full-poster source | 1350 × 1800 | The coral tile clips the authentic upper section so the paper title and sparse-recovery figure remain visible; the literal Poster link opens the complete PDF | “Upper section of the ICASSP 2025 poster showing the paper title and sparse-recovery research figure.” | Rasterized from the complete supplied PDF; crop through an overflow viewport only and never alter the poster contents |
+| Inline patent voice-ledger SVG/CSS | Informative editorial illustration | Responsive `viewBox` | Coral ITEM/QUANTITY/UPDATE instruction slip aligns with a navy ledger and resolves one row | Adjacent description names the generic schema transformation | Original illustration; generic labels only; no microphone, arrows, fake UI, invented stock example, or official-document imitation |
+
+The spine pair wins on conflict with this manifest. These files are mock inputs, not production delivery derivatives.

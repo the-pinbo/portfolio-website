@@ -21,7 +21,7 @@ context:
 
 ## Boundaries & Constraints
 
-**Always:** Lead with the thesis: “I turn meaningful business problems into reliable, production-ready software and AI systems: evaluated, integrated, and shipped.” Present Inbasekaran as Software Development Engineer II at RingCentral and a B.Tech ECE graduate of NITK Surathkal, 2024. Tell a narrative, not a chronology. Keep Smart Filters first, ACE io MCP server second, and VisionGuard third. Use careful high-level language for the two RingCentral cases: no numbers, screenshots, customer quotes, or claims that require internal approval. Keep public links adjacent to public proof. Use short paragraphs and proof cards, not a skills matrix or exhaustive role bullets.
+**Always:** Lead with the thesis: “I turn meaningful business problems into reliable software and AI systems.” Resolve it with “Evaluated. Integrated. Shipped.” Present Inbasekaran as Software Development Engineer II at RingCentral and a B.Tech ECE graduate of NITK Surathkal, 2024. Tell a narrative, not a chronology. Keep Smart Filters first, ACE io MCP server second, and VisionGuard third. Use careful high-level language for the two RingCentral cases: no numbers, screenshots, customer quotes, or claims that require internal approval. Keep public artifact links adjacent to the relevant work. Use short paragraphs and quiet linked artifacts, not a skills matrix, defensive evidence labels, or exhaustive role bullets.
 
 **Ask First:** Adding an unapproved RingCentral metric, customer feedback, product visual, release note, or internal architecture detail. Changing the agreed flagship order. Publishing a new personal contact method or document. Claiming a different patent inventor, project ownership, or publication status.
 

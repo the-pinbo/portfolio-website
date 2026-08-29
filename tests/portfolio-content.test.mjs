@@ -19,6 +19,7 @@ test("the approved public proof has stable evidence routes", () => {
   for (const source of [
     "https://github.com/inbasperu/VisionGuard",
     "https://summerofcode.withgoogle.com/programs/2024/projects/QUbIeRAM",
+    "https://medium.com/openvino-toolkit/visionguard-ai-eye-care-for-computer-users-d055a574d8e9",
     "https://ieeexplore.ieee.org/document/10890318",
     "https://github.com/Posit-Foundation/soft-posit-cpp/commits/refactor-cpp-soft-posits?author=the-pinbo",
     "https://www.credly.com/badges/0caf0ab0-83e9-4614-810a-0a54ef7eb5ab",
@@ -31,14 +32,20 @@ test("the approved public proof has stable evidence routes", () => {
   }
 });
 
-test("confidential RingCentral cases retain the approved narrative without metrics", () => {
+test("RingCentral cases retain the approved narrative without internal detail or defensive labels", () => {
   for (const title of ["Smart Filters", "ACE io MCP server"]) {
     assert.match(publicCopy, new RegExp(title));
   }
-  assert.match(publicCopy, /Smart Filters[\s\S]*?Confidential production case\. Public metrics, screenshots, and customer material are intentionally withheld\./);
-  assert.match(publicCopy, /ACE io MCP server[\s\S]*?Confidential production case\. A future official write-up may provide supporting detail\./);
   assert.doesNotMatch(publicCopy, /68%|42 complex|25%|16 seconds|5 seconds/);
   assert.doesNotMatch(publicCopy, /\b(?:Elasticsearch|OpenTelemetry|Arize Phoenix|Kubernetes|Flux|Apollo MCP)\b/i);
+  assert.doesNotMatch(publicCopy, /\b(?:proof|verified|flagship systems|what i own|engineering loop|confidential production case)\b/i);
+  assert.doesNotMatch(publicCopy, /\bproduction(?:-ready)?\b/i);
+});
+
+test("the hero uses the refined thesis and restrained resolution line", () => {
+  assert.match(publicCopy, /I turn meaningful business problems into reliable software and AI systems\./);
+  assert.match(publicCopy, /Evaluated\. Integrated\. Shipped\./);
+  assert.doesNotMatch(publicCopy, /production-ready/i);
 });
 
 test("excluded résumé material cannot re-enter public-facing copy", () => {
@@ -47,4 +54,5 @@ test("excluded résumé material cannot re-enter public-facing copy", () => {
   assert.doesNotMatch(publicCopy, /media\.licdn\.com/);
   assert.match(publicCopy, /Software Development Engineer II at RingCentral/);
   assert.match(publicCopy, /B\.Tech, Electronics and Communication Engineering · 2024/);
+  assert.match(publicCopy, /Determinant Studios.*NLP systems/);
 });

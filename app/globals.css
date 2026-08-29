@@ -129,7 +129,7 @@ a:focus-visible, button:focus-visible {
 .hero__copy { max-width: 720px; position: relative; z-index: 2; }
 .role-label, .section-kicker, .project-story__label, .project-story__ownership span {
   color: var(--vermilion-text);
-  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  -family:font ui-monospace, "SFMono-Regular", Menlo, monospace;
   font-size: 0.71rem;
   font-weight: 700;
   letter-spacing: 0.09em;

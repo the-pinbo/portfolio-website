@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>inba.dev — Riso-tech editorial direction</title>
+    <style>
+      /*
+        Direction palette
+        paper: #f1eee7
+        paper-light: #f8f5ee
+        ink: #173047
+        ink-deep: #102536
+        coral: #cf654f
+        structure: #8797a2
+        hairline: #c9c5bc
+      */
+      :root {
+        --paper: #f1eee7;
+        --paper-light: #f6f3ed;
+        --ink: #173047;
+        --ink-deep: #102536;
+        --coral: #cf654f;
+        --structure: #8797a2;
+        --hairline: #c9c5bc;
+        --muted: #64727b;
+        --sans: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        background: #d8d5cd;
+        color: var(--ink-deep);
+        font-family: var(--sans);
+      }
+
+      body {
+        margin: 0;
+        padding: 48px 24px 96px;
+        background:
+          radial-gradient(circle at 16% 4%, rgba(255, 255, 255, 0.55), transparent 25%),
+          #d8d5cd;
+      }
+
+      .direction-intro {
+        width: min(1180px, 100%);
+        margin: 0 auto 38px;
+        display: grid;
+        grid-template-columns: minmax(220px, 0.8fr) minmax(320px, 1.4fr);
+        gap: 64px;
+        align-items: end;
+      }
+
+      .direction-intro h1 {
+        margin: 0;
+        font-size: clamp(28px, 3.2vw, 46px);
+        font-weight: 580;
+        letter-spacing: -0.045em;
+      }
+
+      .direction-intro p {
+        max-width: 680px;
+        margin: 0;
+        color: #3d4e59;
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .frame-set {
+        width: min(1440px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 56px;
+      }
+
+      .frame-block {
+        min-width: 0;
+      }
+
+      .frame-label {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto 12px;
+        color: #4c5c65;
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .screen {
+        position: relative;
+        width: 100%;
+        min-height: 760px;
+        aspect-ratio: 16 / 9.25;
+        overflow: hidden;
+        border: 1px solid rgba(23, 48, 71, 0.14);
+        border-radius: 2px;
+        background: var(--paper);
+        box-shadow: 0 20px 60px rgba(16, 37, 54, 0.1);
+        isolation: isolate;
+      }
+
+      .screen::after {
+        position: absolute;
+        z-index: 20;
+        inset: 0;
+        pointer-events: none;
+        content: "";
+        opacity: 0.42;
+        mix-blend-mode: soft-light;
+        background-image: url("../../../../../public/assets/riso-paper-grain-map.png");
+        background-position: center;
+        background-size: cover;
+      }
+
+      .site-mark {
+        position: absolute;
+        z-index: 8;
+        top: 42px;
+        left: 4.5%;
+        margin: 0;
+        color: var(--ink-deep);
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .frame-one .site-mark {
+        opacity: 0.74;
+      }
+
+      .substrate-ink {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .substrate-ink span {
+        position: absolute;
+        inset: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        content: "";
+        mix-blend-mode: multiply;
+      }
+
+      .substrate-navy {
+        background-color: var(--ink);
+        mask: url("../../../../../public/assets/riso-navy-ink-mask.png") center / cover no-repeat;
+        opacity: 0.16;
+        -webkit-mask: url("../../../../../public/assets/riso-navy-ink-mask.png") center / cover no-repeat;
+      }
+
+      .substrate-coral {
+        background-color: var(--coral);
+        mask: url("../../../../../public/assets/riso-coral-ink-mask.png") center / cover no-repeat;
+        opacity: 0.1;
+        -webkit-mask: url("../../../../../public/assets/riso-coral-ink-mask.png") center / cover no-repeat;
+      }
+
+      .thesis-wrap {
+        position: absolute;
+        z-index: 5;
+        top: 50%;
+        left: 8%;
+        width: min(920px, 64%);
+        transform: translateY(-48%);
+      }
+
+      .thesis {
+        max-width: 920px;
+        margin: 0;
+        color: var(--ink-deep);
+        font-size: clamp(42px, 3.7vw, 58px);
+        font-weight: 520;
+        line-height: 0.99;
+        letter-spacing: -0.056em;
+        text-wrap: balance;
+      }
+
+      .thesis span {
+        display: block;
+        white-space: nowrap;
+      }
+
+      .cadence {
+        margin: 34px 0 0;
+        color: rgba(207, 101, 79, 0.78);
+        font-family: var(--mono);
+        font-size: clamp(16px, 1.2vw, 18px);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+
+      /* Motion intent for later exploration only: the substrate sharpens organically under pointer pressure, then gathers right and fades as the thesis contracts and the portrait enters. Text never moves in response to the pointer. */
+
+      .nav-shell {
+        position: absolute;
+        z-index: 12;
+        top: 26px;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 5px;
+        border: 1px solid rgba(23, 48, 71, 0.13);
+        border-radius: 999px;
+        background: rgba(248, 245, 238, 0.84);
+        box-shadow: 0 8px 30px rgba(16, 37, 54, 0.06);
+        transform: translateX(-50%);
+      }
+
+      .nav-shell span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        padding: 0 14px;
+        border-radius: 999px;
+        color: #42525c;
+        font-size: 13px;
+        font-weight: 540;
+      }
+
+      .nav-shell .active {
+        background: var(--ink-deep);
+        color: var(--paper-light);
+      }
+
+      .identity-layout {
+        position: absolute;
+        z-index: 4;
+        inset: 0;
+        display: grid;
+        grid-template-columns: minmax(390px, 0.9fr) minmax(540px, 1.1fr);
+        align-items: center;
+        gap: 5%;
+        padding: 106px 6% 58px 8.5%;
+      }
+
+      .identity-copy {
+        align-self: end;
+        padding-bottom: 102px;
+      }
+
+      .identity-name {
+        max-width: 520px;
+        margin: 0;
+        color: var(--ink-deep);
+        font-size: clamp(50px, 4.4vw, 64px);
+        font-weight: 560;
+        line-height: 0.95;
+        letter-spacing: -0.058em;
+      }
+
+      .identity-role {
+        margin: 22px 0 0;
+        color: #53636d;
+        font-family: var(--mono);
+        font-size: 14px;
+        font-weight: 540;
+        letter-spacing: -0.018em;
+      }
+
+      .portrait-stage {
+        position: relative;
+        align-self: center;
+        justify-self: end;
+        width: min(650px, 100%);
+        height: auto;
+        aspect-ratio: 1;
+      }
+
+      .portrait-stage::before {
+        position: absolute;
+        top: 7%;
+        right: 4%;
+        width: 66%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(207, 101, 79, 0.13);
+        content: "";
+        filter: blur(0.2px);
+      }
+
+      .portrait-composition {
+        position: absolute;
+        z-index: 2;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        filter: saturate(0.92) contrast(1.02) drop-shadow(0 18px 22px rgba(16, 37, 54, 0.09));
+      }
+
+      /* Motion intent for a later pass: the masks stay fixed while navy and coral ink layers separate by 1–2px, halftone detail sharpens, and the portrait settles back into register. */
+
+      .smart-layout {
+        position: absolute;
+        z-index: 4;
+        inset: 0;
+        display: grid;
+        grid-template-columns: minmax(360px, 0.83fr) minmax(580px, 1.17fr);
+        gap: 5.5%;
+        padding: 120px 7.5% 64px;
+      }
+
+      .smart-copy {
+        align-self: center;
+        max-width: 520px;
+      }
+
+      .context-kicker {
+        margin: 0 0 18px;
+        color: var(--coral);
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: 0.065em;
+        text-transform: uppercase;
+      }
+
+      .project-title {
+        margin: 0;
+        color: var(--ink-deep);
+        font-size: clamp(44px, 4vw, 56px);
+        font-weight: 570;
+        line-height: 0.98;
+        letter-spacing: -0.057em;
+      }
+
+      .project-thesis {
+        max-width: 470px;
+        margin: 22px 0 0;
+        color: var(--ink);
+        font-size: clamp(17px, 1.45vw, 20px);
+        font-weight: 500;
+        line-height: 1.42;
+        letter-spacing: -0.02em;
+      }
+
+      .project-body {
+        max-width: 505px;
+        margin: 24px 0 0;
+        color: #485862;
+        font-size: 17px;
+        line-height: 1.58;
+        letter-spacing: -0.012em;
+      }
+
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px 18px;
+        margin: 30px 0 0;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+
+      .project-meta span {
+        position: relative;
+      }
+
+      .project-meta span:not(:last-child)::after {
+        position: absolute;
+        top: 0;
+        right: -12px;
+        color: var(--coral);
+        content: "·";
+      }
+
+      .query-transform {
+        position: relative;
+        display: grid;
+        align-content: center;
+        align-self: stretch;
+        min-height: 580px;
+        padding: 4% 2% 0 4%;
+      }
+
+      .query-sentence {
+        max-width: 630px;
+        margin: 0 0 72px;
+        color: var(--ink-deep);
+        font-size: clamp(27px, 2.6vw, 38px);
+        font-weight: 490;
+        line-height: 1.18;
+        letter-spacing: -0.043em;
+        text-wrap: balance;
+      }
+
+      .query-sentence mark {
+        padding: 0;
+        background: transparent;
+        font-weight: 620;
+      }
+
+      .query-sentence .phrase-date,
+      .mapping-date .extracted-value {
+        color: var(--ink);
+      }
+
+      .query-sentence .phrase-tracker,
+      .mapping-tracker .extracted-value {
+        color: var(--coral);
+      }
+
+      .mapping-list {
+        display: grid;
+        gap: 18px;
+        width: min(650px, 100%);
+      }
+
+      .mapping {
+        display: grid;
+        grid-template-columns: minmax(96px, 0.42fr) minmax(70px, 0.55fr) minmax(210px, 1fr);
+        align-items: center;
+        gap: 16px;
+      }
+
+      .extracted-value {
+        font-family: var(--mono);
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: -0.015em;
+      }
+
+      .registration-line {
+        position: relative;
+        height: 1px;
+        background: rgba(23, 48, 71, 0.27);
+      }
+
+      .registration-line::before,
+      .registration-line::after {
+        position: absolute;
+        top: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+        transform: translateY(-50%);
+      }
+
+      .registration-line::before {
+        left: 0;
+      }
+
+      .registration-line::after {
+        right: 0;
+      }
+
+      .mapping-date .registration-line {
+        color: var(--ink);
+      }
+
+      .mapping-tracker .registration-line {
+        color: var(--coral);
+      }
+
+      .resolved-filter {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 56px;
+        padding: 0 18px;
+        border: 1px solid rgba(23, 48, 71, 0.18);
+        background: rgba(248, 245, 238, 0.72);
+        box-shadow: 8px 8px 0 rgba(23, 48, 71, 0.035);
+      }
+
+      .resolved-filter b,
+      .resolved-filter span {
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+
+      .resolved-filter b {
+        color: var(--structure);
+        font-weight: 500;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+
+      .resolved-filter span {
+        color: var(--ink-deep);
+        font-weight: 650;
+      }
+
+      /* Motion intent for a later pass: the two emphasized phrases separate from the sentence, follow their registration lines, and settle into the filter rows. */
+
+      @media (max-width: 1050px) {
+        .screen {
+          min-height: 680px;
+        }
+
+        .identity-layout,
+        .smart-layout {
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 2.5%;
+          padding-left: 5%;
+          padding-right: 5%;
+        }
+
+        .portrait-stage {
+          width: min(540px, 100%);
+        }
+
+        .smart-copy {
+          transform: scale(0.94);
+          transform-origin: left center;
+        }
+
+        .query-transform {
+          transform: scale(0.88);
+          transform-origin: center;
+        }
+      }
+
+      @media (max-width: 760px) {
+        body {
+          padding: 28px 12px 60px;
+        }
+
+        .direction-intro {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .screen {
+          min-height: 820px;
+          aspect-ratio: auto;
+        }
+
+        .thesis-wrap {
+          top: 34%;
+          left: 7%;
+          width: 86%;
+        }
+
+        .thesis {
+          font-size: 47px;
+        }
+
+        .thesis span {
+          white-space: normal;
+        }
+
+        .nav-shell {
+          top: 56px;
+          gap: 1px;
+        }
+
+        .nav-shell span {
+          padding: 0 8px;
+          font-size: 11px;
+        }
+
+        .identity-layout,
+        .smart-layout {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          padding: 126px 7% 42px;
+        }
+
+        .identity-copy {
+          align-self: stretch;
+          padding-bottom: 30px;
+        }
+
+        .identity-name {
+          font-size: 48px;
+        }
+
+        .portrait-stage {
+          align-self: stretch;
+          width: 100%;
+          max-width: 470px;
+          height: auto;
+        }
+
+        .smart-copy {
+          transform: none;
+        }
+
+        .query-transform {
+          width: 100%;
+          min-height: 470px;
+          padding-left: 0;
+          padding-right: 0;
+          transform: none;
+          transform-origin: top center;
+        }
+
+        .query-sentence {
+          margin-bottom: 48px;
+          font-size: 30px;
+        }
+
+        .mapping {
+          grid-template-columns: 94px minmax(44px, 0.45fr) minmax(180px, 1fr);
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="direction-intro">
+      <h1>Riso-tech editorial</h1>
+      <p>
+        A light, print-led direction where disciplined typography carries the story and interactive ink supplies the technical signature. The portrait feels native to the canvas, while coral appears only at moments of resolution, focus, and change.
+      </p>
+    </header>
+
+    <main class="frame-set">
+      <section class="frame-block" aria-labelledby="opening-frame-label">
+        <p class="frame-label" id="opening-frame-label">Opening statement · navigation withheld</p>
+        <div class="screen frame-one">
+          <p class="site-mark">inba.dev</p>
+          <div class="substrate-ink" aria-hidden="true">
+            <span class="substrate-navy"></span>
+            <span class="substrate-coral"></span>
+          </div>
+          <div class="thesis-wrap">
+            <h2 class="thesis">
+              <span>I turn meaningful business problems</span>
+              <span>into reliable software and AI systems.</span>
+            </h2>
+            <p class="cadence">Evaluated. Integrated. Shipped.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="frame-block" id="identity-frame" aria-labelledby="identity-frame-label">
+        <p class="frame-label" id="identity-frame-label">Resolved identity · portrait earned by the transition</p>
+        <div class="screen frame-two">
+          <p class="site-mark">inba.dev</p>
+          <nav class="nav-shell" aria-label="Portfolio sections">
+            <span>Work</span>
+            <span>Research</span>
+            <span>Track record</span>
+            <span>Contact</span>
+          </nav>
+          <div class="identity-layout">
+            <div class="identity-copy">
+              <h2 class="identity-name">Inbasekaran Perumal</h2>
+              <p class="identity-role">SDE II at RingCentral</p>
+            </div>
+            <figure class="portrait-stage" aria-label="Three-panel editorial portrait of Inbasekaran Perumal">
+              <svg class="portrait-composition" viewBox="0 0 650 650" role="img" aria-label="Portrait of Inbasekaran Perumal divided across three aligned print windows">
+                <defs>
+                  <clipPath id="portrait-left" clipPathUnits="userSpaceOnUse">
+                    <rect x="0" y="273" width="104" height="377" rx="52" />
+                  </clipPath>
+                  <clipPath id="portrait-center" clipPathUnits="userSpaceOnUse">
+                    <rect x="124" y="58" width="377" height="592" rx="72" />
+                  </clipPath>
+                  <clipPath id="portrait-right" clipPathUnits="userSpaceOnUse">
+                    <rect x="526" y="175" width="124" height="475" rx="62" />
+                  </clipPath>
+                </defs>
+
+                <!-- Three undistorted source views: original perspective, repaired side positions. -->
+                <g clip-path="url(#portrait-center)">
+                  <image href="../../../../../public/assets/inbase-editorial-portrait.png" x="65.5" y="31.5" width="479.52" height="639.36" preserveAspectRatio="xMidYMid meet" />
+                </g>
+
+                <!-- Side crops retain natural scale while favoring peripheral artwork. -->
+                <g clip-path="url(#portrait-left)">
+                  <image href="../../../../../public/assets/inbase-editorial-portrait.png" x="0" y="257.92" width="305.37" height="407.16" preserveAspectRatio="xMidYMid meet" />
+                </g>
+                <g clip-path="url(#portrait-right)">
+                  <image href="../../../../../public/assets/inbase-editorial-portrait.png" x="265.25" y="156" width="384.75" height="513" preserveAspectRatio="xMidYMid meet" />
+                </g>
+              </svg>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="frame-block" aria-labelledby="smart-frame-label">
+        <p class="frame-label" id="smart-frame-label">Smart Filters · first authored work chapter</p>
+        <div class="screen frame-three">
+          <p class="site-mark">inba.dev</p>
+          <nav class="nav-shell" aria-label="Portfolio sections">
+            <span class="active" aria-current="page">Work</span>
+            <span>Research</span>
+            <span>Track record</span>
+            <span>Contact</span>
+          </nav>
+          <div class="smart-layout">
+            <article class="smart-copy">
+              <p class="context-kicker">RingCentral · Smart Filters</p>
+              <h2 class="project-title">Make complex filters easy to use.</h2>
+              <p class="project-thesis">People describe the calls they need. The interface handles the filters.</p>
+              <p class="project-body">
+                I proposed and built a natural-language path into the existing filters. The system combines deterministic interpretation with model-assisted reasoning, then makes its behavior measurable through evaluation and observability.
+              </p>
+              <p class="project-meta">
+                <span>Deterministic routing</span>
+                <span>Model-assisted interpretation</span>
+                <span>Evaluation</span>
+                <span>Observability</span>
+              </p>
+            </article>
+            <div class="query-transform" aria-label="The sentence Calls from last week where the customer mentioned cancellation resolves into date and tracker filters">
+              <p class="query-sentence">
+                Calls from <mark class="phrase-date">last week</mark> where the customer mentioned <mark class="phrase-tracker">cancellation</mark>.
+              </p>
+              <div class="mapping-list" aria-hidden="true">
+                <div class="mapping mapping-date">
+                  <span class="extracted-value">last week</span>
+                  <i class="registration-line"></i>
+                  <div class="resolved-filter"><b>Date</b><span>Last week</span></div>
+                </div>
+                <div class="mapping mapping-tracker">
+                  <span class="extracted-value">cancellation</span>
+                  <i class="registration-line"></i>
+                  <div class="resolved-filter"><b>Tracker</b><span>Cancellation</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

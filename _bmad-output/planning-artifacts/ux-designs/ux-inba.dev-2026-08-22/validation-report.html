@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Design Validation: inba.dev flagship portfolio</title>
+<style>
+  :root { --bg:#fafaf9; --surface:#fff; --border:#e7e5e4; --text:#1c1917; --muted:#78716c; --strong:#16a34a; --adequate:#65a30d; --thin:#d97706; --high:#ea580c; --medium:#ca8a04; --low:#64748b; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif; color:var(--text); background:var(--bg); }
+  .container { max-width:960px; margin:auto; padding:32px 24px 64px; }
+  header { padding-bottom:16px; border-bottom:1px solid var(--border); margin-bottom:24px; }
+  h1 { margin:0; font-size:24px; letter-spacing:-.02em; }
+  .path,.meta { color:var(--muted); font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .synthesis,.panel,.card { background:var(--surface); border:1px solid var(--border); border-radius:8px; }
+  .synthesis { border-left:3px solid var(--muted); padding:18px 22px; margin-bottom:24px; }
+  .summary { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-bottom:24px; }
+  .card { padding:12px 14px; }
+  .card span { display:block; color:var(--muted); font-size:13px; }
+  .strong { color:var(--strong); } .adequate { color:var(--adequate); } .thin { color:var(--thin); }
+  details { background:var(--surface); border:1px solid var(--border); border-radius:8px; margin-bottom:12px; }
+  summary { cursor:pointer; padding:14px 18px; font-weight:650; }
+  .body { padding:0 18px 18px; }
+  .body ul { margin:8px 0 0; padding-left:20px; }
+  .badge { display:inline-block; padding:2px 7px; border-radius:4px; margin-right:7px; font-size:11px; font-weight:700; text-transform:uppercase; }
+  .high { color:var(--high); background:#fff1eb; } .medium { color:var(--medium); background:#fff8dc; } .low { color:var(--low); background:#eef2f7; }
+  footer { margin-top:36px; padding-top:16px; border-top:1px solid var(--border); }
+</style>
+</head>
+<body><main class="container">
+  <header>
+    <h1>inba.dev flagship portfolio: UX validation</h1>
+    <div class="path">DESIGN.md + EXPERIENCE.md</div>
+  </header>
+  <section class="synthesis">
+    <p>The direction is coherent and strong, with no critical blockers. Narrative order, progressive enhancement, anti-template discipline, and the two-climax motion model are ready to carry forward.</p>
+    <p>The contract still needs revisions before implementation. The load-bearing gaps are contrast, responsive geometry, durable composition references, motion stop conditions, exact portrait geometry, client-island boundaries, font and image delivery, deep links, and measurable performance tests.</p>
+  </section>
+  <div class="summary">
+    <div class="card"><span>Flow coverage</span><b class="strong">strong</b></div>
+    <div class="card"><span>Token completeness</span><b class="adequate">adequate</b></div>
+    <div class="card"><span>Component coverage</span><b class="adequate">adequate</b></div>
+    <div class="card"><span>State coverage</span><b class="adequate">adequate</b></div>
+    <div class="card"><span>Visual references</span><b class="thin">thin</b></div>
+    <div class="card"><span>Bloat</span><b class="adequate">adequate</b></div>
+    <div class="card"><span>Inheritance</span><b class="adequate">adequate</b></div>
+    <div class="card"><span>Shape fit</span><b class="strong">strong</b></div>
+  </div>
+  <details><summary>Rubric review: 3 high, 4 medium, 2 low</summary><div class="body">
+    <p>Flow and document shape are strong. Tokens, components, states, inheritance, and bloat are adequate. Visual reference coverage is thin.</p>
+    <ul>
+      <li><span class="badge high">high</span>Commit accessible foreground/background pairs.</li>
+      <li><span class="badge high">high</span>Promote the approved mock and cover the remaining composition families.</li>
+      <li><span class="badge high">high</span>Resolve the identity-copy conflict with the canonical content source.</li>
+      <li><span class="badge medium">medium</span>Resolve portrait focus semantics, Track Record disclosure, mobile navigation, and portrait failure state.</li>
+    </ul>
+  </div></details>
+  <details><summary>Accessibility review: 4 high, 7 medium, 3 low</summary><div class="body">
+    <p>Pass with required revisions. The high-motion desktop ambition remains viable with a complete static and reduced-motion experience.</p>
+    <ul>
+      <li><span class="badge high">high</span>Coral and structure colors cannot carry small readable text.</li>
+      <li><span class="badge high">high</span>Track Record needs separate disclosure and navigation controls.</li>
+      <li><span class="badge high">high</span>WebGL must be static at rest or pausable.</li>
+      <li><span class="badge high">high</span>Smart Filters must stack at 320px instead of clipping.</li>
+      <li><span class="badge medium">medium</span>Define deep-link navigation, pin exit criteria, portrait semantics, mapping text equivalents, contextual artifact names, mobile nav reflow, and image alternative rules.</li>
+    </ul>
+  </div></details>
+  <details><summary>Visual integrity and feasibility: 10 high, 10 medium, 2 low</summary><div class="body">
+    <p>Conditional pass. The concept is distinctive, but downstream implementation still has room to reintroduce generic layouts or performance regressions.</p>
+    <ul>
+      <li><span class="badge high">high</span>Canonize portrait geometry and mock the remaining authored chapters.</li>
+      <li><span class="badge high">high</span>Give each compact editorial chapter a defined composition family.</li>
+      <li><span class="badge high">high</span>Specify Core Web Vitals, asset budgets, font delivery, responsive image strategy, and browser tests.</li>
+      <li><span class="badge high">high</span>Define client islands, passive pointer routing, pin eligibility, and deep-link settled states.</li>
+      <li><span class="badge medium">medium</span>Prevent metadata chips, résumé drift, generated-art ambiguity, responsive type gaps, nested controls, and semantic image uncertainty.</li>
+    </ul>
+  </div></details>
+  <details open><summary>Required gate before key-screen production</summary><div class="body"><ol>
+    <li>Resolve contrast, identity copy, project naming, mobile navigation, and Track Record semantics.</li>
+    <li>Promote the approved direction and canonize exact portrait geometry.</li>
+    <li>Define and mock the remaining section composition families.</li>
+    <li>Add WebGL, pinning, client-boundary, font, image, deep-link, and performance contracts.</li>
+    <li>Add browser, accessibility, visual-regression, and Core Web Vitals acceptance checks.</li>
+  </ol></div></details>
+  <footer class="meta">Generated 2026-08-23T12:27:47+05:30 · review-rubric.md · review-accessibility.md · review-integrity-feasibility.md</footer>
+</main></body></html>
