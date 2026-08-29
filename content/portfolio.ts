@@ -1,89 +1,125 @@
-export type Project = {
-  title: string;
-  label: string;
-  tension: string;
-  proof: string[];
-  ownership: string;
+import { links } from "./links";
+
+export const hero = {
+  thesis: "I turn meaningful business problems into reliable software and AI systems.",
+  resolution: "Evaluated. Integrated. Shipped.",
 };
 
-export const links = {
-  email: "mailto:inba2002.p@gmail.com",
-  github: "https://github.com/the-pinbo",
-  linkedin: "https://www.linkedin.com/in/inbasperu",
-  resume:
-    "https://drive.google.com/file/d/1Yd9XmOQbQr_j_XIw3krVfHL3XIJ8zHTQ/view?usp=sharing",
+export const identity = {
+  name: "Inbasekaran Perumal",
+  role: "Software Development Engineer II, RingCentral",
+  supporting: "Building intelligent systems that hold up in real use.",
+};
+
+export type ArtifactLink = {
+  label: string;
+  href: string;
+  context?: string;
+};
+
+export type Project = {
+  slug: string;
+  title: string;
+  headline: string;
+  body: string[];
+  artifacts: ArtifactLink[];
 };
 
 export const projects: Project[] = [
   {
+    slug: "smart-filters",
     title: "Smart Filters",
-    label: "Agentic + deterministic orchestration",
-    tension:
-      "Complex enterprise filters had to feel conversational without giving up the predictability people depend on.",
-    proof: [
-      "Evaluated model behavior with curated benchmarks, repeatable metrics, and production observability.",
-      "Integrated agentic reasoning with deterministic interpretation, retrieval, search knowledge, and authentication.",
-      "Shipped the operational path with scheduled knowledge refresh, APIs, Kubernetes, and GitOps delivery.",
+    headline: "Make powerful product capability easier to use.",
+    body: [
+      "Call filtering had become capable but difficult to discover. I proposed and built a natural-language path into the product's existing filters, so people could describe the view they needed instead of searching through a dense interface.",
+      "The system combines deterministic interpretation with model-assisted reasoning, then makes its behavior measurable through evaluation and observability. I led the work from early experiments through product integration. When real use exposed noisy patterns, I revised the routing with deterministic safeguards rather than treating launch as the finish line.",
     ],
-    ownership:
-      "Orchestration, AI logic, retrieval strategy, evaluation design, platform integration, and delivery infrastructure.",
+    artifacts: [],
   },
   {
-    title: "Aura",
-    label: "Agentic workflows + evaluation",
-    tension:
-      "An internal coding agent needed to support issue resolution as an engineering workflow, not just generate code.",
-    proof: [
-      "Designed reusable workflows, skills, and tool interfaces for a coding-agent harness.",
-      "Evaluated individual skills and multi-step agent loops to make reliability visible.",
-      "Integrated measured feedback into the workflow structure so the system could improve through use.",
+    slug: "ace",
+    title: "ACE",
+    headline: "Bring the product into the AI workspace.",
+    body: [
+      "ACE offers an MCP app that brings governed data, permissions, and product workflows into the AI workspace.",
+      "I am building the GraphQL and MCP layers behind it, from governed schema exposure and tool design to the app experience and plugin delivery.",
     ],
-    ownership:
-      "Workflow architecture, skill and tool interfaces, evaluation approaches, and engineering constraints.",
+    artifacts: [],
   },
   {
-    title: "Ace IO MCP",
-    label: "Governed data access + MCP delivery",
-    tension:
-      "AI clients need useful access to enterprise data without losing control of governance or the product experience.",
-    proof: [
-      "Designed a GraphQL intermediate layer that represents available data as a queryable schema.",
-      "Integrated MCP tools with Apollo MCP, GraphQL, Elasticsearch, and a companion app model.",
-      "Owned the shipment path from schema and tool design to a governed, branded client experience.",
+    slug: "visionguard",
+    title: "VisionGuard",
+    headline: "Turn gaze into private screen-time feedback.",
+    body: [
+      "VisionGuard is a webcam-based desktop application that distinguishes looking at the screen from looking away, turning that signal into private screen-time feedback and break reminders.",
+      "I built the C++ application, calibration flow, and local inference path with OpenVINO, Qt, and OpenCV.",
     ],
-    ownership:
-      "Schema and tool design, GraphQL layer, MCP app experience, data governance, and delivery path.",
+    artifacts: [
+      { label: "Code", href: links.visionguardCode, context: "VisionGuard source code" },
+      { label: "GSoC", href: links.visionguardGsoc, context: "VisionGuard Google Summer of Code project" },
+      { label: "Write-up", href: links.visionguardWriteUp, context: "VisionGuard OpenVINO project write-up" },
+    ],
   },
 ];
 
-export const engineeringLoop = [
+export type TrackRecordEntry = {
+  institution: string;
+  dateRange: string;
+  role: string;
+  description: string;
+};
+
+export const trackRecord: TrackRecordEntry[] = [
   {
-    verb: "Explore",
-    description:
-      "Find the product tension, constraints, and evidence that define a useful problem.",
+    institution: "RingCentral",
+    dateRange: "Jul 2024–Present",
+    role: "Software Development Engineer II",
+    description: "Search, agentic workflows, and software systems for ACE.",
   },
   {
-    verb: "Evaluate",
-    description:
-      "Turn model behavior into measurable quality before it becomes a product dependency.",
+    institution: "Linux Foundation",
+    dateRange: "Mar 2025–May 2025",
+    role: "Open Source Developer · SoftPosit for RISC-V",
+    description: "C++ numerical computing, RISC-V emulation, and benchmark-driven systems work.",
   },
   {
-    verb: "Engineer",
-    description:
-      "Connect AI behavior to retrieval, APIs, platform systems, and a clear user experience.",
+    institution: "Google Summer of Code",
+    dateRange: "May 2024–Aug 2024",
+    role: "Open Source Developer · Intel OpenVINO",
+    description: "On-device gaze estimation across C++, OpenVINO, and AI PC hardware.",
   },
   {
-    verb: "Operate",
-    description:
-      "Ship with observability, delivery discipline, and room to learn from real use.",
+    institution: "Indian Institute of Science",
+    dateRange: "Apr 2024–Jul 2024",
+    role: "Research Intern · Spectrum Lab",
+    description: "Sparse recovery and inverse imaging through optimisation-inspired neural networks.",
+  },
+  {
+    institution: "Goldman Sachs",
+    dateRange: "May 2023–Jul 2023",
+    role: "Summer Analyst · Cards Marcus Data Engineering",
+    description: "PySpark and Airflow pipelines for operational reporting.",
+  },
+  {
+    institution: "Determinant Studios",
+    dateRange: "Nov 2022–May 2023",
+    role: "Software Engineering and Research Intern",
+    description: "Speech recognition and entity extraction for a voice-driven inventory product.",
+  },
+  {
+    institution: "NITK Surathkal",
+    dateRange: "Nov 2020–Apr 2024",
+    role: "B.Tech, Electronics & Communication Engineering · 9.19/10 · Rank 4/138",
+    description: "Chaired IEEE CIS and led media and outreach for IEEE NITK.",
   },
 ];
 
-export const credibility = [
-  "Indian Institute of Science research",
-  "Google Summer of Code",
-  "Linux Foundation Mentorship Program",
-  "Goldman Sachs data engineering",
-  "ICASSP research paper",
-  "Granted Indian patent",
-];
+export const contact = {
+  heading: "If you're building something difficult, I'd like to hear about it.",
+  links: [
+    { label: "Email", href: links.email },
+    { label: "LinkedIn", href: links.linkedin },
+    { label: "GitHub", href: links.github },
+    { label: "Resume", href: links.resume },
+  ],
+};

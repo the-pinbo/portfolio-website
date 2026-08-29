@@ -9,7 +9,7 @@ const navigation = read("components/site-navigation.tsx");
 const scene = read("components/hero-scene.tsx");
 const canvas = read("components/hero-canvas.tsx");
 const portrait = read("components/portrait-triptych.tsx");
-const projectStories = read("components/project-stories.tsx");
+const links = read("content/links.ts");
 const styles = read("app/globals.css");
 
 test("the static page communicates the systems identity and routes", () => {
@@ -26,20 +26,24 @@ test("the static page communicates the systems identity and routes", () => {
 });
 
 test("the RingCentral stories carry the approved labels and delivery evidence", () => {
-  for (const title of ["Smart Filters", "Aura", "Ace IO MCP"]) {
+  for (const title of ["Smart Filters", "ACE", "VisionGuard"]) {
     assert.match(portfolio, new RegExp(title));
   }
   for (const label of [
-    "Agentic \\+ deterministic orchestration",
-    "Agentic workflows \\+ evaluation",
-    "Governed data access \\+ MCP delivery",
+    "Make powerful product capability easier to use",
+    "Bring the product into the AI workspace",
+    "Turn gaze into private screen-time feedback",
   ]) {
     assert.match(portfolio, new RegExp(label));
   }
-  assert.equal((portfolio.match(/ownership:\n/g) ?? []).length, 3);
+  assert.doesNotMatch(portfolio, /\bAura\b/);
+  assert.doesNotMatch(portfolio, /Ace IO MCP/);
   assert.match(portfolio, /Evaluated/);
   assert.match(portfolio, /Integrated/);
   assert.match(portfolio, /Shipped/);
+  assert.match(links, /visionguardCode/);
+  assert.match(links, /icasspPaper/);
+  assert.match(links, /patentCertificate/);
 });
 
 test("static portrait remains complete when WebGL is unavailable", () => {
@@ -48,7 +52,6 @@ test("static portrait remains complete when WebGL is unavailable", () => {
   assert.doesNotMatch(portrait, /inbase-editorial-dark\.png/);
   assert.match(page, /<PortraitTriptych \/>/);
   assert.match(styles, /\.hero-canvas \{ display: none; \}/);
-  assert.doesNotMatch(projectStories, /initial=/);
 });
 
 test("the portrait uses a fixed multi-window mask and theme-safe treatment", () => {
