@@ -1,36 +1,139 @@
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#   - replaced: Epic preserved for history but superseded by another epic
+
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created, ready for development
+#   - in-progress: Developer actively working on implementation
+#   - review: Implementation complete, ready for review
+#   - done: Story completed
+#   - replaced: Story preserved for history but superseded by another story
+
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+
+# Action Item Status:
+#   - open: Committed during a retrospective, not yet addressed
+#   - in-progress: Actively being worked on
+#   - done: Completed
+
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when its first story starts (via build's sprint sync)
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates the next story after the previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# - Retrospective appends its action items to action_items; the status view surfaces open ones
 generated: 08-29-2026 08:00
-last_updated: 08-29-2026 08:15
+last_updated: 08-29-2026 18:32
 project: inba.dev
 project_key: INBA
 tracking_system: file-system
-story_location: "_bmad-output/implementation-artifacts"
-
+story_location: _bmad-output/implementation-artifacts
 development_status:
-  epic-1: in-progress
-  1-1-cloudflare-ready-foundation-and-design-tokens: review
-  1-2-opening-thesis-and-resolved-identity: review
-  1-3-site-mark-section-navigation-and-stable-anchors: review
+  epic-1: replaced
+  1-1-cloudflare-ready-foundation-and-design-tokens: replaced
+  1-2-opening-thesis-and-resolved-identity: replaced
+  1-3-site-mark-section-navigation-and-stable-anchors: replaced
   epic-1-retrospective: optional
 
-  epic-2: done
-  2-1-canonical-content-source-and-artifact-link-component: review
-  2-2-smart-filters-chapter: done
-  2-3-ace-chapter: done
-  2-4-visionguard-chapter: done
+  epic-2: replaced
+  2-1-canonical-content-source-and-artifact-link-component: replaced
+  2-2-smart-filters-chapter: replaced
+  2-3-ace-chapter: replaced
+  2-4-visionguard-chapter: replaced
   epic-2-retrospective: optional
 
-  epic-3: done
-  3-1-research-chapter: done
-  3-2-open-source-chapter: done
-  3-3-patent-chapter: done
-  3-4-track-record-chapter: done
-  3-5-contact-chapter: done
+  epic-3: replaced
+  3-1-research-chapter: replaced
+  3-2-open-source-chapter: replaced
+  3-3-patent-chapter: replaced
+  3-4-track-record-chapter: replaced
+  3-5-contact-chapter: replaced
   epic-3-retrospective: optional
 
-  epic-4: done
-  4-1-webgl-substrate-and-eligibility-fallback: done
-  4-2-pinned-sequences-and-portrait-pointer-response: done
-  4-3-accessibility-and-responsive-compliance: done
-  4-4-media-delivery-performance-deployment-and-legacy-removal: done
+  epic-4: replaced
+  4-1-webgl-substrate-and-eligibility-fallback: replaced
+  4-2-pinned-sequences-and-portrait-pointer-response: replaced
+  4-3-accessibility-and-responsive-compliance: replaced
+  4-4-media-delivery-performance-deployment-and-legacy-removal: replaced
   epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-foundation-cleanup-and-visual-test-harness: backlog
+  5-2-opening-identity-navigation-and-smart-filters-static-parity: backlog
+  5-3-ace-visionguard-research-open-source-and-patent-static-parit: backlog
+  5-4-track-record-contact-intermediate-tablet-and-mobile-parity: backlog
+  5-5-opening-transition-smart-filters-pinning-webgl-accessibility: backlog
+  epic-5-retrospective: optional
+
+replacement_map:
+  1-1-cloudflare-ready-foundation-and-design-tokens: [5.1]
+  1-2-opening-thesis-and-resolved-identity: [5.2]
+  1-3-site-mark-section-navigation-and-stable-anchors: [5.2]
+  2-1-canonical-content-source-and-artifact-link-component: [5.1]
+  2-2-smart-filters-chapter: [5.2]
+  2-3-ace-chapter: [5.3]
+  2-4-visionguard-chapter: [5.3]
+  3-1-research-chapter: [5.3]
+  3-2-open-source-chapter: [5.3]
+  3-3-patent-chapter: [5.3]
+  3-4-track-record-chapter: [5.4]
+  3-5-contact-chapter: [5.4]
+  4-1-webgl-substrate-and-eligibility-fallback: [5.5]
+  4-2-pinned-sequences-and-portrait-pointer-response: [5.5]
+  4-3-accessibility-and-responsive-compliance: [5.4, 5.5]
+  4-4-media-delivery-performance-deployment-and-legacy-removal: [5.1, 5.5]
+
+gate_sequence:
+  - story: 5.1
+    key: 5-1-foundation-cleanup-and-visual-test-harness
+    title: Foundation cleanup and visual test harness
+    gate: G0
+    depends_on: []
+    evidence: VA-01 through VA-16 harness coverage and G0 contract agreement
+    independent_review: Strong non-implementing orchestrator
+  - story: 5.2
+    key: 5-2-opening-identity-navigation-and-smart-filters-static-parity
+    title: Opening, Identity, navigation, and Smart Filters static parity
+    gate: G1
+    depends_on: [Story 5.1 accepted at G0]
+    evidence: VA-01 through VA-03 at desktop, 390px, and 320px
+    independent_review: Terra 5.6 High visual-fidelity review
+  - story: 5.3
+    key: 5-3-ace-visionguard-research-open-source-and-patent-static-parit
+    title: ACE, VisionGuard, Research, Open Source, and Patent static parity
+    gate: G2 desktop checkpoint
+    depends_on: [Story 5.2 accepted at G1]
+    evidence: VA-04 through VA-08 desktop candidates plus continuous-page review
+    independent_review: Terra 5.6 High visual-fidelity review
+  - story: 5.4
+    key: 5-4-track-record-contact-intermediate-tablet-and-mobile-parity
+    title: Track Record, Contact, intermediate, tablet, and mobile parity
+    gate: G2 promotion
+    depends_on: [Story 5.2 accepted at G1, Story 5.3 desktop checkpoint accepted]
+    evidence: VA-01 through VA-10 at 1024px, 768px, 390px, and 320px plus responsive boundary states
+    independent_review: Terra 5.6 High visual-fidelity and responsive/accessibility reviews
+  - story: 5.5
+    key: 5-5-opening-transition-smart-filters-pinning-webgl-accessibility
+    title: Opening transition, Smart Filters pinning, WebGL, accessibility, performance, and Cloudflare release
+    gate: G3/G4
+    depends_on: [Story 5.4 promoted at G2]
+    evidence: VA-11 through VA-16, affected VA-01 through VA-10 reruns, accessibility, performance, and Cloudflare readiness
+    independent_review: Interaction/WebGL, responsive/accessibility, visual-fidelity, and adversarial code/verification reviews; promotion by a non-implementing strong orchestrator
+
+readiness_contract:
+  traceability: [FR1-FR25, UX-DR1-UX-DR30, AD-1-AD-15, VA-01-VA-16]
+  required_viewports: [desktop >=1199px, intermediate 1024px, boundary 901px, boundary 1099px, tablet 768px, mobile 390px, narrow mobile 320px, sub-320px reflow]
+  required_states: [200 percent zoom, enlarged fonts, short landscape, no JavaScript, reduced motion, coarse pointer, Save-Data, WebGL disabled, missing media, font failure, deep links, restored scroll]
+  mandatory_checks: [lint, type/build, canonical content and links, prohibited-copy and legacy scan, asset manifest, structural browser assertions, anchors, accessibility, responsive overflow, visual acceptance]
+  advancement_policy: No story advances without its required visual-acceptance evidence and independent review; failed or invalidated evidence returns work to its owning slice.
+
+# Action items committed during retrospectives (section created by the retrospective workflow)
 action_items: []
