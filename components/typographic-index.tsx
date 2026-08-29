@@ -2,7 +2,7 @@ import { trackRecord } from "@/content/portfolio";
 
 export function TypographicIndex() {
   return (
-    <section className="typographic-index" aria-label="Track record">
+    <section className="typographic-index" id="track-record" aria-label="Track record">
       <ol>
         {trackRecord.map((entry) => (
           <li key={entry.institution}>
