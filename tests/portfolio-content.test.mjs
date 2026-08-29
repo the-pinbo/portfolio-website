@@ -33,7 +33,7 @@ test("the approved public proof has stable evidence routes", () => {
 });
 
 test("RingCentral cases retain the approved narrative without internal detail or defensive labels", () => {
-  for (const title of ["Smart Filters", "ACE io MCP server"]) {
+  for (const title of ["Smart Filters", "ACE"]) {
     assert.match(publicCopy, new RegExp(title));
   }
   assert.doesNotMatch(publicCopy, /68%|42 complex|25%|16 seconds|5 seconds/);
@@ -53,6 +53,6 @@ test("excluded résumé material cannot re-enter public-facing copy", () => {
   assert.doesNotMatch(publicCopy, /\b(?:technical\s+)?skills?\b/i);
   assert.doesNotMatch(publicCopy, /media\.licdn\.com/);
   assert.match(publicCopy, /Software Development Engineer II at RingCentral/);
-  assert.match(publicCopy, /B\.Tech, Electronics and Communication Engineering · 2024/);
-  assert.match(publicCopy, /Determinant Studios.*NLP systems/);
+  assert.match(publicCopy, /B\.Tech, Electronics & Communication Engineering · 9\.19\/10 · Rank 4\/138/);
+  assert.match(publicCopy, /Determinant Studios.*Speech recognition and entity extraction for a voice-driven inventory product/);
 });

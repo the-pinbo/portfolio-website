@@ -2,7 +2,7 @@
 title: 'Cloudflare-ready foundation and design tokens'
 type: 'feature'
 created: '2026-08-29'
-status: 'in-progress'
+status: 'done'
 baseline_commit: 'cff4011da6ae93e1d678c313c6a90ab3e48faa49'
 review_loop_iteration: 0
 context:
@@ -49,10 +49,10 @@ context:
 ## Tasks & Acceptance
 
 **Execution:**
-- [ ] `next.config.ts` -- set `output: "export"` and keep `images.formats` for AVIF/WebP -- makes Cloudflare Pages static export explicit.
-- [ ] `app/layout.tsx` -- import Instrument Sans and IBM Plex Mono and apply them to the root body -- establishes the approved type system.
-- [ ] `app/globals.css` -- add root design tokens for the DESIGN.md palette, typography, spacing, and radii; remove the dark-mode media query and `color-scheme: light dark` -- keeps the site light-only and token-driven.
-- [ ] `app/globals.css` -- set the base body font, page background, color, minimum width, and focus treatment to the new tokens -- makes the base shell readable and responsive.
+- [x] `next.config.ts` -- set `output: "export"` and keep `images.formats` for AVIF/WebP -- makes Cloudflare Pages static export explicit.
+- [x] `app/layout.tsx` -- import Instrument Sans and IBM Plex Mono and apply them to the root body -- establishes the approved type system.
+- [x] `app/globals.css` -- add root design tokens for the DESIGN.md palette, typography, spacing, and radii; remove the dark-mode media query and `color-scheme: light dark` -- keeps the site light-only and token-driven.
+- [x] `app/globals.css` -- set the base body font, page background, color, minimum width, and focus treatment to the new tokens -- makes the base shell readable and responsive.
 
 **Acceptance Criteria:**
 - Given the Next.js project, when `next build` runs, then the build succeeds with `output: "export"` and no server routes.
@@ -76,3 +76,31 @@ The old CSS uses `--parchment`, `--navy`, `--slate`, `--vermilion`, and `--ink`.
 **Manual checks:**
 - Inspect `app/globals.css` for the new token block and absence of dark-mode overrides.
 - Confirm `next.config.ts` contains `output: "export"`.
+
+## Suggested Review Order
+
+**Cloudflare static export**
+
+- Makes the production output explicitly compatible with Cloudflare Pages.
+  [`next.config.ts:4`](../../next.config.ts#L4)
+
+**Design tokens and light-only theme**
+
+- Establishes the approved Riso-tech palette, spacing, radius, and light color scheme.
+  [`globals.css:4`](../../app/globals.css#L4)
+
+**Typography**
+
+- Adds the approved Instrument Sans and IBM Plex Mono as self-hosted `next/font` variables.
+  [`layout.tsx:2`](../../app/layout.tsx#L2)
+
+**Lint boundary**
+
+- Keeps generated static export output out of lint scans.
+  [`eslint.config.mjs:14`](../../eslint.config.mjs#L14)
+
+**Test alignment**
+
+- Updates content and theme expectations to the finalized direction.
+  [`portfolio.test.mjs:52`](../../tests/portfolio.test.mjs#L52)
+  [`portfolio-content.test.mjs:36`](../../tests/portfolio-content.test.mjs#L36)

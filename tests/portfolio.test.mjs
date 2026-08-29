@@ -54,7 +54,8 @@ test("the portrait uses a fixed multi-window mask and theme-safe treatment", () 
   assert.match(styles, /@supports \(\(mask-image/);
   assert.match(styles, /--portrait-wash/);
   assert.match(styles, /--portrait-filter/);
-  assert.match(styles, /@media \(prefers-color-scheme: dark\)/);
+  assert.match(styles, /color-scheme: light/);
+  assert.doesNotMatch(styles, /@media \(prefers-color-scheme: dark\)/);
   assert.match(styles, /transition: border-color 360ms ease, filter 360ms ease/);
   assert.match(styles, /@media \(max-width: 767px\)/);
   assert.doesNotMatch(styles, /filter: invert\(/);

@@ -11,6 +11,7 @@ const config = [
   {
     ignores: [
       ".next/**",
+      "out/**",
       "next-env.d.ts",
       "node_modules/**",
       "_bmad/**",
