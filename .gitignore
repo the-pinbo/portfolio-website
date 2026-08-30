@@ -6,3 +6,7 @@ node_modules/
 .next/
 out/
 *.tsbuildinfo
+playwright-report/
+test-results/
+tests/visual/candidates/**
+!tests/visual/candidates/.gitkeep

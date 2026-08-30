@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Visual candidate evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["rowId", "gate", "implementationRevision", "worktreeFingerprint", "fixtureRevision", "outDigest", "viewport", "devicePixelRatio", "browser", "fontReady", "anchor", "checkpoint", "crop", "masks", "tolerance", "command", "artifactPath", "artifactHash", "result", "comparison", "reviewer", "reviewDate", "exceptionOwner"],
+  "properties": {
+    "rowId": { "type": "string", "pattern": "^VA-(0[1-9]|1[0-6])$" },
+    "gate": { "type": "string", "enum": ["G1", "G2", "G3"] },
+    "implementationRevision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "worktreeFingerprint": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "fixtureRevision": { "const": "a1d613522b568b5af79ca424ff64961c9927371f" },
+    "outDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "viewport": { "type": "object", "additionalProperties": false, "required": ["name", "width", "height"], "properties": {
+      "name": { "enum": ["desktop", "intermediate", "tablet", "mobile", "narrow-mobile"] },
+      "width": { "type": "integer", "minimum": 1 }, "height": { "type": "integer", "minimum": 1 }
+    } },
+    "devicePixelRatio": { "type": "number", "exclusiveMinimum": 0 },
+    "browser": { "type": "string", "minLength": 1 },
+    "fontReady": { "const": true },
+    "anchor": { "type": "string", "pattern": "^#[A-Za-z][A-Za-z0-9_-]*$" },
+    "checkpoint": { "type": "string", "minLength": 1 },
+    "crop": { "enum": ["viewport", "chapter", "full-page"] },
+    "masks": { "type": "array", "items": {
+      "type": "object", "additionalProperties": false, "required": ["x", "y", "width", "height", "unit"],
+      "properties": { "x": { "type": "number", "minimum": 0 }, "y": { "type": "number", "minimum": 0 }, "width": { "type": "number", "exclusiveMinimum": 0 }, "height": { "type": "number", "exclusiveMinimum": 0 }, "unit": { "enum": ["px", "ratio"] } },
+      "if": { "properties": { "unit": { "const": "ratio" } } },
+      "then": { "properties": { "x": { "type": "number", "maximum": 1 }, "y": { "type": "number", "maximum": 1 }, "width": { "type": "number", "maximum": 1 }, "height": { "type": "number", "maximum": 1 } } }
+    } },
+    "tolerance": { "type": "number", "minimum": 0, "maximum": 1 },
+    "command": { "type": "string", "minLength": 1 },
+    "artifactPath": { "type": "string", "minLength": 1 },
+    "artifactHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "result": { "const": "candidate/unreviewed" },
+    "comparison": { "type": "object", "additionalProperties": false, "required": ["result", "reason"], "properties": {
+      "result": { "enum": ["pass", "fail", "not-reviewed"] }, "reason": { "type": "string", "minLength": 1 }
+    } },
+    "reviewer": { "type": "null" }, "reviewDate": { "type": "null" }, "exceptionOwner": { "type": "null" }
+  }
+}

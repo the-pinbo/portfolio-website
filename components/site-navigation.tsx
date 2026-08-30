@@ -1,21 +1,15 @@
 import { ActiveSectionObserver } from "@/components/active-section-observer";
-
-const destinations = [
-  { label: "Work", href: "#work" },
-  { label: "Research", href: "#research" },
-  { label: "Track Record", href: "#track-record" },
-  { label: "Contact", href: "#contact" },
-];
+import { site } from "@/content/portfolio";
 
 export function SiteNavigation() {
   return (
     <header className="site-header">
       <a className="site-mark" href="#top">
-        inba.dev
+        {site.mark}
       </a>
-      <nav className="section-navigation" aria-label="Section navigation" data-section-nav>
+      <nav className="section-navigation" aria-label={site.navigationLabel} data-section-nav>
         <ul>
-          {destinations.map((item) => (
+          {site.navigation.map((item) => (
             <li key={item.href}>
               <a href={item.href}>{item.label}</a>
             </li>

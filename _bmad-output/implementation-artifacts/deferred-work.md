@@ -10,3 +10,6 @@
 - source_spec: `_bmad-output/implementation-artifacts/spec-finalize-portfolio-content.md`
   summary: Establish a periodic owner-reviewed link and freshness check for current role, confidential-case clearance, and external proof routes before launch and after material career changes.
   evidence: The approved copy deliberately contains current-state statements and third-party proof links whose status can change outside the repository.
+- source_spec: `_bmad-output/implementation-artifacts/spec-5-1-foundation-cleanup-and-visual-test-harness.md`
+  summary: Implement and verify the required sub-320px reflow instead of retaining the current 320px body minimum.
+  evidence: `body { min-width: 320px; }` predates Story 5.1 and will overflow below 320px; responsive parity belongs to Story 5.4 and was explicitly excluded from this foundation slice.

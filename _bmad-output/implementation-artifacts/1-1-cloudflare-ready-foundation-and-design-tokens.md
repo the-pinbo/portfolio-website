@@ -2,7 +2,8 @@
 title: 'Cloudflare-ready foundation and design tokens'
 type: 'feature'
 created: '2026-08-29'
-status: 'done'
+status: 'replaced'
+replaced_by: '5.1'
 baseline_commit: 'cff4011da6ae93e1d678c313c6a90ab3e48faa49'
 review_loop_iteration: 0
 context:

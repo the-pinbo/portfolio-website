@@ -2,7 +2,8 @@
 title: 'Canonical content source and artifact link component'
 type: 'feature'
 created: '2026-08-29'
-status: 'done'
+status: 'replaced'
+replaced_by: '5.1'
 baseline_commit: '7c1ab39'
 review_loop_iteration: 0
 context:

@@ -1,17 +1,16 @@
 import { LinkedArtifact } from "@/components/linked-artifact";
 import { links } from "@/content/links";
+import { visualLabels } from "@/content/portfolio";
 
 export function VoiceLedgerField() {
   return (
     <figure className="voice-ledger-field">
       <div className="voice-ledger-field__slip">
-        <span>ITEM</span>
-        <span>QUANTITY</span>
-        <span>UPDATE</span>
+        {visualLabels.ledger.fields.map((field) => <span key={field}>{field}</span>)}
       </div>
       <div className="voice-ledger-field__ledger">
-        <span>ITEM</span>
-        <strong>Resolved row</strong>
+        <span>{visualLabels.ledger.resolvedField}</span>
+        <strong>{visualLabels.ledger.resolvedValue}</strong>
       </div>
       <figcaption>
         <LinkedArtifact label="Patent" href={links.patentCertificate} context="Official Patent Office certificate" />

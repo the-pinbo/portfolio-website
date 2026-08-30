@@ -1,3 +1,6 @@
+import { DeliveryImage } from "@/components/delivery-image";
+import { assets } from "@/content/assets";
+
 export function PortraitTriptych() {
   return (
     <figure className="portrait-triptych">
@@ -8,7 +11,7 @@ export function PortraitTriptych() {
         viewBox="0 0 650 650"
       >
         <title id="portrait-triptych-title">
-          Illustrated portrait of Inbasekaran Perumal
+          {assets.portrait.alt}
         </title>
         <defs>
           <clipPath id="portrait-left">
@@ -27,30 +30,36 @@ export function PortraitTriptych() {
           rx="72"
           width="650"
         />
-        <image
+        <foreignObject
           className="portrait-triptych__panel"
           clipPath="url(#portrait-left)"
           height="650"
-          href="/assets/inbase-editorial-portrait.png"
-          preserveAspectRatio="xMidYMid meet"
           width="650"
-        />
-        <image
+          x="0"
+          y="0"
+        >
+          <DeliveryImage asset={assets.portrait} decorative />
+        </foreignObject>
+        <foreignObject
           className="portrait-triptych__panel"
           clipPath="url(#portrait-center)"
           height="650"
-          href="/assets/inbase-editorial-portrait.png"
-          preserveAspectRatio="xMidYMid meet"
           width="650"
-        />
-        <image
+          x="0"
+          y="0"
+        >
+          <DeliveryImage asset={assets.portrait} decorative />
+        </foreignObject>
+        <foreignObject
           className="portrait-triptych__panel"
           clipPath="url(#portrait-right)"
           height="650"
-          href="/assets/inbase-editorial-portrait.png"
-          preserveAspectRatio="xMidYMid meet"
           width="650"
-        />
+          x="0"
+          y="0"
+        >
+          <DeliveryImage asset={assets.portrait} decorative />
+        </foreignObject>
       </svg>
     </figure>
   );

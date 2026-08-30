@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
+import { assets } from "@/content/assets";
+import { seo } from "@/content/portfolio";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -17,18 +19,16 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Inbasekaran Perumal | Software Development Engineer II, RingCentral",
-  description:
-    "Inbasekaran Perumal turns meaningful business problems into reliable software and AI systems. Evaluated. Integrated. Shipped.",
+  title: seo.title,
+  description: seo.description,
   metadataBase: new URL("https://inba.dev"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Inbasekaran Perumal | Software Development Engineer II, RingCentral",
-    description:
-      "I turn meaningful business problems into reliable software and AI systems. Evaluated. Integrated. Shipped.",
-    images: ["/assets/inbase-editorial-portrait.png"],
+    title: seo.title,
+    description: seo.openGraphDescription,
+    images: [assets.portrait.derivatives[2].webp],
   },
 };
 

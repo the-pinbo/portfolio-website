@@ -1,18 +1,17 @@
+import { visualLabels } from "@/content/portfolio";
+
 export function McpAppStack() {
+  const ace = visualLabels.ace;
   return (
-    <figure className="mcp-app-stack" aria-label="ACE offers an MCP app">
+    <figure className="mcp-app-stack" aria-label={ace.accessibleName}>
       <div className="mcp-app-stack__experience">
-        <span>MCP app</span>
-        <strong>Interactive UI</strong>
-        <strong>Customer workflow</strong>
-        <strong>Saved work</strong>
+        <span>{ace.experienceLabel}</span>
+        {ace.experience.map((item) => <strong key={item}>{item}</strong>)}
       </div>
-      <div className="mcp-app-stack__contract">GraphQL contract</div>
+      <div className="mcp-app-stack__contract">{ace.contract}</div>
       <div className="mcp-app-stack__capability">
-        <span>Governed capability</span>
-        <strong>Data</strong>
-        <strong>Tools</strong>
-        <strong>Permissions</strong>
+        <span>{ace.capabilityLabel}</span>
+        {ace.capability.map((item) => <strong key={item}>{item}</strong>)}
       </div>
     </figure>
   );

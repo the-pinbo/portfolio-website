@@ -1,11 +1,10 @@
+import { DeliveryImage } from "@/components/delivery-image";
+import { assets } from "@/content/assets";
+
 export function SpecimenPlate() {
   return (
     <figure className="specimen-plate">
-      <img
-        alt="Riso-style editorial composite of VisionGuard's desktop interface and gaze-calibration geometry"
-        className="specimen-plate__image"
-        src="/assets/visionguard-riso-editorial-v2.png"
-      />
+      <DeliveryImage asset={assets.visionguard} className="specimen-plate__image" />
     </figure>
   );
 }
