@@ -21,18 +21,18 @@ export default function Home() {
         <OpeningSequence>
           <div className="opening-statement wrap">
             <div>
-              <h1>{homepage.thesis}</h1>
-              <p className="opening-cadence">Evaluated. Integrated. Shipped.</p>
+              <h1>{homepage.thesis.map((line, index) => <span key={line}>{index > 0 ? " " : ""}{line}</span>)}</h1>
+              <p className="opening-cadence">{homepage.cadence}</p>
             </div>
           </div>
           <div className="hero wrap" id="identity-frame">
-            <div>
+            <div className="hero-copy">
               <h2 className="hero-name">{homepage.name}</h2>
+              <p className="hero-role">{homepage.role}</p>
               <p className="lead">{homepage.introduction}</p>
-              <p className="hero-role">Software Development Engineer II</p>
               <div className="hero-actions">
-                <LinkedArtifact label="Explore my work" href="#work" />
-                <LinkedArtifact label="Résumé" href={links.resume} />
+                <LinkedArtifact label={homepage.workAction} href="#work" variant="primary" />
+                <LinkedArtifact label={homepage.resumeAction} href={links.resume} variant="secondary" />
               </div>
             </div>
             <PortraitTriptych />

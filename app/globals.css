@@ -116,7 +116,7 @@ p {
 }
 .hero {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: 5%;
   min-height: calc(100svh - var(--header-height));
@@ -136,13 +136,18 @@ p {
   padding-block: 64px;
 }
 .opening-statement h1 {
-  max-width: 19ch;
-  font-size: clamp(48px, 6.3vw, 90px);
+  max-width: 1120px;
+  font-size: clamp(2.5rem, 4.8vw, 4.25rem);
   font-weight: 550;
+  line-height: 1.13;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
+.opening-statement h1 > span { display: block; }
+.opening-statement h1 > span:first-child { color: var(--muted); }
 .opening-cadence {
-  margin-top: 36px;
-  font: 500 14px/1.6 var(--font-plex-mono), monospace;
+  margin-top: 28px;
+  font: 500 13px/1.6 var(--font-plex-mono), monospace;
   color: var(--coral-text);
 }
 .opening-sequence--animated { height: calc((100svh - var(--header-height)) * 2); }
@@ -161,14 +166,22 @@ p {
   transform: translateX(calc((1 - var(--opening-progress, 0)) * 100vw));
 }
 .hero-name {
-  max-width: 10ch;
-  margin-bottom: 28px;
-  font-size: clamp(48px, 5.5vw, 80px);
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
   font-weight: 550;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
-.hero-role { margin-top: 16px; font: 500 12px/1.5 var(--font-plex-mono), monospace; }
-.lead {
-  max-width: 58ch;
+.hero-copy { min-width: 0; }
+.hero-role {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.hero .lead {
+  max-width: 34ch;
+  margin-top: 12px;
   font-size: clamp(18px, 1.6vw, 20px);
   line-height: 1.5;
 }
@@ -179,6 +192,33 @@ p {
   gap: 24px;
   align-items: center;
   margin-top: 32px;
+}
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 12px 0;
+  font: 500 15px/1.5 var(--font-instrument-sans), sans-serif;
+  text-decoration: none;
+}
+.action-link--primary {
+  padding-inline: 24px;
+  border-radius: 999px;
+  background: var(--deep);
+  color: var(--light);
+}
+.action-link--primary:hover { background: var(--ink); }
+.action-link--secondary:hover > span:first-child,
+.action-link--secondary:focus-visible > span:first-child {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.action-link:active { opacity: 0.8; }
+@media (prefers-reduced-motion: no-preference) {
+  .action-link { transition: transform 150ms ease, background-color 150ms ease; }
+  .action-link--primary:active { transform: scale(0.98); }
 }
 .portrait-triptych {
   width: 100%;
@@ -440,12 +480,15 @@ figcaption > span {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
   border-top: 1px solid var(--rule);
 }
 .contact-close h2 {
-  max-width: 15ch;
-  margin: 24px 0;
-  font-size: clamp(52px, 7.5vw, 108px);
+  max-width: 19ch;
+  margin: 20px 0 0;
+  font-size: clamp(36px, 4.5vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
 }
 .contact-close > p:not(.contact-close__eyebrow) {
   max-width: 55ch;
@@ -461,8 +504,14 @@ figcaption > span {
 .contact-close__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  align-items: center;
+  gap: 12px 28px;
   margin-top: 36px;
+}
+.contact-close__secondary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
 }
 .case-page {
   padding-top: 42px;
@@ -584,8 +633,11 @@ figcaption > span {
     grid-template-columns: 1fr;
     padding-block: 48px 65px;
   }
-  .hero-name { font-size: clamp(44px, 12vw, 64px); }
-  .opening-statement h1 { font-size: clamp(42px, 11vw, 62px); }
+  .hero-name { font-size: clamp(2.375rem, 6.2vw, 2.5rem); }
+  .opening-statement h1 { font-size: clamp(2.25rem, 6.2vw, 2.5rem); }
+  .opening-statement h1 > span { display: inline; }
+  .hero-actions { gap: 12px 24px; margin-top: 28px; }
+  .hero .portrait-triptych { margin-top: 16px; }
   .portrait-triptych {
     max-width: 400px;
     justify-self: center;
@@ -638,6 +690,8 @@ figcaption > span {
   .contact-close {
     padding-block: 64px 80px;
   }
+  .contact-close__links { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .contact-close__secondary { gap: 8px 24px; }
   .case-header { padding: 48px 0 36px; }
   .case-sections p { font-size: 17px; }
   .case-sections section {

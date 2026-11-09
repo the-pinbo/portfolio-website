@@ -183,8 +183,8 @@ export const trackRecord: TrackRecordEntry[] = [
 export const contact = {
   eyebrow: "Contact",
   heading: "Let’s talk about what you’re building.",
+  primaryAction: { label: "Email", href: links.email },
   links: [
-    { label: "Email", href: links.email },
     { label: "LinkedIn", href: links.linkedin },
     { label: "GitHub", href: links.github },
     { label: "Résumé", href: links.resume },
@@ -212,7 +212,14 @@ export const visualLabels = {
 
 export const homepage = {
   name: "Inbasekaran Perumal",
-  thesis: "I turn meaningful business problems into reliable software and AI systems.",
+  thesis: [
+    "I turn meaningful business problems",
+    "into reliable software and AI systems.",
+  ],
+  cadence: "Evaluated. Integrated. Shipped.",
+  role: "Software Development Engineer II",
+  workAction: "Explore my work",
+  resumeAction: "Résumé",
   filtersHeadline: "Make complex filters easy to use.",
   introduction:
     "I build AI capabilities and backend systems at RingCentral.",
