@@ -124,7 +124,7 @@ for (const width of [1440, 1024, 768, 390, 320]) {
     }
     await expect(page.getByRole("navigation", { name: "Next project" })).toHaveCount(0);
     await page.getByRole("navigation", { name: "More work" }).getByRole("link", { name: "Back to selected work" }).click();
-    await expect(page).toHaveURL(/#work$/);
+    await expect(page).toHaveURL(/#visionguard$/);
     await page.goto("/");
     await page.keyboard.press("Tab");
     const skip = page.getByRole("link", { name: "Skip to content" });

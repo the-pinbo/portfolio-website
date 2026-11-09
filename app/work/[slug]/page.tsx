@@ -5,7 +5,7 @@ import { SiteNavigation } from "@/components/site-navigation";
 import { LinkedArtifact } from "@/components/linked-artifact";
 import { SpecimenPlate } from "@/components/specimen-plate";
 import { assets } from "@/content/assets";
-import { projects, site } from "@/content/portfolio";
+import { projectAnchors, projects, site } from "@/content/portfolio";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -48,8 +48,7 @@ export default async function ProjectPage({ params }: Props) {
       <SiteNavigation current="Work" />
       <main id="main-content" className="case-page wrap" tabIndex={-1}>
         {/* Native navigation preserves the hash across a static-export route change. */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a className="back-link action-link action-link--secondary" href="/#work">
+        <a className="back-link action-link action-link--secondary" href={`/#${projectAnchors[slug]}`}>
           <span>{site.workBackLabel}</span><span aria-hidden="true">←</span>
         </a>
         <header className="case-header">
@@ -92,7 +91,7 @@ export default async function ProjectPage({ params }: Props) {
           <span>{next ? site.nextProjectLabel : site.moreWorkLabel}</span>
           <LinkedArtifact
             label={next ? next.title : site.workReturnLabel}
-            href={next ? `/work/${next.slug}/` : "/#work"}
+            href={next ? `/work/${next.slug}/` : `/#${projectAnchors[slug]}`}
           />
         </nav>
       </main>

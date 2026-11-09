@@ -9,7 +9,7 @@ import { ResearchPosterTile } from "@/components/research-poster-tile";
 import { SiteNavigation } from "@/components/site-navigation";
 import { VoiceInventoryVisual } from "@/components/voice-inventory-visual";
 import { links } from "@/content/links";
-import { homepage, projects, researchStories, site, trackRecord } from "@/content/portfolio";
+import { homepage, projectAnchors, projects, researchStories, site, trackRecord } from "@/content/portfolio";
 export default function Home() {
   return (
     <>
@@ -44,16 +44,7 @@ export default function Home() {
               <article
                 className={`chapter work-preview work-preview--${project.slug}`}
                 key={project.slug}
-                id={
-                  (
-                    {
-                      "natural-language-filtering": "smart-filters",
-                      "ai-native-engineering": "ai-native-engineering",
-                      "ace-mcp": "ace",
-                      visionguard: "visionguard",
-                    } as Record<string, string>
-                  )[project.slug]
-                }
+                id={projectAnchors[project.slug]}
               >
                 <div className="work-preview__copy">
                   <p className="eyebrow">{project.eyebrow}</p>

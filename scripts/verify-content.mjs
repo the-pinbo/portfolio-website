@@ -12,7 +12,8 @@ for (const slug of slugs) {
   const page = readFileSync(`out/work/${slug}/index.html`, "utf8");
   assert.ok(page.includes("<h1"));
   assert.ok(page.includes(`https://inba.dev/work/${slug}/`));
-  assert.ok(page.includes('href="/#work"'));
+  const anchor = { "natural-language-filtering": "smart-filters", "ai-native-engineering": "ai-native-engineering", "ace-mcp": "ace", visionguard: "visionguard" }[slug];
+  assert.ok(page.includes(`href="/#${anchor}"`));
   assert.ok(page.includes("My contribution"));
   assert.ok(!/GraphQL|MCP app|plugin.delivery/i.test(page));
 }
@@ -29,7 +30,7 @@ for (const phrase of ["helped cut monthly AI spend by 52% while supporting highe
 assert.doesNotMatch(home, /Engineering for real product workflows\./, "redundant About section must remain removed");
 
 const ace = readFileSync("out/work/ace-mcp/index.html", "utf8");
-assert.ok(ace.includes("Another engineer implemented the interface."), "ACE implementation attribution missing");
+assert.ok(ace.includes("I designed the query language and client-facing interface for document search and aggregation, and contributed multi-turn evaluations."), "ACE contribution description missing");
 for (const phrase of ["from 26.4 to 32.6 dB in the reported benchmark", "reducing entry time by about 35% in tests", "Indian Patent No. 576831, granted in 2025"]) {
   assert.ok(home.includes(phrase), `Research benchmark qualifier missing: ${phrase}`);
 }

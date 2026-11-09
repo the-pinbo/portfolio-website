@@ -22,6 +22,12 @@ export const seo = {
     "Software engineer at RingCentral building AI features from product problem to production, across backend systems, evaluation, and deployment. Explore selected work, research, and open-source contributions.",
 } as const;
 export type ArtifactLink = { label: string; href: string; context?: string };
+export const projectAnchors: Record<string, string> = {
+  "natural-language-filtering": "smart-filters",
+  "ai-native-engineering": "ai-native-engineering",
+  "ace-mcp": "ace",
+  visionguard: "visionguard",
+};
 export type Project = {
   slug: string;
   title: string;

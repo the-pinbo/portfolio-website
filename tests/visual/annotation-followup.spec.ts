@@ -66,7 +66,7 @@ for (const width of [1345, 390]) {
       await expect(link).toHaveClass(/linked-artifact/);
       if (i < slugs.length - 1) await expect(link).toHaveAttribute("href", `/work/${slugs[i + 1]}/`);
       else {
-        await expect(link).toHaveAttribute("href", "/#work");
+        await expect(link).toHaveAttribute("href", "/#visionguard");
         await expect(link).toHaveAccessibleName("Back to selected work");
       }
       const fontSize = await link.evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
