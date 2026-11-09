@@ -2,6 +2,8 @@
 
 Inbasekaran Perumal’s portfolio uses Next.js App Router, React, and TypeScript. It exports a static homepage and individual case studies. The November 2026 refresh implements the approved narrative in [the content review](docs/website-content-review.md); the earlier [website review](docs/website-review.md) records the starting state.
 
+Agent contributors should start with [AGENTS.md](AGENTS.md) and the [codebase map](docs/agents/domain.md).
+
 ## Run locally
 
 Use Node **24.20.0** and npm **11.19.0**, matching `.node-version` and `package.json`.
@@ -39,7 +41,7 @@ The browser checks serve the static `out/` export and exercise direct routes, re
 
 ## Static hosting
 
-`npm run build` writes the deployable static site to `out/`. For Cloudflare Pages, use `npm ci` to install, `npm run build` as the build command, `out` as the output directory, and Node 24.20.0. The user manages deployment. Metadata assumes `https://inba.dev`.
+`npm run build` writes the deployable static site to `out/`. For Cloudflare Pages, use `npm ci` to install, `npm run build` as the build command, `out` as the output directory, and Node 24.20.0. Production is deployed from `main` to the Cloudflare Pages project `inba-dev-portfolio`. Automatic deployments are enabled. The site is available at [inba.dev](https://inba.dev/) and [www.inba.dev](https://www.inba.dev/). Metadata assumes `https://inba.dev`. See [deployment instructions](docs/deployment.md) for publishing, domain configuration and recovery.
 
 ## Visual layout
 
