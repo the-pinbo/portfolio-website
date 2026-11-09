@@ -9,14 +9,13 @@ export function LinkedArtifact({ label, href, context, variant }: LinkedArtifact
   const external = href.startsWith("http://") || href.startsWith("https://");
   return (
     <a
-      className={variant ? `action-link action-link--${variant}` : "linked-artifact"}
+      className={`linked-artifact action-link action-link--${variant ?? "secondary"}`}
       href={href}
       rel={external ? "noopener noreferrer" : undefined}
       target={external ? "_blank" : undefined}
     >
-      {!variant ? <span aria-hidden="true">↗</span> : null}
       <span>{label}</span>
-      {variant ? <span aria-hidden="true">{href.startsWith("#") ? "→" : "↗"}</span> : null}
+      <span aria-hidden="true">{external ? "↗" : "→"}</span>
       {context ? <span className="sr-only"> {context}</span> : null}
       {external ? <span className="sr-only"> opens in a new tab</span> : null}
     </a>

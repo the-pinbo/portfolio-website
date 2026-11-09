@@ -1,8 +1,7 @@
 import { LinkedArtifact } from "@/components/linked-artifact";
 import { DeliveryImage } from "@/components/delivery-image";
 import { assets } from "@/content/assets";
-import { links } from "@/content/links";
-import { standaloneChapters, visualLabels } from "@/content/portfolio";
+import { researchStories, standaloneChapters, visualLabels } from "@/content/portfolio";
 
 export function FractalPrecisionPlate({ showLinks = true }: { showLinks?: boolean }) {
   return (
@@ -18,11 +17,9 @@ export function FractalPrecisionPlate({ showLinks = true }: { showLinks?: boolea
       </div>
       <figcaption>
         <span>{standaloneChapters.openSource.figureLabel}</span>
-        {showLinks && <>
-        <LinkedArtifact label="Code" href={links.softpositCode} context="SoftPosit contribution history" />
-        <LinkedArtifact label="Certificate" href={links.linuxFoundationBadge} context="Linux Foundation mentorship badge" />
-        <LinkedArtifact label="Proceedings · forthcoming" href={links.congaPaper} context="CoNGA proceedings" />
-        </>}
+        {showLinks && researchStories.find((story) => story.id === "open-source")?.references.map((reference) => (
+          <LinkedArtifact key={reference.label} {...reference} />
+        ))}
       </figcaption>
     </figure>
   );

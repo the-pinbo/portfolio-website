@@ -4,6 +4,11 @@ export const site = {
   mark: "inba.dev",
   skipLabel: "Skip to content",
   navigationLabel: "Main navigation",
+  workCaseLabel: "Read case study",
+  workBackLabel: "All work",
+  nextProjectLabel: "Continue to",
+  moreWorkLabel: "Explore more",
+  workReturnLabel: "Back to selected work",
   navigation: [
     { label: "Work", href: "/#work" },
     { label: "Research", href: "/#research" },
@@ -20,6 +25,7 @@ export type ArtifactLink = { label: string; href: string; context?: string };
 export type Project = {
   slug: string;
   title: string;
+  eyebrow: string;
   headline: string;
   summary: string;
   sections: { heading: string; body: string }[];
@@ -28,8 +34,9 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: "natural-language-filtering",
-    title: "Natural language filtering",
-    headline: "Make existing product capabilities easier to discover.",
+    title: "Smart Filters",
+    eyebrow: "RingCentral · Smart Filters",
+    headline: "Make complex filters easy to use.",
     summary:
       "I proposed and shipped plain-language access to 40+ call filters, then used production traces to route simpler requests without a model.",
     sections: [
@@ -54,9 +61,9 @@ export const projects: Project[] = [
   },
   {
     slug: "ai-native-engineering",
-    title: "AI native engineering workflows",
-    headline:
-      "Give engineers useful context, then make the workflow repeatable.",
+    title: "AI engineering workflows",
+    eyebrow: "RingCentral · AI engineering workflows",
+    headline: "Make AI workflows repeatable.",
     summary:
       "Shared planning context, agent workflows and teammate training helped the team reduce monthly AI spend by 52%.",
     sections: [
@@ -82,9 +89,10 @@ export const projects: Project[] = [
   {
     slug: "ace-mcp",
     title: "ACE MCP",
-    headline: "Answer reporting questions beyond the product’s existing views.",
+    eyebrow: "RingCentral · ACE MCP",
+    headline: "Go beyond existing reports.",
     summary:
-      "I designed the query language and contributed multi-turn evaluations for a released reporting interface covering 23 conversation-intelligence entities.",
+      "I designed the query language and contributed multi-turn evaluations for ACE MCP, covering 23 conversation-intelligence entities. Another engineer implemented the released interface.",
     sections: [
       {
         heading: "Problem",
@@ -108,9 +116,10 @@ export const projects: Project[] = [
   {
     slug: "visionguard",
     title: "VisionGuard",
-    headline: "Use local gaze inference for screen-time feedback.",
+    eyebrow: "Google Summer of Code · OpenVINO",
+    headline: "Track screen time on device.",
     summary:
-      "An on-device gaze-tracking desktop app built during Google Summer of Code with OpenVINO.",
+      "I built a gaze-tracking desktop app with OpenVINO during Google Summer of Code, providing local screen-time feedback and break reminders.",
     sections: [
       {
         heading: "The project",
@@ -220,16 +229,57 @@ export const homepage = {
   role: "Software Development Engineer II",
   workAction: "Explore my work",
   resumeAction: "Résumé",
-  filtersHeadline: "Make complex filters easy to use.",
   introduction:
     "I build AI capabilities and backend systems at RingCentral.",
-  research:
-    "At IISc’s Spectrum Lab, I implemented and benchmarked amplitude debiasing in LISTA, studying recovery from noisy measurements. I co-authored Some Intriguing Observations on the Learnt Matrices in Deep Unfolded Networks, published in the IEEE ICASSP 2025 proceedings.",
-  openSource:
-    "Through the Linux Foundation Mentorship Program, I implemented missing 8- and 16-bit mathematical functions in SoftPosit C++ and added unit tests. The work supported evaluation of posit arithmetic on RISC-V. I also co-authored Evaluating Numerical Formats for HPC Using Fractal Benchmarks, in the forthcoming CoNGA 2025 proceedings.",
-  patent:
-    "At Determinant Studios, I prototyped entity extraction for spoken inventory updates, helping shopkeepers enter structured records through voice. I am a named inventor on Indian Patent No. 576831, granted in 2025.",
 } as const;
+
+export type ResearchStory = {
+  id: string;
+  eyebrow: string;
+  heading: string;
+  summary: string;
+  references: ArtifactLink[];
+  visual: "poster" | "fractals" | "inventory";
+};
+
+export const researchStories: ResearchStory[] = [
+  {
+    id: "signal-recovery",
+    eyebrow: "IISc Spectrum Lab · ICASSP 2025",
+    heading: "Learning to recover signals",
+    summary:
+      "At IISc’s Spectrum Lab, I studied recovery from noisy signals by implementing and benchmarking amplitude debiasing in LISTA. I co-authored a paper in the IEEE ICASSP 2025 proceedings.",
+    references: [
+      { label: "Paper", href: links.icasspPaper, context: "Some Intriguing Observations on the Learnt Matrices in Deep Unfolded Networks, IEEE ICASSP 2025" },
+      { label: "Poster", href: links.icasspPoster, context: "Complete ICASSP poster PDF" },
+      { label: "Certificate", href: links.iiscCertificate, context: "IISc internship verification" },
+      { label: "Lab", href: links.spectrumLab, context: "IISc Spectrum Lab" },
+    ],
+    visual: "poster",
+  },
+  {
+    id: "open-source",
+    eyebrow: "Linux Foundation · CoNGA 2025 forthcoming",
+    heading: "Evaluating numerical formats",
+    summary:
+      "Through Linux Foundation mentorship, I implemented missing 8- and 16-bit SoftPosit C++ mathematical functions and unit tests for posit evaluation on RISC-V. I co-authored a fractal benchmark paper for the forthcoming CoNGA 2025 proceedings.",
+    references: [
+      { label: "Code", href: links.softpositCode, context: "SoftPosit contribution history" },
+      { label: "Certificate", href: links.linuxFoundationBadge, context: "Linux Foundation mentorship badge" },
+      { label: "Proceedings · forthcoming", href: links.congaPaper, context: "Evaluating Numerical Formats for HPC Using Fractal Benchmarks, forthcoming CoNGA 2025 proceedings" },
+    ],
+    visual: "fractals",
+  },
+  {
+    id: "patent",
+    eyebrow: "Determinant Studios · Indian patent",
+    heading: "Voice-assisted inventory",
+    summary:
+      "At Determinant Studios, I prototyped entity extraction to turn spoken inventory updates into structured records for shopkeepers. Named inventor on Indian Patent No. 576831, granted in 2025.",
+    references: [{ label: "Patent record", href: links.patentCertificate }],
+    visual: "inventory",
+  },
+];
 
 export const projectDiagrams = {
   "natural-language-filtering": {

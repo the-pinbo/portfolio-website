@@ -49,8 +49,8 @@ export default async function ProjectPage({ params }: Props) {
       <main id="main-content" className="case-page wrap" tabIndex={-1}>
         {/* Native navigation preserves the hash across a static-export route change. */}
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a className="back-link" href="/#work">
-          ← All work
+        <a className="back-link action-link action-link--secondary" href="/#work">
+          <span>{site.workBackLabel}</span><span aria-hidden="true">←</span>
         </a>
         <header className="case-header">
           <h1>{project.title}</h1>
@@ -79,9 +79,9 @@ export default async function ProjectPage({ params }: Props) {
           )}
         </div>
         <nav className="next-project" aria-label={next ? "Next project" : "More work"}>
-          <span>{next ? "Continue to" : "Explore more"}</span>
+          <span>{next ? site.nextProjectLabel : site.moreWorkLabel}</span>
           <LinkedArtifact
-            label={next ? next.title : "Back to selected work"}
+            label={next ? next.title : site.workReturnLabel}
             href={next ? `/work/${next.slug}/` : "/#work"}
           />
         </nav>

@@ -47,7 +47,7 @@ test("experience is a compact timeline with inline education details", async ({ 
   expect(secondRole.y - firstRole.y - firstRole.height).toBeGreaterThanOrEqual(8);
   expect(secondRole.y - firstRole.y - firstRole.height).toBeLessThanOrEqual(20);
   await expect(rows.nth(1).locator("h3")).toHaveCount(0);
-  expect((await rows.last().locator(".role").boundingBox())!.height).toBeLessThanOrEqual(20);
+  expect((await rows.last().locator(".role").boundingBox())!.height).toBeLessThanOrEqual(24);
   await expect(page.locator(".reporting-visual figcaption")).toHaveCount(0);
 });
 

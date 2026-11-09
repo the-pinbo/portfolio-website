@@ -1,8 +1,7 @@
 import { LinkedArtifact } from "@/components/linked-artifact";
 import { DeliveryImage } from "@/components/delivery-image";
 import { assets } from "@/content/assets";
-import { links } from "@/content/links";
-import { standaloneChapters } from "@/content/portfolio";
+import { researchStories, standaloneChapters } from "@/content/portfolio";
 
 export function ResearchPosterTile({ showLinks = true }: { showLinks?: boolean }) {
   return (
@@ -12,12 +11,9 @@ export function ResearchPosterTile({ showLinks = true }: { showLinks?: boolean }
       </div>
       <figcaption>
         <span>{standaloneChapters.research.figureLabel}</span>
-        {showLinks && <>
-        <LinkedArtifact label="Paper" href={links.icasspPaper} context="ICASSP paper" />
-        <LinkedArtifact label="Poster" href={links.icasspPoster} context="Complete ICASSP poster PDF" />
-        <LinkedArtifact label="Certificate" href={links.iiscCertificate} context="IISc internship verification" />
-        <LinkedArtifact label="Lab" href={links.spectrumLab} context="IISc Spectrum Lab" />
-        </>}
+        {showLinks && researchStories.find((story) => story.id === "signal-recovery")?.references.map((reference) => (
+          <LinkedArtifact key={reference.label} {...reference} />
+        ))}
       </figcaption>
     </figure>
   );

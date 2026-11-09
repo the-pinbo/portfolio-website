@@ -9,7 +9,7 @@ import { ResearchPosterTile } from "@/components/research-poster-tile";
 import { SiteNavigation } from "@/components/site-navigation";
 import { VoiceInventoryVisual } from "@/components/voice-inventory-visual";
 import { links } from "@/content/links";
-import { homepage, projects, site, trackRecord } from "@/content/portfolio";
+import { homepage, projects, researchStories, site, trackRecord } from "@/content/portfolio";
 export default function Home() {
   return (
     <>
@@ -56,11 +56,11 @@ export default function Home() {
                 }
               >
                 <div className="work-preview__copy">
-                  <p className="eyebrow">{project.slug === "natural-language-filtering" ? "RingCentral · Smart filters" : project.title}</p>
-                  <h3>{project.slug === "natural-language-filtering" ? homepage.filtersHeadline : project.headline}</h3>
+                  <p className="eyebrow">{project.eyebrow}</p>
+                  <h3>{project.headline}</h3>
                   <p>{project.summary}</p>
                   <div className="artifact-links">
-                    <LinkedArtifact label="Read case study" href={`/work/${project.slug}/`} context={project.title} />
+                    <LinkedArtifact label={site.workCaseLabel} href={`/work/${project.slug}/`} context={project.title} />
                     {project.artifacts.map((artifact) => <LinkedArtifact key={artifact.label} {...artifact} />)}
                   </div>
                 </div>
@@ -76,45 +76,25 @@ export default function Home() {
           </div>
         </section>
         <section className="story-group wrap" id="research" aria-label="Research and publications">
-          <article className="chapter research-row">
-            <div>
-              <h3>Learning to recover signals</h3>
-              <p>{homepage.research}</p>
-              <div className="artifact-links">
-                <LinkedArtifact label="Paper" href={links.icasspPaper} context="ICASSP paper" />
-                <LinkedArtifact label="Poster" href={links.icasspPoster} context="Complete ICASSP poster PDF" />
-                <LinkedArtifact label="Certificate" href={links.iiscCertificate} context="IISc internship verification" />
-                <LinkedArtifact label="Lab" href={links.spectrumLab} context="IISc Spectrum Lab" />
+          {researchStories.map((story) => (
+            <article className="chapter research-row" id={story.id} key={story.id}>
+              <div>
+                <p className="eyebrow">{story.eyebrow}</p>
+                <h3>{story.heading}</h3>
+                <p>{story.summary}</p>
+                <div className="artifact-links">
+                  {story.references.map((reference) => <LinkedArtifact key={reference.label} {...reference} />)}
+                </div>
               </div>
-            </div>
-            <div className="research-row__visual">
-              <ResearchPosterTile showLinks={false} />
-            </div>
-          </article>
-          <article className="chapter research-row" id="open-source">
-            <div>
-              <h3>Evaluating numerical formats</h3>
-              <p>{homepage.openSource}</p>
-              <div className="artifact-links">
-                <LinkedArtifact label="Code" href={links.softpositCode} context="SoftPosit contribution history" />
-                <LinkedArtifact label="Certificate" href={links.linuxFoundationBadge} context="Linux Foundation mentorship badge" />
-                <LinkedArtifact label="Proceedings · forthcoming" href={links.congaPaper} context="CoNGA proceedings" />
+              <div className="research-row__visual">
+                {{
+                  poster: <ResearchPosterTile showLinks={false} />,
+                  fractals: <FractalPrecisionPlate showLinks={false} />,
+                  inventory: <VoiceInventoryVisual />,
+                }[story.visual]}
               </div>
-            </div>
-            <div className="research-row__visual">
-              <FractalPrecisionPlate showLinks={false} />
-            </div>
-          </article>
-          <article className="chapter research-row" id="patent">
-            <div>
-              <h3>Voice-assisted inventory</h3>
-              <p>{homepage.patent}</p>
-              <div className="artifact-links"><LinkedArtifact label="Patent record" href={links.patentCertificate} /></div>
-            </div>
-            <div className="research-row__visual">
-              <VoiceInventoryVisual />
-            </div>
-          </article>
+            </article>
+          ))}
         </section>
         <section className="section chapter wrap" id="experience">
           <div className="section-heading">
