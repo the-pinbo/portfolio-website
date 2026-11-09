@@ -70,6 +70,16 @@ export default async function ProjectPage({ params }: Props) {
               <p>{section.body}</p>
             </section>
           ))}
+          {project.caseReferences && (
+            <section>
+              <h2>{project.caseReferences.heading}</h2>
+              <div className="artifact-links">
+                {project.caseReferences.links.map((reference) => (
+                  <LinkedArtifact key={reference.label} {...reference} />
+                ))}
+              </div>
+            </section>
+          )}
           {project.artifacts.length > 0 && (
             <div className="artifact-links">
               {project.artifacts.map((artifact) => (

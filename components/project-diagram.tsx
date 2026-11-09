@@ -1,18 +1,13 @@
 import { projectDiagrams } from "@/content/portfolio";
 
 export function ProjectDiagram({ slug }: { slug: string }) {
-  const diagram = projectDiagrams[slug as keyof typeof projectDiagrams];
-  if (!diagram) return null;
-
   if (slug === "natural-language-filtering") {
+    const diagram = projectDiagrams[slug];
     return (
-      <figure
-        className="project-visual filter-visual"
-        aria-label={diagram.label}
-      >
+      <figure className="project-visual filter-visual" aria-label={diagram.label}>
         <p className="filter-visual__query">
-          Calls from <strong>last week</strong> where the customer mentioned{" "}
-          <em>cancellation.</em>
+          {diagram.query.before} <strong>{diagram.query.date}</strong>{" "}
+          {diagram.query.between} <em>{diagram.query.tracker}</em>
         </p>
         <div className="filter-visual__resolution">
           {diagram.steps.map((step) => (
@@ -28,47 +23,61 @@ export function ProjectDiagram({ slug }: { slug: string }) {
   }
 
   if (slug === "ai-native-engineering") {
+    const diagram = projectDiagrams[slug];
     return (
-      <figure
-        className="project-visual workflow-visual"
-        aria-label={diagram.label}
-      >
+      <figure className="project-visual workflow-visual" aria-label={diagram.label}>
         <div className="workflow-visual__context">
-          <span>Shared context</span>
-          <p>Decisions that carry across the work.</p>
+          <span>{diagram.source}</span>
+          <p>{diagram.description}</p>
+          <span className="workflow-visual__memory">{diagram.memory}</span>
         </div>
-        <div className="workflow-visual__documents">
-          {diagram.steps.map((step) => (
-            <div className="workflow-visual__document" key={step.detail}>
-              <span>{step.title}</span>
-              <strong>{step.detail}</strong>
-              <div className="workflow-visual__rules" aria-hidden="true">
-                <i />
-                <i />
-                <i />
-              </div>
-            </div>
-          ))}
+        <div className="workflow-visual__connection" aria-hidden="true">↓</div>
+        <div className="workflow-visual__scope">
+          <span>{diagram.repositoriesLabel}</span>
+          <ul className="workflow-visual__repositories" aria-label={diagram.repositoriesLabel}>
+            {diagram.repositories.map((repository) => <li key={repository}>{repository}</li>)}
+          </ul>
+        </div>
+        <div className="workflow-visual__connection" aria-hidden="true">↓</div>
+        <div className="workflow-visual__work">
+          <span>{diagram.workflowLabel}</span>
+          <ul className="workflow-visual__steps" aria-label={diagram.workflowLabel}>
+            {diagram.steps.map((step) => (
+              <li key={step.title}><span>{step.title}</span><strong>{step.detail}</strong></li>
+            ))}
+          </ul>
+        </div>
+        <div className="workflow-visual__debugging">
+          <strong>{diagram.debugging.title}</strong>
+          <p>{diagram.debugging.detail}</p>
+          <span>{diagram.debugging.relationship}</span>
         </div>
       </figure>
     );
   }
 
+  if (slug !== "ace-mcp") return null;
+  const diagram = projectDiagrams[slug];
   return (
-    <figure
-      className="project-visual reporting-visual"
-      aria-label={diagram.label}
-    >
-      <span className="reporting-visual__example">Illustrative question</span>
-      <p className="reporting-visual__question">Which calls mention cancellation?</p>
+    <figure className="project-visual reporting-visual" aria-label={diagram.label}>
+      <span className="reporting-visual__example">{diagram.exampleLabel}</span>
+      <p className="reporting-visual__question">{diagram.source}</p>
       <div className="reporting-visual__connector" aria-hidden="true">↓</div>
-      <div className="reporting-visual__gateway"><span>AI client → ACE MCP · read-only</span><strong>Query language</strong></div>
+      <div className="reporting-visual__gateway"><span>{diagram.gateway}</span><strong>{diagram.language}</strong></div>
       <div className="reporting-visual__tools">
-        <div><span>Document search</span><strong>Find matching calls</strong><div className="reporting-visual__document" aria-hidden="true"><i /><i /><i /></div><p>Returns matching call records</p></div>
-        <div><span>Aggregation</span><strong>Group by tracker</strong><div className="reporting-visual__bars" aria-hidden="true"><i /><i /><i /></div><p>Returns counts by tracker</p></div>
+        {diagram.steps.map((step, index) => (
+          <div key={step.title}>
+            <span>{step.title}</span><strong>{step.detail}</strong>
+            {index === 0 ? (
+              <div className="reporting-visual__document" aria-hidden="true"><i /><i /><i /></div>
+            ) : (
+              <div className="reporting-visual__bars" aria-hidden="true"><i /><i /><i /></div>
+            )}
+          </div>
+        ))}
       </div>
       <div className="reporting-visual__connector" aria-hidden="true">↓</div>
-      <div className="reporting-visual__report"><span>Results returned to AI client</span><strong>AI client synthesizes the report</strong><p>Matching calls + count by tracker</p><i aria-hidden="true" /></div>
+      <div className="reporting-visual__report"><span>{diagram.resultsLabel}</span><strong>{diagram.results}</strong><i aria-hidden="true" /></div>
     </figure>
   );
 }

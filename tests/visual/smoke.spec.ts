@@ -50,13 +50,20 @@ for (const width of [1440, 1024, 768, 390, 320]) {
           const title = figure
             .querySelector(".workflow-visual__context p")!
             .getBoundingClientRect();
-          const firstDocument = figure
-            .querySelector(".workflow-visual__document")!
+          const repositoryScope = figure
+            .querySelector(".workflow-visual__scope")!
             .getBoundingClientRect();
-          return firstDocument.top - title.bottom;
+          return repositoryScope.top - title.bottom;
         });
         expect(clearance).toBeGreaterThanOrEqual(12);
-        for (const label of await workflow.locator("strong").all()) {
+        const bounds = await workflow.boundingBox();
+        expect(bounds).not.toBeNull();
+        for (const label of await workflow.locator("p, strong, li, span").all()) {
+          const labelBounds = await label.boundingBox();
+          expect(labelBounds).not.toBeNull();
+          expect(labelBounds!.x).toBeGreaterThanOrEqual(bounds!.x - 1);
+          expect(labelBounds!.x + labelBounds!.width).toBeLessThanOrEqual(bounds!.x + bounds!.width + 1);
+          expect(labelBounds!.y + labelBounds!.height).toBeLessThanOrEqual(bounds!.y + bounds!.height + 1);
           expect(
             await label.evaluate(
               (element) => element.scrollWidth - element.clientWidth,

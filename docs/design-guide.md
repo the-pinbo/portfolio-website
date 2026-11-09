@@ -21,7 +21,7 @@ Case pages use a left-aligned title and supporting headline on the reading spine
 ## Artwork
 
 - Smart filters use the prototype's sentence-to-filter mapping: extracted phrases, connector lines, date and tracker fields. Red identifies the cancellation tracker.
-- AI engineering uses shared context and planning, implementation and review documents. No heading or label may be covered by overlapping layers.
+- AI-native transformation uses one shared-context source supporting frontend, backend, analytics and AI repositories. A separate workflow grid shows planning, implementation, review and bug triage; debugging MCP brings observability and deployment context to triage. Keep the native HTML/CSS figure in normal flow with bounded four-column grids above 1100px and two-column grids at narrower widths, without overlapping layers or a claim that all 20+ repositories were integrated. Open-source references appear only on its case page, under a shared section heading with the same sans action links as other references.
 - ACE MCP uses a conceptual question-to-tools-to-report flow. Preserve attribution in the accompanying copy; an illustration is not customer evidence or a product screenshot.
 - VisionGuard retains its existing illustration and deliberate homepage preview crop. Its case study retains the wider source composition.
 - The portrait uses native SVG image masks. Do not reintroduce mixed HTML foreignObject clipping, which failed WebKit painting tests.

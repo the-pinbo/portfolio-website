@@ -30,85 +30,96 @@ export type Project = {
   summary: string;
   sections: { heading: string; body: string }[];
   artifacts: ArtifactLink[];
+  caseReferences?: { heading: string; links: ArtifactLink[] };
 };
 export const projects: Project[] = [
   {
     slug: "natural-language-filtering",
     title: "Smart Filters",
     eyebrow: "RingCentral · Smart Filters",
-    headline: "Make complex filters easy to use.",
+    headline: "Find the right calls in plain language.",
     summary:
-      "I proposed and shipped plain-language access to 40+ call filters, then used production traces to route simpler requests without a model.",
+      "I built a natural language interface for 40+ call filters, making them easier to discover and use. Filter activity increased 13% in the first month.",
     sections: [
       {
         heading: "Problem",
-        body: "ACE’s call filters could answer useful questions, but users had to know which filters to look for and how to combine them. I proposed a natural language entry point so they could describe the view they needed.",
+        body: "ACE offered powerful call filters, but customers needed to know which filters to use and how to combine them.",
       },
       {
         heading: "My contribution",
-        body: "I led the work from early experiments through AI and backend implementation, product integration, deployment, and observability. Retrieval supplied context for organization-specific values, while checks against available values helped resolve what a request referred to.",
+        body: "I proposed and built a natural language interface that translates a request into filters. Retrieval supplied context for organization-specific values, and validation matched requests against available values.",
       },
       {
         heading: "Decision",
-        body: "After inspecting production requests, I added deterministic handling for recurring simple queries and kept model-assisted interpretation for requests that needed it. Real usage also informed evaluation examples and filter descriptions.",
+        body: "I used real requests and evaluations to identify common queries that could be handled with deterministic logic, reserving model-assisted interpretation for more complex requests.",
       },
       {
         heading: "Outcome",
-        body: "The feature covered 40+ predefined filters, with filter activity up 13% in the first month. Activity means page and API requests, not unique users. About 40% of queries took a deterministic path, reducing latency for that subset from 5 seconds to under 1 second.",
+        body: "Filter activity increased 13% in the first month, measured by page and API requests. About 40% of queries used the deterministic path, reducing latency for those queries from 5 seconds to under 1 second.",
       },
     ],
     artifacts: [],
   },
   {
     slug: "ai-native-engineering",
-    title: "AI engineering workflows",
-    eyebrow: "RingCentral · AI engineering workflows",
-    headline: "Make AI workflows repeatable.",
+    title: "AI-native transformation",
+    eyebrow: "RingCentral · AI-native transformation",
+    headline: "Make AI-assisted engineering work across the stack.",
     summary:
-      "Shared planning context, agent workflows and teammate training helped the team reduce monthly AI spend by 52%.",
+      "I led our AI-native transformation, building workflows that helped cut monthly AI spend by 52% while supporting higher delivery volume.",
     sections: [
       {
         heading: "Problem",
-        body: "AI tools were available, but using them well across planning, implementation, debugging, and review required shared context and practices that teammates could understand and maintain.",
+        body: "AI tools were evolving quickly, but our early attempts at end-to-end development were slower than manual work, introduced more bugs and used too many tokens. Features often spanned multiple repositories across our 20+ repository landscape, making context hard to manage.",
       },
       {
         heading: "My contribution",
-        body: "I developed shared planning context, role-specific agent skills and workflows, persistent memory, and teammate training. I also built an internal debugging MCP server that brought observability and deployment context into coding workflows.",
+        body: "I led the team's AI-native transformation, exploring open-source tools, standardizing workflows and training teammates. I built a shared planning context inspired by OpenSpec, adapted skills from Matt Pocock, BMAD and Lauren Tan's pstack, and used BMAD Builder to create agents with persistent memory. I also built an internal MCP server to bring observability and deployment context into debugging.",
       },
       {
         heading: "Decision",
-        body: "We kept plans and decisions available across sessions and repositories, with review checkpoints before implementation. We favored a local coding workflow the team could inspect and debug as tools changed. The debugging integration reduced the context gathering needed before investigating failures.",
+        body: "Shared context helped agents work across frontend, backend, analytics and AI repositories. Specialized workflows supported planning, implementation, review and bug triage in Codex, Claude Code and Cursor.",
       },
       {
         heading: "Outcome",
-        body: "The shared workflows and tooling helped the team reduce monthly AI spend by 52%, from $16.2K to $7.8K, while supporting higher delivery volume. Agentic debugging workflows helped the team resolve 123 Jira bugs in three weeks; estimated diagnostic time fell from 30 to 5 minutes. Testing and verification remained a substantial part of delivery.",
+        body: "The workflows helped cut monthly AI spend by 52% while supporting higher delivery volume. Agent-assisted debugging helped the team resolve 123 Jira bugs in three weeks, with estimated diagnostic time falling from 30 to 5 minutes.",
       },
     ],
     artifacts: [],
+    caseReferences: {
+      heading: "Open-source references",
+      links: [
+        { label: "OpenSpec", href: links.openSpec },
+        { label: "Matt Pocock's skills", href: links.mattPocockSkills },
+        { label: "Lauren Tan's pstack", href: links.pstack },
+        { label: "BMAD Method", href: links.bmadMethod },
+        { label: "BMAD Builder", href: links.bmadBuilder },
+      ],
+    },
   },
   {
     slug: "ace-mcp",
     title: "ACE MCP",
     eyebrow: "RingCentral · ACE MCP",
-    headline: "Go beyond existing reports.",
+    headline: "Explore conversation data beyond standard reports.",
     summary:
-      "I designed the query language and contributed multi-turn evaluations for ACE MCP, covering 23 conversation-intelligence entities. Another engineer implemented the released interface.",
+      "I designed the query language and contributed multi-turn evaluations for ACE MCP, enabling custom analysis across 23 conversation-intelligence entities.",
     sections: [
       {
         heading: "Problem",
-        body: "Customers of ACE, RingCentral’s conversation intelligence product, wanted custom analysis of conversation data without requiring a separate engineering cycle for every report. A Model Context Protocol (MCP) interface offered read-only access from an AI client while respecting the user’s permissions.",
+        body: "Customers wanted custom analysis of conversation data without a separate engineering cycle for each report.",
       },
       {
         heading: "My contribution",
-        body: "I designed the query language and client-facing interface around document search and aggregation, and contributed multi-turn evaluations. Another engineer implemented the interface.",
+        body: "I designed the query language and client-facing interface for document search and aggregation, and contributed multi-turn evaluations.",
       },
       {
         heading: "Decision",
-        body: "The language needed to express varied reporting requests through a small tool surface. Evaluation had to check sequences of calls, because a later query could depend on an earlier result. Correct individual calls were only part of getting the complete report right.",
+        body: "A small set of tools needed to support varied reporting questions. I evaluated sequences of calls as well as individual queries, since later queries could depend on earlier results.",
       },
       {
         heading: "Outcome",
-        body: "ACE MCP has released. The shared reporting interface covers 23 conversation-intelligence entities.",
+        body: "ACE MCP provides permission-aware, read-only access across 23 conversation-intelligence entities, enabling AI clients to answer custom reporting questions.",
       },
     ],
     artifacts: [],
@@ -119,19 +130,19 @@ export const projects: Project[] = [
     eyebrow: "Google Summer of Code · OpenVINO",
     headline: "Track screen time on device.",
     summary:
-      "I built a gaze-tracking desktop app with OpenVINO during Google Summer of Code, providing local screen-time feedback and break reminders.",
+      "I built a gaze-tracking desktop app that provides screen-time feedback and break reminders using local inference.",
     sections: [
       {
         heading: "The project",
-        body: "VisionGuard is a webcam-based desktop application that distinguishes looking at the screen from looking away and uses that signal for screen-time feedback and break reminders.",
+        body: "VisionGuard uses a webcam to distinguish looking at the screen from looking away, providing screen-time feedback and break reminders.",
       },
       {
         heading: "My contribution",
-        body: "During Google Summer of Code, I built the C++ application, calibration flow, and local inference path using OpenVINO, Qt, and OpenCV.",
+        body: "During Google Summer of Code, I built the C++ application, calibration flow and local inference path using OpenVINO, Qt and OpenCV.",
       },
       {
-        heading: "Hardware comparison",
-        body: "A hardware benchmark measured 14 W on an Intel NPU versus 26 W on a GPU, approximately 46% lower power consumption in that comparison.",
+        heading: "Outcome",
+        body: "In a hardware comparison, inference on an Intel NPU consumed 14 W versus 26 W on a GPU, approximately 46% less power.",
       },
     ],
     artifacts: [
@@ -248,25 +259,23 @@ export const researchStories: ResearchStory[] = [
     eyebrow: "IISc Spectrum Lab · ICASSP 2025",
     heading: "Learning to recover signals",
     summary:
-      "At IISc’s Spectrum Lab, I studied recovery from noisy signals by implementing and benchmarking amplitude debiasing in LISTA. I co-authored a paper in the IEEE ICASSP 2025 proceedings.",
+      "I implemented and benchmarked amplitude debiasing in LISTA for sparse signal recovery, improving mean reconstruction SNR from 26.4 to 32.6 dB in the reported benchmark. I co-authored the resulting ICASSP 2025 paper.",
     references: [
-      { label: "Paper", href: links.icasspPaper, context: "Some Intriguing Observations on the Learnt Matrices in Deep Unfolded Networks, IEEE ICASSP 2025" },
-      { label: "Poster", href: links.icasspPoster, context: "Complete ICASSP poster PDF" },
-      { label: "Certificate", href: links.iiscCertificate, context: "IISc internship verification" },
+      { label: "Paper", href: links.icasspPaper, context: "Some Intriguing Observations on the Learnt Matrices in Deep Unfolded Networks" },
+      { label: "Poster", href: links.icasspPoster, context: "ICASSP 2025 poster" },
       { label: "Lab", href: links.spectrumLab, context: "IISc Spectrum Lab" },
     ],
     visual: "poster",
   },
   {
     id: "open-source",
-    eyebrow: "Linux Foundation · CoNGA 2025 forthcoming",
+    eyebrow: "Linux Foundation · CoNGA 2025",
     heading: "Evaluating numerical formats",
     summary:
-      "Through Linux Foundation mentorship, I implemented missing 8- and 16-bit SoftPosit C++ mathematical functions and unit tests for posit evaluation on RISC-V. I co-authored a fractal benchmark paper for the forthcoming CoNGA 2025 proceedings.",
+      "Through Linux Foundation mentorship, I implemented and tested missing 8- and 16-bit mathematical functions in SoftPosit C++, supporting evaluation of posit arithmetic on RISC-V. I also co-authored a study comparing posit and floating-point formats using fractal benchmarks.",
     references: [
       { label: "Code", href: links.softpositCode, context: "SoftPosit contribution history" },
-      { label: "Certificate", href: links.linuxFoundationBadge, context: "Linux Foundation mentorship badge" },
-      { label: "Proceedings · forthcoming", href: links.congaPaper, context: "Evaluating Numerical Formats for HPC Using Fractal Benchmarks, forthcoming CoNGA 2025 proceedings" },
+      { label: "Proceedings · forthcoming", href: links.congaPaper, context: "Evaluating Numerical Formats for HPC Using Fractal Benchmarks" },
     ],
     visual: "fractals",
   },
@@ -275,7 +284,7 @@ export const researchStories: ResearchStory[] = [
     eyebrow: "Determinant Studios · Indian patent",
     heading: "Voice-assisted inventory",
     summary:
-      "At Determinant Studios, I prototyped entity extraction to turn spoken inventory updates into structured records for shopkeepers. Named inventor on Indian Patent No. 576831, granted in 2025.",
+      "I prototyped entity extraction to turn spoken inventory updates into structured records for shopkeepers, reducing entry time by about 35% in tests. I am a named inventor on Indian Patent No. 576831, granted in 2025.",
     references: [{ label: "Patent record", href: links.patentCertificate }],
     visual: "inventory",
   },
@@ -284,30 +293,42 @@ export const researchStories: ResearchStory[] = [
 export const projectDiagrams = {
   "natural-language-filtering": {
     label: "A natural language request resolved into available filters",
-    source: "Calls from last week where the customer mentioned cancellation",
+    source: "Calls from last week where the customer mentioned cancellation.",
+    query: { before: "Calls from", date: "last week", between: "where the customer mentioned", tracker: "cancellation." },
     steps: [
       { title: "DATE", detail: "Last week" },
       { title: "TRACKER", detail: "Cancellation" },
     ],
   },
   "ai-native-engineering": {
-    label: "Shared context supports planning, implementation and review",
-    source: "Shared planning context and persistent memory",
+    label: "Shared context supports specialized workflows across frontend, backend, analytics and AI repositories, with observability and deployment context for debugging",
+    source: "Shared context",
+    description: "Consistent decisions across the work.",
+    memory: "Planning context + persistent memory",
+    repositoriesLabel: "Repository domains",
+    repositories: ["Frontend", "Backend", "Analytics", "AI"],
+    workflowLabel: "Specialized workflows",
+    debugging: { title: "Debugging MCP", detail: "Observability + deployment context", relationship: "Supports bug triage" },
     steps: [
       { title: "PLAN", detail: "Shared plan" },
       { title: "BUILD", detail: "Agent skills" },
       { title: "REVIEW", detail: "Review checks" },
+      { title: "TRIAGE", detail: "Bug triage" },
     ],
   },
   "ace-mcp": {
     label:
       "Reporting questions use a query language for document search and aggregation",
-    source: "Reporting question from an AI client",
+    source: "Which calls mention cancellation?",
+    exampleLabel: "Illustrative question",
+    gateway: "AI client → ACE MCP · read-only",
+    language: "Query language",
     steps: [
-      { title: "QUERY LANGUAGE", detail: "Document search" },
-      { title: "QUERY LANGUAGE", detail: "Aggregation" },
-      { title: "EVALUATION", detail: "Multi-turn behavior" },
+      { title: "Document search", detail: "Find matching calls." },
+      { title: "Aggregation", detail: "Count calls by tracker." },
     ],
+    resultsLabel: "Results",
+    results: "The AI client combines the matching calls and counts into a report.",
   },
 } as const;
 

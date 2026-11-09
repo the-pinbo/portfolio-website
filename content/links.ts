@@ -9,16 +9,18 @@ export const links = {
   visionguardWriteUp:
     "https://medium.com/openvino-toolkit/visionguard-ai-eye-care-for-computer-users-d055a574d8e9",
 
+  openSpec: "https://github.com/Fission-AI/OpenSpec",
+  mattPocockSkills: "https://github.com/mattpocock/skills",
+  pstack: "https://github.com/cursor/plugins/tree/main/pstack",
+  bmadMethod: "https://github.com/bmad-code-org/BMAD-METHOD",
+  bmadBuilder: "https://github.com/bmad-code-org/bmad-builder",
+
   icasspPaper: "https://elib.dlr.de/223869/",
   icasspPoster: "/ICASSP-DUN-Poster.pdf",
-  iiscCertificate:
-    "https://drive.google.com/file/d/1-LrhKrFmR9FZvuXp9MBH59vLjfCgzr6o/view",
   spectrumLab: "https://spectrum.ee.iisc.ac.in/",
 
   softpositCode:
     "https://github.com/Posit-Foundation/soft-posit-cpp/commits/refactor-cpp-soft-posits?author=the-pinbo",
-  linuxFoundationBadge:
-    "https://www.credly.com/badges/0caf0ab0-83e9-4614-810a-0a54ef7eb5ab",
   congaPaper:
     "https://link.springer.com/book/9783032292568",
 
