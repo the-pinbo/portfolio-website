@@ -25,7 +25,12 @@
     "visual:capture:candidate": "playwright test tests/visual/capture.spec.ts",
     "visual:capture:verify": "VISUAL_RUN_ID=story-5-1-verify VISUAL_CAPTURE_COMMAND='npm run visual:capture:verify' playwright test tests/visual/capture.spec.ts",
     "verify:evidence-matrix": "VISUAL_RUN_ID=story-5-1-verify node scripts/verify-evidence-matrix.mjs",
-    "verify:story-5-1": "npm run verify:runtime && npm run lint -- --max-warnings=0 && npm run typecheck && npm run build && npm run verify:content && npm run verify:legacy && npm run verify:assets && npm run digest:out && npm test && npm run visual:smoke && npm run visual:capture:verify && npm run verify:evidence-matrix"
+    "verify:story-5-1": "npm run verify:runtime && npm run lint -- --max-warnings=0 && npm run typecheck && npm run build && npm run verify:content && npm run verify:legacy && npm run verify:assets && npm run digest:out && npm test && npm run visual:smoke && npm run visual:capture:verify && npm run verify:evidence-matrix",
+    "visual:compare": "playwright test tests/visual/current-design.spec.ts",
+    "visual:update": "playwright test tests/visual/current-design.spec.ts --update-snapshots",
+    "verify:release": "npm run verify:runtime && npm run lint -- --max-warnings=0 && npm run typecheck && npm run build && npm run verify:content && npm run verify:assets && npm run verify:legacy && npm test && npm run visual:smoke && npm run visual:chapters && npm run visual:webkit && npm run visual:compare",
+    "visual:chapters": "playwright test tests/visual/chapters.spec.ts tests/visual/annotation-followup.spec.ts",
+    "visual:webkit": "playwright test --config=playwright.webkit.config.ts"
   },
   "dependencies": {
     "next": "^15.5.3",

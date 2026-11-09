@@ -1,65 +1,62 @@
-import { DeliveryImage } from "@/components/delivery-image";
 import { assets } from "@/content/assets";
-
 export function PortraitTriptych() {
+  const panels = [
+    {
+      id: "left",
+      mask: [0, 273, 104, 377, 52],
+      image: [0, 257.92, 305.37, 407.16],
+    },
+    {
+      id: "center",
+      mask: [124, 58, 377, 592, 72],
+      image: [65.5, 31.5, 479.52, 639.36],
+    },
+    {
+      id: "right",
+      mask: [526, 175, 124, 475, 62],
+      image: [240, 118, 410, 546.67],
+    },
+  ];
   return (
     <figure className="portrait-triptych">
+      <link
+        rel="preload"
+        as="image"
+        href={assets.portrait.derivatives[2].webp}
+        fetchPriority="high"
+      />
       <svg
-        aria-labelledby="portrait-triptych-title"
         className="portrait-triptych__stage"
-        role="img"
         viewBox="0 0 650 650"
+        role="img"
+        aria-label={assets.portrait.alt}
       >
-        <title id="portrait-triptych-title">
-          {assets.portrait.alt}
-        </title>
         <defs>
-          <clipPath id="portrait-left">
-            <rect x="0" y="273" width="104" height="377" rx="52" />
-          </clipPath>
-          <clipPath id="portrait-center">
-            <rect x="124" y="58" width="377" height="592" rx="72" />
-          </clipPath>
-          <clipPath id="portrait-right">
-            <rect x="526" y="175" width="124" height="475" rx="62" />
-          </clipPath>
+          {panels.map((p) => (
+            <clipPath key={p.id} id={`portrait-${p.id}`}>
+              <rect
+                x={p.mask[0]}
+                y={p.mask[1]}
+                width={p.mask[2]}
+                height={p.mask[3]}
+                rx={p.mask[4]}
+              />
+            </clipPath>
+          ))}
         </defs>
-        <rect
-          className="portrait-triptych__fallback"
-          height="650"
-          rx="72"
-          width="650"
-        />
-        <foreignObject
-          className="portrait-triptych__panel"
-          clipPath="url(#portrait-left)"
-          height="650"
-          width="650"
-          x="0"
-          y="0"
-        >
-          <DeliveryImage asset={assets.portrait} decorative />
-        </foreignObject>
-        <foreignObject
-          className="portrait-triptych__panel"
-          clipPath="url(#portrait-center)"
-          height="650"
-          width="650"
-          x="0"
-          y="0"
-        >
-          <DeliveryImage asset={assets.portrait} decorative />
-        </foreignObject>
-        <foreignObject
-          className="portrait-triptych__panel"
-          clipPath="url(#portrait-right)"
-          height="650"
-          width="650"
-          x="0"
-          y="0"
-        >
-          <DeliveryImage asset={assets.portrait} decorative />
-        </foreignObject>
+        {panels.map((p) => (
+          <image
+            key={p.id}
+            clipPath={`url(#portrait-${p.id})`}
+            x={p.image[0]}
+            y={p.image[1]}
+            width={p.image[2]}
+            height={p.image[3]}
+            href={assets.portrait.derivatives[2].webp}
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+          />
+        ))}
       </svg>
     </figure>
   );

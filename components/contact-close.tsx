@@ -3,7 +3,7 @@ import { contact } from "@/content/portfolio";
 
 export function ContactClose() {
   return (
-    <section className="contact-close" id="contact" aria-labelledby="contact-title">
+    <section className="chapter contact-close" id="contact" aria-labelledby="contact-title">
       <p className="contact-close__eyebrow">{contact.eyebrow}</p>
       <h2 id="contact-title">{contact.heading}</h2>
       <div className="contact-close__links">
@@ -11,6 +11,7 @@ export function ContactClose() {
           <LinkedArtifact key={link.label} {...link} />
         ))}
       </div>
+      <span id="page-end" aria-hidden="true" />
     </section>
   );
 }

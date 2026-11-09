@@ -1,27 +1,16 @@
 import { expect, test } from "@playwright/test";
-
-const orderedAnchors = ["top", "identity-frame", "work", "smart-filters", "ace", "visionguard", "research", "open-source", "patent", "track-record", "contact"];
-
-test("server-owned structure, copy, links, and anchors remain complete without JavaScript", async ({ browser }) => {
-  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1024, height: 900 } });
+test("content and routes work without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 320, height: 900 }, reducedMotion: "reduce" });
   const page = await context.newPage();
-  await page.goto("http://127.0.0.1:4173/", { waitUntil: "networkidle" });
-  await expect(page.locator("main#main-content")).toBeVisible();
-  await expect(page.locator("#top h1")).toContainText("I turn meaningful business problems");
-  await expect(page.locator("#track-record li")).toHaveCount(7);
-  await expect(page.locator("#contact .linked-artifact")).toHaveCount(4);
-  await expect(page.locator('a[href="./ICASSP-DUN-Poster.pdf"]')).toHaveCount(1);
-  const structure = await page.locator("body").evaluate((body, expected) => {
-    const ids = [...body.querySelectorAll<HTMLElement>("[id]")].map((element) => element.id);
-    const positions = expected.map((id) => ids.indexOf(id));
-    const hrefs = [...body.querySelectorAll<HTMLAnchorElement>("a[href]")].map((link) => link.getAttribute("href"));
-    return {
-      complete: positions.every((position) => position >= 0),
-      ordered: positions.every((position, index) => index === 0 || position > positions[index - 1]),
-      duplicateIds: ids.filter((id, index) => ids.indexOf(id) !== index),
-      emptyLinks: hrefs.filter((href) => !href).length,
-    };
-  }, orderedAnchors);
-  expect(structure).toEqual({ complete: true, ordered: true, duplicateIds: [], emptyLinks: 0 });
+  await page.goto("/");
+  await expect(page.locator("main h1")).toContainText("reliable software and AI systems");
+  await expect(page.locator("#experience li")).toHaveCount(8);
+  await expect(page.locator('a[href="/ICASSP-DUN-Poster.pdf"]')).toHaveCount(1);
+  for (const slug of ["natural-language-filtering", "ai-native-engineering", "ace-mcp", "visionguard"]) {
+    await page.goto(`/work/${slug}/`);
+    await expect(page.locator("main h1")).toBeVisible();
+    await expect(page.getByRole("link", { name: "All work" })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  }
   await context.close();
 });

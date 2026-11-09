@@ -20,7 +20,7 @@ export default defineConfig({
   webServer: {
     command: "node tests/visual/static-server.mjs",
     port: 4173,
-    reuseExistingServer: false,
+    reuseExistingServer: !process.env.CI,
     timeout: 15_000,
   },
 });

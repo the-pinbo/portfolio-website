@@ -9,11 +9,23 @@ const projectRoot = resolve(new URL("../", import.meta.url).pathname);
 const publicRoot = resolve(projectRoot, "public");
 const publicAssets = resolve(projectRoot, "public/assets");
 const out = resolve(projectRoot, "out");
-const html = readFileSync(join(out, "index.html"), "utf8");
+const html = ["index.html", "work/visionguard/index.html"].map(file => readFileSync(join(out, file), "utf8")).join("\n");
 
 for (const asset of Object.values(assets)) {
   await verifyDeliveryAsset({ asset, projectRoot });
   if (asset.sourceLinkKey !== null) assert.ok(asset.sourceLinkKey in links, `unknown source link key: ${asset.sourceLinkKey}`);
+  if (asset === assets.portrait) {
+    const portraitSource = asset.derivatives[2].webp;
+    const images = [...html.matchAll(/<image\b[^>]*>/g)];
+    assert.equal(images.length, 3, "portrait must have three native SVG image panels");
+    for (const [panel] of images) {
+      assert.ok(panel.includes(`href="${portraitSource}"`), "portrait panel must use the verified WebP source");
+      assert.ok(panel.includes('clip-path="url(#portrait-'), "portrait panel must retain its clip mask");
+    }
+    assert.doesNotMatch(html, /foreignObject/i, "mixed HTML/SVG portrait clipping regresses Safari");
+    assert.ok(html.includes(`href="${portraitSource}" as="image"`) || html.includes(`as="image" href="${portraitSource}"`), "above-fold portrait must preload its selected source");
+    continue;
+  }
   for (const derivative of asset.derivatives) {
     assert.ok(html.includes(derivative.avif), `rendered HTML omits declared AVIF: ${derivative.avif}`);
     assert.ok(html.includes(derivative.webp), `rendered HTML omits declared WebP: ${derivative.webp}`);
@@ -49,6 +61,6 @@ for (const file of outFiles) {
   assert.notEqual(extname(file).toLowerCase(), ".png", `source raster shipped in out/: ${relative(out, file)}`);
 }
 assert.doesNotMatch(html, /\.png(?:[?"'\s]|$)/i, "rendered HTML references a source raster");
-assert.ok(html.includes('href="./ICASSP-DUN-Poster.pdf"'), "rendered Poster destination is not canonical");
+assert.ok(html.includes('href="/ICASSP-DUN-Poster.pdf"'), "rendered Poster destination is not canonical");
 assert.ok(existsSync(join(projectRoot, "public/ICASSP-DUN-Poster.pdf")), "approved static Poster PDF is missing");
 console.log(`${Object.keys(assets).length} AD-6 asset entries, delivery sets, source integrity, and rendered output verified`);

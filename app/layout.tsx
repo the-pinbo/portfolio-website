@@ -22,12 +22,13 @@ export const metadata: Metadata = {
   title: seo.title,
   description: seo.description,
   metadataBase: new URL("https://inba.dev"),
+  icons: { icon: [{ url: "/favicon.ico", sizes: "32x32" }, { url: "/icon.svg", type: "image/svg+xml" }] },
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: seo.title,
-    description: seo.openGraphDescription,
+    description: seo.description,
     images: [assets.portrait.derivatives[2].webp],
   },
 };

@@ -1,193 +1,266 @@
 import { links } from "./links";
 
-export const hero = {
-  thesis: "I turn meaningful business problems into reliable software and AI systems.",
-  resolution: "Evaluated. Integrated. Shipped.",
-};
-
-export const identity = {
-  name: "Inbasekaran Perumal",
-  role: "Software Development Engineer II, RingCentral",
-  supporting: "Building intelligent systems that hold up in real use.",
-};
-
 export const site = {
   mark: "inba.dev",
   skipLabel: "Skip to content",
-  navigationLabel: "Section navigation",
+  navigationLabel: "Main navigation",
   navigation: [
-    { label: "Work", href: "#work" },
-    { label: "Research", href: "#research" },
-    { label: "Track Record", href: "#track-record" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "/#work" },
+    { label: "Research", href: "/#research" },
+    { label: "Experience", href: "/#experience" },
+    { label: "Contact", href: "/#contact" },
   ],
 } as const;
-
 export const seo = {
-  title: "Inbasekaran Perumal | Software Development Engineer II, RingCentral",
-  description: "Inbasekaran Perumal turns meaningful business problems into reliable software and AI systems. Evaluated. Integrated. Shipped.",
-  openGraphDescription: "I turn meaningful business problems into reliable software and AI systems. Evaluated. Integrated. Shipped.",
+  title: "Inbasekaran Perumal | Applied AI & Software Engineering",
+  description:
+    "Software engineer at RingCentral building AI features from product problem to production, across backend systems, evaluation, and deployment. Explore selected work, research, and open-source contributions.",
 } as const;
-
-export type ArtifactLink = {
-  label: string;
-  href: string;
-  context?: string;
-};
-
+export type ArtifactLink = { label: string; href: string; context?: string };
 export type Project = {
   slug: string;
   title: string;
   headline: string;
-  body: string[];
+  summary: string;
+  sections: { heading: string; body: string }[];
   artifacts: ArtifactLink[];
 };
-
 export const projects: Project[] = [
   {
-    slug: "smart-filters",
-    title: "Smart Filters",
-    headline: "Make powerful product capability easier to use.",
-    body: [
-      "Call filtering had become capable but difficult to discover. I proposed and built a natural-language path into the product's existing filters, so people could describe the view they needed instead of searching through a dense interface.",
-      "The system combines deterministic interpretation with model-assisted reasoning, then makes its behavior measurable through evaluation and observability. I led the work from early experiments through product integration. When real use exposed noisy patterns, I revised the routing with deterministic safeguards rather than treating launch as the finish line.",
+    slug: "natural-language-filtering",
+    title: "Natural language filtering",
+    headline: "Make existing product capabilities easier to discover.",
+    summary:
+      "I proposed and shipped plain-language access to 40+ call filters, then used production traces to route simpler requests without a model.",
+    sections: [
+      {
+        heading: "Problem",
+        body: "ACE’s call filters could answer useful questions, but users had to know which filters to look for and how to combine them. I proposed a natural language entry point so they could describe the view they needed.",
+      },
+      {
+        heading: "My contribution",
+        body: "I led the work from early experiments through AI and backend implementation, product integration, deployment, and observability. Retrieval supplied context for organization-specific values, while checks against available values helped resolve what a request referred to.",
+      },
+      {
+        heading: "Decision",
+        body: "After inspecting production requests, I added deterministic handling for recurring simple queries and kept model-assisted interpretation for requests that needed it. Real usage also informed evaluation examples and filter descriptions.",
+      },
+      {
+        heading: "Outcome",
+        body: "The feature covered 40+ predefined filters, with filter activity up 13% in the first month. Activity means page and API requests, not unique users. About 40% of queries took a deterministic path, reducing latency for that subset from 5 seconds to under 1 second.",
+      },
     ],
     artifacts: [],
   },
   {
-    slug: "ace",
-    title: "ACE",
-    headline: "Bring the product into the AI workspace.",
-    body: [
-      "ACE offers an MCP app that brings governed data, permissions, and product workflows into the AI workspace.",
-      "I am building the GraphQL and MCP layers behind it, from governed schema exposure and tool design to the app experience and plugin delivery.",
+    slug: "ai-native-engineering",
+    title: "AI native engineering workflows",
+    headline:
+      "Give engineers useful context, then make the workflow repeatable.",
+    summary:
+      "Shared planning context, agent workflows and teammate training helped the team reduce monthly AI spend by 52%.",
+    sections: [
+      {
+        heading: "Problem",
+        body: "AI tools were available, but using them well across planning, implementation, debugging, and review required shared context and practices that teammates could understand and maintain.",
+      },
+      {
+        heading: "My contribution",
+        body: "I developed shared planning context, role-specific agent skills and workflows, persistent memory, and teammate training. I also built an internal debugging MCP server that brought observability and deployment context into coding workflows.",
+      },
+      {
+        heading: "Decision",
+        body: "We kept plans and decisions available across sessions and repositories, with review checkpoints before implementation. We favored a local coding workflow the team could inspect and debug as tools changed. The debugging integration reduced the context gathering needed before investigating failures.",
+      },
+      {
+        heading: "Outcome",
+        body: "The shared workflows and tooling helped the team reduce monthly AI spend by 52%, from $16.2K to $7.8K, while supporting higher delivery volume. Agentic debugging workflows helped the team resolve 123 Jira bugs in three weeks; estimated diagnostic time fell from 30 to 5 minutes. Testing and verification remained a substantial part of delivery.",
+      },
+    ],
+    artifacts: [],
+  },
+  {
+    slug: "ace-mcp",
+    title: "ACE MCP",
+    headline: "Answer reporting questions beyond the product’s existing views.",
+    summary:
+      "I designed the query language and contributed multi-turn evaluations for a released reporting interface covering 23 conversation-intelligence entities.",
+    sections: [
+      {
+        heading: "Problem",
+        body: "Customers of ACE, RingCentral’s conversation intelligence product, wanted custom analysis of conversation data without requiring a separate engineering cycle for every report. A Model Context Protocol (MCP) interface offered read-only access from an AI client while respecting the user’s permissions.",
+      },
+      {
+        heading: "My contribution",
+        body: "I designed the query language and client-facing interface around document search and aggregation, and contributed multi-turn evaluations. Another engineer implemented the interface.",
+      },
+      {
+        heading: "Decision",
+        body: "The language needed to express varied reporting requests through a small tool surface. Evaluation had to check sequences of calls, because a later query could depend on an earlier result. Correct individual calls were only part of getting the complete report right.",
+      },
+      {
+        heading: "Outcome",
+        body: "ACE MCP has released. The shared reporting interface covers 23 conversation-intelligence entities.",
+      },
     ],
     artifacts: [],
   },
   {
     slug: "visionguard",
     title: "VisionGuard",
-    headline: "Turn gaze into private screen-time feedback.",
-    body: [
-      "VisionGuard is a webcam-based desktop application that distinguishes looking at the screen from looking away, turning that signal into private screen-time feedback and break reminders.",
-      "I built the C++ application, calibration flow, and local inference path with OpenVINO, Qt, and OpenCV.",
+    headline: "Use local gaze inference for screen-time feedback.",
+    summary:
+      "An on-device gaze-tracking desktop app built during Google Summer of Code with OpenVINO.",
+    sections: [
+      {
+        heading: "The project",
+        body: "VisionGuard is a webcam-based desktop application that distinguishes looking at the screen from looking away and uses that signal for screen-time feedback and break reminders.",
+      },
+      {
+        heading: "My contribution",
+        body: "During Google Summer of Code, I built the C++ application, calibration flow, and local inference path using OpenVINO, Qt, and OpenCV.",
+      },
+      {
+        heading: "Hardware comparison",
+        body: "A hardware benchmark measured 14 W on an Intel NPU versus 26 W on a GPU, approximately 46% lower power consumption in that comparison.",
+      },
     ],
     artifacts: [
-      { label: "Code", href: links.visionguardCode, context: "VisionGuard source code" },
-      { label: "GSoC", href: links.visionguardGsoc, context: "VisionGuard Google Summer of Code project" },
-      { label: "Write-up", href: links.visionguardWriteUp, context: "VisionGuard OpenVINO project write-up" },
+      { label: "Code", href: links.visionguardCode },
+      { label: "GSoC", href: links.visionguardGsoc },
+      { label: "Write-up", href: links.visionguardWriteUp },
     ],
   },
 ];
-
 export type TrackRecordEntry = {
   institution: string;
-  dateRange: string;
   role: string;
-  description: string;
+  dateRange: string;
 };
 
 export const trackRecord: TrackRecordEntry[] = [
   {
     institution: "RingCentral",
-    dateRange: "Jul 2024–Present",
     role: "Software Development Engineer II",
-    description: "Search, agentic workflows, and software systems for ACE.",
+    dateRange: "Jul 2026–Present",
   },
   {
-    institution: "Linux Foundation",
-    dateRange: "Mar 2025–May 2025",
-    role: "Open Source Developer · SoftPosit for RISC-V",
-    description: "C++ numerical computing, RISC-V emulation, and benchmark-driven systems work.",
+    institution: "RingCentral",
+    role: "Software Development Engineer I",
+    dateRange: "Jul 2024–Jun 2026",
+  },
+  {
+    institution: "Linux Foundation Mentorship Program",
+    role: "Open Source Developer",
+    dateRange: "Mar–May 2025",
   },
   {
     institution: "Google Summer of Code",
-    dateRange: "May 2024–Aug 2024",
-    role: "Open Source Developer · Intel OpenVINO",
-    description: "On-device gaze estimation across C++, OpenVINO, and AI PC hardware.",
+    role: "Open Source Developer, Intel OpenVINO Toolkit",
+    dateRange: "May–Aug 2024",
   },
   {
     institution: "Indian Institute of Science",
-    dateRange: "Apr 2024–Jul 2024",
-    role: "Research Intern · Spectrum Lab",
-    description: "Sparse recovery and inverse imaging through optimisation-inspired neural networks.",
+    role: "Research Intern, Spectrum Lab",
+    dateRange: "Apr–Jul 2024",
   },
   {
     institution: "Goldman Sachs",
-    dateRange: "May 2023–Jul 2023",
-    role: "Summer Analyst · Cards Marcus Data Engineering",
-    description: "PySpark and Airflow pipelines for operational reporting.",
+    role: "Summer Analyst Intern, Cards Marcus Data Engineering",
+    dateRange: "May–Jul 2023",
   },
   {
     institution: "Determinant Studios",
-    dateRange: "Nov 2022–May 2023",
-    role: "Software Engineering and Research Intern",
-    description: "Speech recognition and entity extraction for a voice-driven inventory product.",
+    role: "Software Engineering Intern",
+    dateRange: "Dec 2022–Feb 2023",
   },
   {
     institution: "NITK Surathkal",
-    dateRange: "Nov 2020–Apr 2024",
-    role: "B.Tech, Electronics & Communication Engineering · 9.19/10 · Rank 4/138",
-    description: "Chaired IEEE CIS and led media and outreach for IEEE NITK.",
+    role: "B.Tech, Electronics and Communication Engineering | CGPA 9.19/10 | Class rank 4/138",
+    dateRange: "2020–2024",
   },
 ];
-
 export const contact = {
   eyebrow: "Contact",
-  heading: "If you're building something difficult, I'd like to hear about it.",
+  heading: "Let’s talk about what you’re building.",
   links: [
     { label: "Email", href: links.email },
     { label: "LinkedIn", href: links.linkedin },
     { label: "GitHub", href: links.github },
-    { label: "Resume", href: links.resume },
+    { label: "Résumé", href: links.resume },
   ],
 };
-
+// Labels retained for the source-authentic scientific plates.
 export const standaloneChapters = {
-  research: {
-    label: "Research",
-    headline: "Recovering images from incomplete measurements.",
-    body: "At IISc's Spectrum Lab, I worked on inverse problems in imaging: recovering images from incomplete or noisy measurements. Using deep-unfolded networks, which are learned versions of iterative optimisation, I studied how update matrices, thresholds, and initialization shape stability and reconstruction.",
-    figureLabel: "ICASSP 2025 poster",
-  },
+  research: { figureLabel: "ICASSP 2025 poster" },
   openSource: {
-    label: "Open Source",
-    headline: "When numerical formats change the picture.",
-    body: "In the Linux Foundation Mentorship, I extended SoftPosit C++ for RISC-V through mathematical functions, tests, packaging, and an emulated toolchain, so alternative arithmetic could be exercised in real workloads.",
-    figureLabel: "Representative fractal result from a broader benchmark suite.",
-  },
-  patent: {
-    label: "Patent",
-    headline: "Inventory should not require a keyboard.",
-    body: "At Determinant Studios, I worked on a voice-assisted inventory and ledger system that turns spoken updates into structured actions. I am a named inventor on the resulting Indian Patent No. 576831.",
+    figureLabel:
+      "Representative fractal result from a broader benchmark suite.",
   },
 } as const;
-
 export const visualLabels = {
-  smartFilters: {
-    accessibleName: "Smart Filters query resolution",
-    query: "Calls from last week where the customer mentioned cancellation",
-    rows: [
-      { key: "DATE", value: "Last week" },
-      { key: "TRACKER", value: "Cancellation" },
-    ],
-  },
-  ace: {
-    accessibleName: "ACE offers an MCP app",
-    experienceLabel: "MCP app",
-    experience: ["Interactive UI", "Customer workflow", "Saved work"],
-    contract: "GraphQL contract",
-    capabilityLabel: "Governed capability",
-    capability: ["Data", "Tools", "Permissions"],
-  },
   fractals: [
     { asset: "fractalDouble", label: "double" },
     { asset: "fractalFloat", label: "float", metric: "SSIM 0.476 · MSE 0.087" },
-    { asset: "fractalPosit32", label: "posit32", metric: "SSIM 0.605 · MSE 0.053" },
+    {
+      asset: "fractalPosit32",
+      label: "posit32",
+      metric: "SSIM 0.605 · MSE 0.053",
+    },
   ],
-  ledger: {
-    fields: ["ITEM", "QUANTITY", "UPDATE"],
-    resolvedField: "ITEM",
-    resolvedValue: "Resolved row",
+} as const;
+
+export const homepage = {
+  name: "Inbasekaran Perumal",
+  thesis: "I turn meaningful business problems into reliable software and AI systems.",
+  filtersHeadline: "Make complex filters easy to use.",
+  introduction:
+    "I build AI capabilities and backend systems at RingCentral.",
+  research:
+    "At IISc’s Spectrum Lab, I implemented and benchmarked amplitude debiasing in LISTA, studying recovery from noisy measurements. I co-authored Some Intriguing Observations on the Learnt Matrices in Deep Unfolded Networks, published in the IEEE ICASSP 2025 proceedings.",
+  openSource:
+    "Through the Linux Foundation Mentorship Program, I implemented missing 8- and 16-bit mathematical functions in SoftPosit C++ and added unit tests. The work supported evaluation of posit arithmetic on RISC-V. I also co-authored Evaluating Numerical Formats for HPC Using Fractal Benchmarks, in the forthcoming CoNGA 2025 proceedings.",
+  patent:
+    "At Determinant Studios, I prototyped entity extraction for spoken inventory updates, helping shopkeepers enter structured records through voice. I am a named inventor on Indian Patent No. 576831, granted in 2025.",
+} as const;
+
+export const projectDiagrams = {
+  "natural-language-filtering": {
+    label: "A natural language request resolved into available filters",
+    source: "Calls from last week where the customer mentioned cancellation",
+    steps: [
+      { title: "DATE", detail: "Last week" },
+      { title: "TRACKER", detail: "Cancellation" },
+    ],
   },
+  "ai-native-engineering": {
+    label: "Shared context supports planning, implementation and review",
+    source: "Shared planning context and persistent memory",
+    steps: [
+      { title: "PLAN", detail: "Shared plan" },
+      { title: "BUILD", detail: "Agent skills" },
+      { title: "REVIEW", detail: "Review checks" },
+    ],
+  },
+  "ace-mcp": {
+    label:
+      "Reporting questions use a query language for document search and aggregation",
+    source: "Reporting question from an AI client",
+    steps: [
+      { title: "QUERY LANGUAGE", detail: "Document search" },
+      { title: "QUERY LANGUAGE", detail: "Aggregation" },
+      { title: "EVALUATION", detail: "Multi-turn behavior" },
+    ],
+  },
+} as const;
+
+export const inventoryVisual = {
+  label: "Illustration of a spoken inventory instruction resolved into an item, quantity, and action",
+  instruction: "Add five bags of rice.",
+  fields: [
+    { label: "Item", value: "Rice" },
+    { label: "Quantity", value: "Five bags" },
+    { label: "Action", value: "Add stock" },
+  ],
+  caption: "Spoken input, structured inventory update.",
 } as const;
