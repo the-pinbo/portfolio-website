@@ -3,16 +3,14 @@ import { links } from "./links.ts";
 export const sections = {
   work: {
     label: "Work",
-    searchTitle: "Applied AI and software engineering work",
     anchor: "work",
     route: "/work/",
     heading: "Applied AI and software engineering work",
-    introduction: "Explore four projects spanning natural language filtering, AI-assisted engineering, conversation intelligence and on-device gaze tracking. Each case study describes my contribution and the decisions behind it.",
+    introduction: "Explore projects spanning natural language filtering, AI-assisted engineering, conversation intelligence and on-device gaze tracking. Each case study describes my contribution and the decisions behind it.",
     description: "Explore Inbasekaran Perumal’s software engineering case studies, from natural language filtering and ACE MCP to AI-assisted workflows and VisionGuard.",
   },
   research: {
     label: "Research",
-    searchTitle: "Research and publications",
     anchor: "research",
     route: "/research/",
     heading: "Research and publications",
@@ -21,7 +19,6 @@ export const sections = {
   },
   experience: {
     label: "Experience",
-    searchTitle: "Software engineering and research experience",
     anchor: "experience",
     route: "/experience/",
     heading: "Software engineering and research experience",
@@ -34,7 +31,7 @@ export const sections = {
     anchor: "contact",
     route: "/contact/",
     heading: "Contact Inbasekaran Perumal",
-    introduction: "Email me to discuss applied AI, backend engineering or research. You can also find my professional profile, code and résumé below.",
+    introduction: "Get in touch to discuss applied AI, backend engineering or research.",
     description: "Get in touch with Inbasekaran Perumal by email or LinkedIn, browse his GitHub projects or download his résumé.",
   },
 } as const;
@@ -58,6 +55,11 @@ export const seo = {
   description:
     "Software engineer building applied AI and backend systems. Explore Inbasekaran Perumal’s selected work, research and open-source contributions.",
 } as const;
+export const homepageSharing = {
+  title: "Inbasekaran Perumal",
+  description: "Software engineer building applied AI and backend systems.",
+} as const;
+
 export type ArtifactLink = { label: string; href: string; context?: string };
 export const projectAnchors: Record<string, string> = {
   "natural-language-filtering": "smart-filters",

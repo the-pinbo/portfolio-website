@@ -1,13 +1,12 @@
 import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 import sharp from "sharp";
-import { searchAssets } from "../content/assets.ts";
-import { homepage, site } from "../content/portfolio.ts";
+import { homepageShareArt, searchAssets } from "../content/assets.ts";
+import { homepage, homepageSharing, projects, seo, site } from "../content/portfolio.ts";
 import { links, projectPath, siteOrigin } from "../content/links.ts";
-const portfolio = readFileSync("content/portfolio.ts", "utf8");
 const home = readFileSync("out/index.html", "utf8");
 const slugs = ["natural-language-filtering", "ai-native-engineering", "ace-mcp", "visionguard"];
-assert.deepEqual([...portfolio.matchAll(/slug: "([^"]+)"/g)].map(match => match[1]), slugs);
+assert.deepEqual(projects.map(({ slug }) => slug), slugs);
 assert.equal(links.icasspPoster, "/ICASSP-DUN-Poster.pdf");
 assert.ok(home.includes("Inbasekaran Perumal | Applied AI &amp; Software Engineering"));
 for (const slug of slugs) {
@@ -75,6 +74,7 @@ for (const { route } of site.navigation) {
   assert.ok(home.includes(`href="${route}"`), `Missing homepage link to ${route}`);
 }
 
+const escapeAttribute = value => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
 const unique = { titles: new Set(), descriptions: new Set() };
 for (const [index, path] of paths.entries()) {
   const html = readFileSync(`out${path}index.html`, "utf8");
@@ -86,18 +86,29 @@ for (const [index, path] of paths.entries()) {
   unique.titles.add(title);
   unique.descriptions.add(description);
 
+  const social = path === "/" ? {
+    title: escapeAttribute(homepageSharing.title),
+    description: escapeAttribute(homepageSharing.description),
+  } : { title, description };
+  if (path === "/") {
+    assert.equal(title, escapeAttribute(seo.title));
+    assert.equal(description, escapeAttribute(seo.description));
+  }
+
   const url = expectedUrls[index];
   const { share } = searchAssets;
   const image = `${siteOrigin}${share.path(path)}`;
   assert.deepEqual([...head.matchAll(/<link rel="canonical" href="([^"]+)"/g)].map(([, value]) => value), [url]);
   for (const [name, value] of Object.entries({
-    url, title, description, type: "website", site_name: homepage.name,
+    url, ...social, type: "website", site_name: site.mark,
     image, "image:type": share.type, "image:width": share.width, "image:height": share.height,
   })) {
     assert.ok(head.includes(`property="og:${name}" content="${value}"`), `Missing og:${name} for ${path}`);
   }
-  assert.match(head, /property="og:image:alt" content="[^"]+"/);
-  for (const [name, value] of Object.entries({ card: "summary_large_image", title, description, image })) {
+  const alt = head.match(/property="og:image:alt" content="([^"]+)"/)?.[1];
+  assert.ok(alt, `Missing Open Graph image alt for ${path}`);
+  if (path === "/") assert.equal(alt, escapeAttribute(homepageShareArt.alt));
+  for (const [name, value] of Object.entries({ card: "summary_large_image", ...social, image, "image:alt": alt })) {
     assert.ok(head.includes(`name="twitter:${name}" content="${value}"`), `Missing twitter:${name} for ${path}`);
   }
   assert.doesNotMatch(head, /noindex/i);

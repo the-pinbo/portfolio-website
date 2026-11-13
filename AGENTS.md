@@ -14,6 +14,7 @@ Personal portfolio for Inbasekaran Perumal. Next.js App Router, React, TypeScrip
 Use Node 24.20.0 and npm 11.19.0, as pinned in `.node-version` and `package.json`. Install with `npm ci`; start with `npm run dev`.
 
 - For application changes, run `npm run lint -- --max-warnings=0`, `npm run typecheck`, `npm run build` and relevant tests.
+- Have an independent adversarial reviewer check user-visible changes before publishing. Fix actionable findings and verify the revised output in its intended context. For sharing changes, inspect a 96 × 96 center crop and test the deployed link in the target app when accessible.
 - Before publishing application changes, run `npm run verify:release`. It builds `out/` and checks content, assets, legacy anchors, Node tests, Chromium, WebKit and screenshots.
 - Browser tests serve `out/` on port 4173. Rebuild after source changes; an existing server is reused locally. Use Chrome and Playwright WebKit as configured.
 - For documentation-only changes, check links, commands and `git diff --check`; a full browser run is unnecessary.

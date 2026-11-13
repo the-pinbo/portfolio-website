@@ -4,11 +4,16 @@ import { LinkedArtifact } from "@/components/linked-artifact";
 import { OpeningSequence } from "@/components/opening-sequence";
 import { PortraitTriptych } from "@/components/portrait-triptych";
 import { SiteNavigation } from "@/components/site-navigation";
-import { assets } from "@/content/assets";
+import { assets, homepageShareArt } from "@/content/assets";
 import { pageMetadata } from "@/lib/page-metadata";
 import { links, siteOrigin } from "@/content/links";
-import { homepage, seo, site } from "@/content/portfolio";
-export const metadata = pageMetadata({ path: "/", ...seo, cardTitle: homepage.name });
+import { homepage, homepageSharing, seo, site } from "@/content/portfolio";
+export const metadata = pageMetadata({
+  path: "/",
+  ...seo,
+  sharing: homepageSharing,
+  imageAlt: homepageShareArt.alt,
+});
 
 const homeUrl = `${siteOrigin}/`;
 const structuredData = {

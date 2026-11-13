@@ -245,9 +245,15 @@ export const assets = {
   },
 } as const satisfies Record<string, DeliveryAsset>;
 
+export const homepageShareArt = {
+  source: "assets/source/inba-share.svg",
+  alt: "INBA in bold navy letters with a red underline on a warm paper background",
+} as const;
+
 export const searchAssets = {
   share: {
-    path: (page: string) => `/share/${page.split("/").filter(Boolean).join("-") || "home"}.png`,
+    path: (page: string) =>
+      page === "/" ? "/share/home-inba.png" : `/share/${page.split("/").filter(Boolean).join("-")}.png`,
     width: 1200,
     height: 630,
     type: "image/png",

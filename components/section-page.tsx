@@ -4,11 +4,12 @@ import { homepage, site, type Section } from "@/content/portfolio";
 import { pageMetadata } from "@/lib/page-metadata";
 
 export function sectionMetadata(section: Section) {
+  const title = "searchTitle" in section ? section.searchTitle : section.heading;
   return pageMetadata({
     path: section.route,
-    title: `${section.searchTitle} | ${homepage.name}`,
+    title: `${title} | ${homepage.name}`,
     description: section.description,
-    cardTitle: section.heading,
+    imageAlt: title,
   });
 }
 

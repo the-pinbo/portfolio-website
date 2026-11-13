@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: projectPath(slug),
     title: `${project.title} | ${homepage.name}`,
     description: project.summary,
-    cardTitle: project.title,
+    imageAlt: project.title,
   });
 }
 export default async function ProjectPage({ params }: Props) {
