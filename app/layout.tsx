@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Instrument_Sans } from "next/font/google";
-import { assets } from "@/content/assets";
-import { seo } from "@/content/portfolio";
+import { searchAssets } from "@/content/assets";
+import { siteOrigin } from "@/content/links";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -19,17 +19,14 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: seo.title,
-  description: seo.description,
-  metadataBase: new URL("https://inba.dev"),
-  icons: { icon: [{ url: "/favicon.ico", sizes: "32x32" }, { url: "/icon.svg", type: "image/svg+xml" }] },
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: seo.title,
-    description: seo.description,
-    images: [assets.portrait.derivatives[2].webp],
+  metadataBase: new URL(siteOrigin),
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: searchAssets.favicon.path, type: "image/png", sizes: `${searchAssets.favicon.size}x${searchAssets.favicon.size}` },
+    ],
+    apple: [{ url: searchAssets.appleTouchIcon.path, type: "image/png", sizes: `${searchAssets.appleTouchIcon.size}x${searchAssets.appleTouchIcon.size}` }],
   },
 };
 

@@ -1,4 +1,43 @@
-import { links } from "./links";
+import { links } from "./links.ts";
+
+export const sections = {
+  work: {
+    label: "Work",
+    searchTitle: "Applied AI and software engineering work",
+    anchor: "work",
+    route: "/work/",
+    heading: "Applied AI and software engineering work",
+    introduction: "Explore four projects spanning natural language filtering, AI-assisted engineering, conversation intelligence and on-device gaze tracking. Each case study describes my contribution and the decisions behind it.",
+    description: "Explore Inbasekaran Perumal’s software engineering case studies, from natural language filtering and ACE MCP to AI-assisted workflows and VisionGuard.",
+  },
+  research: {
+    label: "Research",
+    searchTitle: "Research and publications",
+    anchor: "research",
+    route: "/research/",
+    heading: "Research and publications",
+    introduction: "My research covers sparse signal recovery with deep unfolded networks, posit arithmetic for numerical precision and voice-based inventory entry. Find the papers, poster, code and patent evidence below.",
+    description: "Find Inbasekaran Perumal’s research on sparse signal recovery, deep unfolded networks, posit arithmetic and voice-based inventory entry.",
+  },
+  experience: {
+    label: "Experience",
+    searchTitle: "Software engineering and research experience",
+    anchor: "experience",
+    route: "/experience/",
+    heading: "Software engineering and research experience",
+    introduction: "Follow my software engineering roles at RingCentral, open-source work through Google Summer of Code, research and education.",
+    description: "See Inbasekaran Perumal’s software engineering, open-source, research and education timeline, including RingCentral and Google Summer of Code.",
+  },
+  contact: {
+    label: "Contact",
+    searchTitle: "Contact",
+    anchor: "contact",
+    route: "/contact/",
+    heading: "Contact Inbasekaran Perumal",
+    introduction: "Email me to discuss applied AI, backend engineering or research. You can also find my professional profile, code and résumé below.",
+    description: "Get in touch with Inbasekaran Perumal by email or LinkedIn, browse his GitHub projects or download his résumé.",
+  },
+} as const;
 
 export const site = {
   mark: "inba.dev",
@@ -9,17 +48,15 @@ export const site = {
   nextProjectLabel: "Continue to",
   moreWorkLabel: "Explore more",
   workReturnLabel: "Back to selected work",
-  navigation: [
-    { label: "Work", href: "/#work" },
-    { label: "Research", href: "/#research" },
-    { label: "Experience", href: "/#experience" },
-    { label: "Contact", href: "/#contact" },
-  ],
+  navigation: Object.values(sections),
 } as const;
+
+export type Section = (typeof site.navigation)[number];
+
 export const seo = {
   title: "Inbasekaran Perumal | Applied AI & Software Engineering",
   description:
-    "Software engineer at RingCentral building AI features from product problem to production, across backend systems, evaluation, and deployment. Explore selected work, research, and open-source contributions.",
+    "Software engineer building applied AI and backend systems. Explore Inbasekaran Perumal’s selected work, research and open-source contributions.",
 } as const;
 export type ArtifactLink = { label: string; href: string; context?: string };
 export const projectAnchors: Record<string, string> = {

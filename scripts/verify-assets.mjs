@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, relative, resolve } from "node:path";
-import { assets } from "../content/assets.ts";
-import { links } from "../content/links.ts";
+import { assets, searchAssets } from "../content/assets.ts";
+import { links, projectPath } from "../content/links.ts";
+import { projects, site } from "../content/portfolio.ts";
 import { verifyDeliveryAsset } from "./asset-contract.mjs";
 
 const projectRoot = resolve(new URL("../", import.meta.url).pathname);
@@ -46,9 +47,19 @@ function filesBelow(directory) {
   walk(directory);
   return files;
 }
+// These generated search assets are dimension-checked by verify-content.
+const searchPngs = new Set([
+  searchAssets.favicon.path,
+  searchAssets.appleTouchIcon.path,
+  ...["/", ...site.navigation.map(({ route }) => route), ...projects.map(({ slug }) => projectPath(slug))]
+    .map(searchAssets.share.path),
+]);
+
 for (const file of filesBelow(publicRoot)) {
   const publicEntry = relative(publicRoot, file).replaceAll("\\", "/");
-  assert.doesNotMatch(publicEntry, /\.png$/i, `source PNG must not ship from public/: ${publicEntry}`);
+  if (!searchPngs.has(`/${publicEntry}`)) {
+    assert.doesNotMatch(publicEntry, /\.png$/i, `source PNG must not ship from public/: ${publicEntry}`);
+  }
   assert.doesNotMatch(publicEntry, /(?:portrait-window-mask|riso-(?:coral|navy|paper)|paper-substrate|editorial-v1|editorial-dark)/i, `obsolete raw asset shipped from public/: ${publicEntry}`);
 }
 for (const file of filesBelow(publicAssets)) {
@@ -56,11 +67,14 @@ for (const file of filesBelow(publicAssets)) {
   if (entry !== "quiet-media-fallback.svg") assert.match(entry, /-\d+\.(?:avif|webp)$/, `obsolete or non-responsive public asset: ${entry}`);
 }
 
-const outFiles = filesBelow(out);
-for (const file of outFiles) {
-  assert.notEqual(extname(file).toLowerCase(), ".png", `source raster shipped in out/: ${relative(out, file)}`);
+for (const file of filesBelow(out)) {
+  const entry = relative(out, file).replaceAll("\\", "/");
+  if (!searchPngs.has(`/${entry}`)) {
+    assert.notEqual(extname(file).toLowerCase(), ".png", `source raster shipped in out/: ${entry}`);
+  }
 }
-assert.doesNotMatch(html, /\.png(?:[?"'\s]|$)/i, "rendered HTML references a source raster");
+const body = html.replace(/<head>.*?<\/head>/gs, "");
+assert.doesNotMatch(body, /\.png(?:[?"'\s]|$)/i, "rendered HTML references a source raster");
 assert.ok(html.includes('href="/ICASSP-DUN-Poster.pdf"'), "rendered Poster destination is not canonical");
 assert.ok(existsSync(join(projectRoot, "public/ICASSP-DUN-Poster.pdf")), "approved static Poster PDF is missing");
 console.log(`${Object.keys(assets).length} AD-6 asset entries, delivery sets, source integrity, and rendered output verified`);

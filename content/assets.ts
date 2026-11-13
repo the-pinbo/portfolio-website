@@ -244,3 +244,14 @@ export const assets = {
     fallback: quietFallback,
   },
 } as const satisfies Record<string, DeliveryAsset>;
+
+export const searchAssets = {
+  share: {
+    path: (page: string) => `/share/${page.split("/").filter(Boolean).join("-") || "home"}.png`,
+    width: 1200,
+    height: 630,
+    type: "image/png",
+  },
+  favicon: { path: "/favicon-96.png", size: 96 },
+  appleTouchIcon: { path: "/apple-touch-icon.png", size: 180 },
+} as const;

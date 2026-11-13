@@ -48,3 +48,7 @@ The browser checks serve the static `out/` export and exercise direct routes, re
 See the [current design guide](docs/design-guide.md), [visual review](docs/visual-review-2026-11-09.md), and [release verification](docs/release-readiness-2026-11-09.md).
 
 The November 9 design uses equal side margins, viewport-height story chapters and one bounded visual field per project. A horizontal opening reveals identity before vertical scrolling resumes; reduced motion and small screens retain normal document flow. Keep text and artwork inside the shared content spine, with resource links in the left copy column. Native illustrations explain the filtering, shared-context and reporting concepts. VisionGuard’s source image uses a deliberate 4:3 preview crop, while the case study retains the wider composition. Scientific media stays faithful to its source. Check sizing and text hierarchy at desktop, tablet, 390px and 320px widths before updating visual baselines.
+
+## Search metadata
+
+The static build exports `robots.txt` and `sitemap.xml` from the site’s route definitions. After changing section or project titles, run `npm run assets:generate:search` and include the regenerated PNGs in the change. The release checks verify the exported sitemap, metadata and images.

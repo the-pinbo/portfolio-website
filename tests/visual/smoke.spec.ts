@@ -30,13 +30,13 @@ for (const width of [1440, 1024, 768, 390, 320]) {
         );
         await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
           "content",
-          /https:\/\/inba\.dev\/assets\/inbase-editorial-portrait-1086\.webp/,
+          /^https:\/\/inba\.dev\/share\/work-[a-z-]+\.png$/,
         );
         await expect(
           page.locator('meta[name="twitter:image"]'),
         ).toHaveAttribute(
           "content",
-          /https:\/\/inba\.dev\/assets\/inbase-editorial-portrait-1086\.webp/,
+          /^https:\/\/inba\.dev\/share\/work-[a-z-]+\.png$/,
         );
         await expect(
           page.locator(

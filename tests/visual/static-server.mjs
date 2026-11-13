@@ -4,7 +4,7 @@ import { extname, join, normalize, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const defaultOut = resolve(new URL("../../out/", import.meta.url).pathname);
-const mime = { ".avif": "image/avif", ".css": "text/css; charset=utf-8", ".html": "text/html; charset=utf-8", ".ico": "image/x-icon", ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8", ".pdf": "application/pdf", ".png": "image/png", ".svg": "image/svg+xml", ".webp": "image/webp", ".woff2": "font/woff2" };
+const mime = { ".avif": "image/avif", ".css": "text/css; charset=utf-8", ".html": "text/html; charset=utf-8", ".ico": "image/x-icon", ".js": "text/javascript; charset=utf-8", ".json": "application/json; charset=utf-8", ".pdf": "application/pdf", ".png": "image/png", ".svg": "image/svg+xml", ".txt": "text/plain; charset=utf-8", ".webp": "image/webp", ".woff2": "font/woff2", ".xml": "application/xml; charset=utf-8" };
 
 export function resolveStaticRequest(rawUrl, out = defaultOut) {
   let pathname;

@@ -4,8 +4,9 @@ import { ProjectDiagram } from "@/components/project-diagram";
 import { SiteNavigation } from "@/components/site-navigation";
 import { LinkedArtifact } from "@/components/linked-artifact";
 import { SpecimenPlate } from "@/components/specimen-plate";
-import { assets } from "@/content/assets";
-import { projectAnchors, projects, site } from "@/content/portfolio";
+import { projectPath } from "@/content/links";
+import { pageMetadata } from "@/lib/page-metadata";
+import { homepage, projectAnchors, projects, site } from "@/content/portfolio";
 
 type Props = { params: Promise<{ slug: string }> };
 export function generateStaticParams() {
@@ -15,24 +16,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) return {};
-  const title = `${project.title} | Inbasekaran Perumal`;
-  return {
-    title,
+  return pageMetadata({
+    path: projectPath(slug),
+    title: `${project.title} | ${homepage.name}`,
     description: project.summary,
-    alternates: { canonical: `/work/${slug}/` },
-    openGraph: {
-      title,
-      description: project.summary,
-      url: `/work/${slug}/`,
-      images: [assets.portrait.derivatives[2].webp],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description: project.summary,
-      images: [assets.portrait.derivatives[2].webp],
-    },
-  };
+    cardTitle: project.title,
+  });
 }
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
@@ -91,7 +80,7 @@ export default async function ProjectPage({ params }: Props) {
           <span>{next ? site.nextProjectLabel : site.moreWorkLabel}</span>
           <LinkedArtifact
             label={next ? next.title : site.workReturnLabel}
-            href={next ? `/work/${next.slug}/` : `/#${projectAnchors[slug]}`}
+            href={next ? projectPath(next.slug) : `/#${projectAnchors[slug]}`}
           />
         </nav>
       </main>

@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import { links } from "../content/links.ts";
+import { readFileSync, readdirSync } from "node:fs";
+import sharp from "sharp";
+import { searchAssets } from "../content/assets.ts";
+import { homepage, site } from "../content/portfolio.ts";
+import { links, projectPath, siteOrigin } from "../content/links.ts";
 const portfolio = readFileSync("content/portfolio.ts", "utf8");
 const home = readFileSync("out/index.html", "utf8");
 const slugs = ["natural-language-filtering", "ai-native-engineering", "ace-mcp", "visionguard"];
@@ -57,3 +60,70 @@ for (const href of [links.visionguardCode, links.visionguardGsoc, links.visiongu
   assert.ok(readFileSync("out/work/visionguard/index.html", "utf8").includes(`href="${href}"`), `VisionGuard case artifact missing: ${href}`);
 }
 console.log("Refined outcome qualifiers, research references, removed certificates and case-only attribution verified");
+
+const paths = ["/", ...site.navigation.map(({ route }) => route), ...slugs.map(projectPath)];
+const expectedUrls = paths.map(path => new URL(path, siteOrigin).href);
+const sitemap = readFileSync("out/sitemap.xml", "utf8");
+assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url), expectedUrls);
+const exportedPages = readdirSync("out", { recursive: true })
+  .filter(path => path.endsWith("index.html") && !path.startsWith("404/"))
+  .map(path => `/${path.slice(0, -"index.html".length)}`);
+assert.deepEqual(exportedPages.sort(), [...paths].sort());
+assert.equal(readFileSync("out/robots.txt", "utf8").trim(), `User-Agent: *\nAllow: /\n\nSitemap: ${siteOrigin}/sitemap.xml`);
+
+for (const { route } of site.navigation) {
+  assert.ok(home.includes(`href="${route}"`), `Missing homepage link to ${route}`);
+}
+
+const unique = { titles: new Set(), descriptions: new Set() };
+for (const [index, path] of paths.entries()) {
+  const html = readFileSync(`out${path}index.html`, "utf8");
+  const head = html.match(/<head>(.*?)<\/head>/s)?.[1];
+  assert.ok(head, `Missing initial HTML head for ${path}`);
+  const title = head.match(/<title>([^<]+)<\/title>/)?.[1];
+  const description = head.match(/<meta name="description" content="([^"]+)"/)?.[1];
+  assert.ok(title && description, `Missing title or description for ${path}`);
+  unique.titles.add(title);
+  unique.descriptions.add(description);
+
+  const url = expectedUrls[index];
+  const { share } = searchAssets;
+  const image = `${siteOrigin}${share.path(path)}`;
+  assert.deepEqual([...head.matchAll(/<link rel="canonical" href="([^"]+)"/g)].map(([, value]) => value), [url]);
+  for (const [name, value] of Object.entries({
+    url, title, description, type: "website", site_name: homepage.name,
+    image, "image:type": share.type, "image:width": share.width, "image:height": share.height,
+  })) {
+    assert.ok(head.includes(`property="og:${name}" content="${value}"`), `Missing og:${name} for ${path}`);
+  }
+  assert.match(head, /property="og:image:alt" content="[^"]+"/);
+  for (const [name, value] of Object.entries({ card: "summary_large_image", title, description, image })) {
+    assert.ok(head.includes(`name="twitter:${name}" content="${value}"`), `Missing twitter:${name} for ${path}`);
+  }
+  assert.doesNotMatch(head, /noindex/i);
+  const { format, width, height } = await sharp(`out${share.path(path)}`).metadata();
+  assert.deepEqual([format, width, height], ["png", share.width, share.height]);
+}
+assert.equal(unique.titles.size, paths.length);
+assert.equal(unique.descriptions.size, paths.length);
+
+for (const { path, size } of [searchAssets.favicon, searchAssets.appleTouchIcon]) {
+  const { format, width, height } = await sharp(`out${path}`).metadata();
+  assert.deepEqual([format, width, height], ["png", size, size]);
+  assert.ok(home.includes(`href="${path}"`));
+}
+
+const jsonLd = home.match(/<script type="application\/ld\+json">(.+?)<\/script>/)?.[1];
+assert.ok(jsonLd, "Missing homepage structured data");
+const graph = JSON.parse(jsonLd)["@graph"];
+const website = graph.find(node => node["@type"] === "WebSite");
+const profile = graph.find(node => node["@type"] === "ProfilePage");
+assert.equal(website.name, homepage.name);
+assert.equal(website.alternateName, site.mark);
+assert.equal(website.url, `${siteOrigin}/`);
+assert.equal(profile.url, website.url);
+assert.equal(profile.isPartOf["@id"], website["@id"]);
+assert.equal(profile.mainEntity["@type"], "Person");
+assert.equal(profile.mainEntity.name, homepage.name);
+assert.deepEqual(profile.mainEntity.sameAs, [links.linkedin, links.github]);
+console.log("Nine indexable exports, sitemap, robots, initial search and social metadata, icons and JSON-LD verified");

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ActiveSectionObserver } from "@/components/active-section-observer";
 import { site } from "@/content/portfolio";
 
-export function SiteNavigation({ current }: { current?: string }) {
+export function SiteNavigation({ current, standalone }: { current?: string; standalone?: boolean }) {
   return (
     <header className="site-header">
       <Link className="site-mark" href="/">
@@ -15,9 +15,9 @@ export function SiteNavigation({ current }: { current?: string }) {
       >
         <ul>
           {site.navigation.map((item) => (
-            <li key={item.href}>
+            <li key={item.anchor}>
               <a
-                href={item.href}
+                href={standalone ? item.route : `/#${item.anchor}`}
                 aria-current={current === item.label ? "page" : undefined}
               >
                 {item.label}

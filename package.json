@@ -19,6 +19,7 @@
     "verify:content": "node scripts/verify-content.mjs",
     "verify:legacy": "node scripts/verify-legacy.mjs",
     "verify:assets": "node scripts/verify-assets.mjs",
+    "assets:generate:search": "node scripts/generate-search-assets.mjs",
     "assets:generate": "node scripts/generate-assets.mjs",
     "digest:out": "node scripts/digest-out.mjs",
     "visual:smoke": "playwright test tests/visual/smoke.spec.ts tests/visual/no-js.spec.ts",

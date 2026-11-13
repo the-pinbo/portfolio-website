@@ -1,3 +1,9 @@
+export const siteOrigin = "https://inba.dev";
+
+export function projectPath(slug: string) {
+  return `/work/${slug}/` as const;
+}
+
 export const links = {
   email: "mailto:inba2002.p@gmail.com",
   linkedin: "https://www.linkedin.com/in/inbasperu/",
