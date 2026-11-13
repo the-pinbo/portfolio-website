@@ -24,6 +24,8 @@ Cloudflare installs dependencies and runs the build from GitHub. This is a stati
 
 Both custom domains were configured through Pages, which added CNAME records pointing to `inba-dev-portfolio.pages.dev`. Do not replace these with a server IP. Site metadata assumes `https://inba.dev`.
 
+The former Work, Research, Experience and Contact page URLs redirect to their sections on the homepage through [the Pages redirect rules](../public/_redirects). The sitemap lists the homepage and project case studies.
+
 ## Publish changes
 
 1. Inspect `git status` and the diff; include only intended files. Keep local drafts and private material out of the commit.

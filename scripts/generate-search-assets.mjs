@@ -5,7 +5,7 @@ import { createElement as h } from "react";
 import sharp from "sharp";
 import { homepageShareArt, searchAssets } from "../content/assets.ts";
 import { projectPath } from "../content/links.ts";
-import { homepage, projects, site } from "../content/portfolio.ts";
+import { homepage, projects } from "../content/portfolio.ts";
 
 const mark = await readFile("public/icon.svg");
 for (const { path, size } of [searchAssets.favicon, searchAssets.appleTouchIcon]) {
@@ -14,13 +14,7 @@ for (const { path, size } of [searchAssets.favicon, searchAssets.appleTouchIcon]
 const brandImage = `data:image/png;base64,${(await sharp(mark, { density: 216 }).png().toBuffer()).toString("base64")}`;
 
 const { share } = searchAssets;
-const cards = [
-  ...site.navigation.map(section => ({
-    path: section.route,
-    title: "searchTitle" in section ? section.searchTitle : section.heading,
-  })),
-  ...projects.map(({ slug, title }) => ({ path: projectPath(slug), title })),
-];
+const cards = projects.map(({ slug, title }) => ({ path: projectPath(slug), title }));
 
 await mkdir("public/share", { recursive: true });
 await sharp(homepageShareArt.source).png().toFile(join("public", share.path("/")));

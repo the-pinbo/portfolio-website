@@ -3,7 +3,7 @@ import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, relative, resolve } from "node:path";
 import { assets, searchAssets } from "../content/assets.ts";
 import { links, projectPath } from "../content/links.ts";
-import { projects, site } from "../content/portfolio.ts";
+import { projects } from "../content/portfolio.ts";
 import { verifyDeliveryAsset } from "./asset-contract.mjs";
 
 const projectRoot = resolve(new URL("../", import.meta.url).pathname);
@@ -51,7 +51,7 @@ function filesBelow(directory) {
 const searchPngs = new Set([
   searchAssets.favicon.path,
   searchAssets.appleTouchIcon.path,
-  ...["/", ...site.navigation.map(({ route }) => route), ...projects.map(({ slug }) => projectPath(slug))]
+  ...["/", ...projects.map(({ slug }) => projectPath(slug))]
     .map(searchAssets.share.path),
 ]);
 

@@ -72,10 +72,10 @@ export default function Home() {
             <PortraitTriptych />
           </div>
         </OpeningSequence>
-        <WorkSection homepage />
-        <ResearchSection homepage />
-        <ExperienceSection homepage />
-        <ContactClose homepage />
+        <WorkSection />
+        <ResearchSection />
+        <ExperienceSection />
+        <ContactClose />
       </main>
     </>
   );

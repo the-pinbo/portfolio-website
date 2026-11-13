@@ -1,39 +1,10 @@
 import { links } from "./links.ts";
 
 export const sections = {
-  work: {
-    label: "Work",
-    anchor: "work",
-    route: "/work/",
-    heading: "Applied AI and software engineering work",
-    introduction: "Explore projects spanning natural language filtering, AI-assisted engineering, conversation intelligence and on-device gaze tracking. Each case study describes my contribution and the decisions behind it.",
-    description: "Explore Inbasekaran Perumal’s software engineering case studies, from natural language filtering and ACE MCP to AI-assisted workflows and VisionGuard.",
-  },
-  research: {
-    label: "Research",
-    anchor: "research",
-    route: "/research/",
-    heading: "Research and publications",
-    introduction: "My research covers sparse signal recovery with deep unfolded networks, posit arithmetic for numerical precision and voice-based inventory entry. Find the papers, poster, code and patent evidence below.",
-    description: "Find Inbasekaran Perumal’s research on sparse signal recovery, deep unfolded networks, posit arithmetic and voice-based inventory entry.",
-  },
-  experience: {
-    label: "Experience",
-    anchor: "experience",
-    route: "/experience/",
-    heading: "Software engineering and research experience",
-    introduction: "Follow my software engineering roles at RingCentral, open-source work through Google Summer of Code, research and education.",
-    description: "See Inbasekaran Perumal’s software engineering, open-source, research and education timeline, including RingCentral and Google Summer of Code.",
-  },
-  contact: {
-    label: "Contact",
-    searchTitle: "Contact",
-    anchor: "contact",
-    route: "/contact/",
-    heading: "Contact Inbasekaran Perumal",
-    introduction: "Get in touch to discuss applied AI, backend engineering or research.",
-    description: "Get in touch with Inbasekaran Perumal by email or LinkedIn, browse his GitHub projects or download his résumé.",
-  },
+  work: { label: "Work", anchor: "work" },
+  research: { label: "Research", anchor: "research" },
+  experience: { label: "Experience", anchor: "experience" },
+  contact: { label: "Contact", anchor: "contact" },
 } as const;
 
 export const site = {
@@ -47,8 +18,6 @@ export const site = {
   workReturnLabel: "Back to selected work",
   navigation: Object.values(sections),
 } as const;
-
-export type Section = (typeof site.navigation)[number];
 
 export const seo = {
   title: "Inbasekaran Perumal | Applied AI & Software Engineering",

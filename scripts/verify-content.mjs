@@ -8,7 +8,6 @@ const home = readFileSync("out/index.html", "utf8");
 const slugs = ["natural-language-filtering", "ai-native-engineering", "ace-mcp", "visionguard"];
 assert.deepEqual(projects.map(({ slug }) => slug), slugs);
 assert.equal(links.icasspPoster, "/ICASSP-DUN-Poster.pdf");
-assert.ok(home.includes("Inbasekaran Perumal | Applied AI &amp; Software Engineering"));
 for (const slug of slugs) {
   assert.ok(home.includes(`/work/${slug}/`));
   const page = readFileSync(`out/work/${slug}/index.html`, "utf8");
@@ -60,7 +59,7 @@ for (const href of [links.visionguardCode, links.visionguardGsoc, links.visiongu
 }
 console.log("Refined outcome qualifiers, research references, removed certificates and case-only attribution verified");
 
-const paths = ["/", ...site.navigation.map(({ route }) => route), ...slugs.map(projectPath)];
+const paths = ["/", ...slugs.map(projectPath)];
 const expectedUrls = paths.map(path => new URL(path, siteOrigin).href);
 const sitemap = readFileSync("out/sitemap.xml", "utf8");
 assert.deepEqual([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([, url]) => url), expectedUrls);
@@ -70,8 +69,16 @@ const exportedPages = readdirSync("out", { recursive: true })
 assert.deepEqual(exportedPages.sort(), [...paths].sort());
 assert.equal(readFileSync("out/robots.txt", "utf8").trim(), `User-Agent: *\nAllow: /\n\nSitemap: ${siteOrigin}/sitemap.xml`);
 
-for (const { route } of site.navigation) {
-  assert.ok(home.includes(`href="${route}"`), `Missing homepage link to ${route}`);
+const redirects = readFileSync("out/_redirects", "utf8").trim().split("\n");
+assert.deepEqual(redirects, site.navigation.flatMap(({ anchor }) => [
+  `/${anchor} /#${anchor} 301`,
+  `/${anchor}/ /#${anchor} 301`,
+]));
+for (const { anchor } of site.navigation) {
+  assert.ok(home.includes(`id="${anchor}"`), `Missing redirect destination #${anchor}`);
+  for (const path of [`/${anchor}`, `/${anchor}/`]) {
+    assert.ok(!home.includes(`href="${path}"`), `Obsolete section link ${path}`);
+  }
 }
 
 const escapeAttribute = value => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
@@ -137,4 +144,4 @@ assert.equal(profile.isPartOf["@id"], website["@id"]);
 assert.equal(profile.mainEntity["@type"], "Person");
 assert.equal(profile.mainEntity.name, homepage.name);
 assert.deepEqual(profile.mainEntity.sameAs, [links.linkedin, links.github]);
-console.log("Nine indexable exports, sitemap, robots, initial search and social metadata, icons and JSON-LD verified");
+console.log("Indexable exports, sitemap, robots, initial search and social metadata, icons and JSON-LD verified");

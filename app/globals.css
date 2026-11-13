@@ -294,8 +294,8 @@ main:focus {
   margin-bottom: var(--story-copy-gap);
   color: var(--muted);
 }
-.work-preview :is(h2, h3),
-.research-row :is(h2, h3) {
+.work-preview h3,
+.research-row h3 {
   max-width: 17ch;
   font-size: var(--story-heading-size);
   font-weight: 550;
@@ -429,7 +429,7 @@ figcaption > span {
   padding: 26px 0;
 }
 #experience h2 { line-height: 1.12; letter-spacing: -0.03em; }
-.experience-list :is(h2, h3) {
+.experience-list h3 {
   line-height: 1.2;
   letter-spacing: -0.03em;
   font-size: clamp(22px, 2.1vw, 28px);
@@ -504,12 +504,6 @@ figcaption > span {
   margin-inline: auto;
   padding: 64px 0 42px;
   text-align: left;
-}
-.section-page-header { max-width: 1200px; }
-.section-page-header .lead {
-  max-width: 62ch;
-  font-size: var(--story-body-size);
-  line-height: 1.55;
 }
 .case-header h1 {
   font-size: clamp(38px, calc(26px + 2.5vw), 64px);
